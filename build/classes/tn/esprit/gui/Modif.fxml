@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.ModifController">
+   <children>
+      <Label layoutX="80.0" layoutY="75.0" text="lieu" />
+      <Label layoutX="80.0" layoutY="138.0" text="degats" />
+      <Label layoutX="63.0" layoutY="192.0" text="description" />
+      <Label layoutX="80.0" layoutY="231.0" text="Date" />
+      <Button layoutX="248.0" layoutY="298.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
+      <ImageView fx:id="imageV" fitHeight="150.0" fitWidth="200.0" layoutX="377.0" layoutY="50.0" onMouseClicked="#addimage" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="tf_lieu" layoutX="136.0" layoutY="71.0" />
+      <TextField fx:id="tf_degats" layoutX="136.0" layoutY="134.0" />
+      <TextField fx:id="tf_description" layoutX="136.0" layoutY="188.0" />
+      <DatePicker fx:id="date" layoutX="123.0" layoutY="227.0" />
+   </children>
+</AnchorPane>
