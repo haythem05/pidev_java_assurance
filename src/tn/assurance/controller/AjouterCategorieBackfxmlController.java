@@ -25,6 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -86,7 +87,7 @@ public class AjouterCategorieBackfxmlController implements Initializable {
             }
         });
 
-        imageV.setImage(new Image("file:C:\\Users\\haythem\\Documents\\NetBeansProjects\\Assurance\\build\\classes\\tn\\assurance\\images\\drag-drop.gif"));
+        imageV.setImage(new Image("file:C:\\Users\\haythem\\Documents\\NetBeansProjects\\Assurance\\build\\classes\\images\\drag-drop.gif"));
 
     }
 
@@ -95,6 +96,32 @@ public class AjouterCategorieBackfxmlController implements Initializable {
 
         nom = nomF.getText();
         description = descriptionF.getText();
+        
+         if (nom.isEmpty() || description.isEmpty() ) {
+  Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez remplir tous les champs obligatoires.");
+            alert.showAndWait();
+        return;
+    }
+
+    if (nom.matches(".*\\d.*")) {
+  Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText(null);
+            alert.setContentText("pas de nombes dans le champ nom !!");
+            alert.showAndWait();
+        return;
+    }
+     if (description.length() < 20) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText(null);
+            alert.setContentText("Minumuim 20 caracteres !  ");
+            alert.showAndWait();
+        return; 
+    }
 
         Categorie ca = new Categorie(nom, description, url_image);
         categorieS cS = new categorieS();

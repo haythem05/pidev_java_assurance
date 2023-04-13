@@ -17,6 +17,8 @@ public class Habitation {
     private float capitalmobilier;
     private float devis;
     Categorie  type_Id;
+     
+    
     
     public Habitation() {
     }
@@ -37,6 +39,8 @@ public class Habitation {
         this.capitalmobilier = capitalmobilier;
         this.devis = devis;
     }
+    
+    
 
     
     @Override

@@ -20,18 +20,23 @@ import javafx.stage.Stage;
  *
  * @author haythem
  */
-public class Main extends Application {
-    
+public class main extends Application {
+
     @Override
     public void start(Stage primaryStage) {
-     try {
-            Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/ajouterCategorieBackfxml.fxml"));
-
+        try {
+             //Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/ajouterCategorieBackfxml.fxml")); 
+           // Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/affichercategorieB.fxml"));  
+            Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/ajouterHabitationFront.fxml"));  
+         
+        //  Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/afficherhabitation.fxml"));  
+         // Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/afficherContrat.fxml"));  
+  
+           
+        
             Scene scene = new Scene(root);
 
-            /*String css = this.getClass().getResource("/edu/webuild/gui/style.css").toExternalForm();
-            scene.getStylesheets().add(css);*/
-            primaryStage.setTitle("Webuild");
+            primaryStage.setTitle("DevSquad");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {
@@ -45,5 +50,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.assurance.controller.ModifiercategorieController">
+   <children>
+      <Label layoutX="234.0" layoutY="30.0" text="Modifier Categorie" textFill="#ec1010">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="74.0" layoutY="92.0" text="nom :" />
+      <Label layoutX="75.0" layoutY="134.0" text="Description :" />
+      <TextField fx:id="nomc" layoutX="210.0" layoutY="88.0" />
+      <TextField fx:id="descriptionc" layoutX="211.0" layoutY="130.0" />
+      <Button layoutX="260.0" layoutY="231.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
+   </children>
+</AnchorPane>
