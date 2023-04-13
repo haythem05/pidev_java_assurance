@@ -156,13 +156,8 @@ public ObservableList<Reponse> getReponseList() {
         PreparedStatement smt = cnx.prepareStatement(query2);
         ResultSet rs = smt.executeQuery();
         while (rs.next()) {
-            // Fetch the corresponding Reclamation object
-            int reclamationId = rs.getInt("reclamation_id");
-            ReclamationService reclamationService = new ReclamationService();
-            Reclamation reclamation = reclamationService.getById(reclamationId);
-
-            // Create the Reponse object with the fetched Reclamation object
-            Reponse rep = new Reponse(rs.getInt("id"), rs.getString("id_user"), rs.getString("note"), rs.getDate("created_at"), reclamation);
+            // Create the Reponse object without fetching the Reclamation object
+            Reponse rep = new Reponse(rs.getInt("id"), rs.getString("id_user"), rs.getString("note"), rs.getDate("created_at"), null);
             ReponseList.add(rep);
         }
     } catch (SQLException ex) {
@@ -171,6 +166,7 @@ public ObservableList<Reponse> getReponseList() {
 
     return ReponseList;
 }
+
 
 public void ShowListe() {
     ObservableList<Reponse> list = getReponseList();

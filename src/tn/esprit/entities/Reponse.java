@@ -23,6 +23,12 @@ public class Reponse {
         this.note = note;
     }
 
+    public Reponse(String id_user, String note, Reclamation reclamation_id) {
+        this.id_user = id_user;
+        this.note = note;
+        this.reclamation_id = reclamation_id;
+    }
+
     public Reponse(int id, String id_user, String note, Date created_at, Reclamation reclamation_id) {
         this.id = id;
         this.id_user = id_user;

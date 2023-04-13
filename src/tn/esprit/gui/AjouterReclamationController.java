@@ -264,7 +264,11 @@ if (tel == null || tel.isEmpty()) {
         ste.executeUpdate();
         // Définir la référence générée pour la nouvelle réclamation
         r.setReference(reference);
-        System.out.println("Réclamation ajoutée !");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText("La réclamation a été ajoutée avec succès.");
+        alert.showAndWait();
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
     }

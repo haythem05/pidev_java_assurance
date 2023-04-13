@@ -126,26 +126,5 @@ public class ReponseService implements InterfaceReponse<Reponse> {
         }
     }
    
-    public Reponse getById(int id) {
-        /*
-        try {
-            String query="SELECT * FROM reponse WHERE id="+id;
-            Statement st=conn.createStatement();
-            ResultSet rs=st.executeQuery(query);
-            while(rs.next()){
-                Reponse r=new Reponse();
-                r.setId(rs.getInt("id"));
-                r.setReclamation_id(rs.getInt("reclamation_id"));
-                r.setObjet(rs.getString("objet"));
-                r.setDescription(rs.getString("description"));
-                r.setDatereponse(rs.getDate("datereponse"));
-                return r;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ServiceReclamation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;*/
-        return afficher().stream().filter(r->r.getId()==id).findAny().orElse(null);
-    }
-    
+   
 }

@@ -81,6 +81,8 @@ public class ReclamationsController implements Initializable {
     private Button ModifierR;
     @FXML
     private Button Supprimer;
+      @FXML
+    private Button reponse;
     @FXML
     private  ListView<Reclamation> lvReclamation;
     @FXML
@@ -113,6 +115,10 @@ public class ReclamationsController implements Initializable {
         
         ModifierR.setOnAction((ActionEvent event) -> {
             GoToModifierR();
+        });
+        
+        reponse.setOnAction((ActionEvent event) -> {
+            reponse();
         });
 
         // Appel de la méthode ShowListe() pour afficher la liste des réclamations
@@ -248,6 +254,19 @@ public void ShowListe() {
         alert.setContentText("La réclamation a été supprimée avec succès.");
         alert.showAndWait();
         ShowListe();
+    }
+
+    @FXML
+  private void reponse() {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("AjouterReponse.fxml"));
+            Scene c = new Scene(root);
+            Stage stage = (Stage) reponse.getScene().getWindow();
+            stage.setScene(c);
+        } catch (IOException ex) {
+            Logger.getLogger(AjouterReponseController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
 

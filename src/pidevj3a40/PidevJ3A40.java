@@ -19,6 +19,7 @@ public class PidevJ3A40 extends Application {
     public void start(Stage stage) throws Exception {
         try {
            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Reclamations.fxml"));
+      
  // Correction du chemin du fichier FXML
             AnchorPane root = loader.load(); // Correction : chargement du fichier FXML dans un AnchorPane
             Scene scene = new Scene(root);

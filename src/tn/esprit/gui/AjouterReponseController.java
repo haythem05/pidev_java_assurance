@@ -39,6 +39,7 @@ import tn.esprit.services.ReponseService;
 
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 /**
@@ -53,7 +54,10 @@ public class AjouterReponseController implements Initializable {
     @FXML
     private TextArea fxnote;
     @FXML
-    private ComboBox<String> fxcb;
+    private ComboBox<Reclamation> fxcb;
+    private Reclamation reclamation_id;
+
+    private List<Reclamation> Reclamations;
     @FXML
     private Button ajout;
     @FXML
@@ -65,6 +69,10 @@ public class AjouterReponseController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        Reclamations = new ReclamationService().afficher();
+        fxcb.getItems().addAll(Reclamations);
+
         Reponse rep = new Reponse();
 
         try {
@@ -95,6 +103,7 @@ public class AjouterReponseController implements Initializable {
     public void ajouter(Reponse rep) {
         String id_user = fxid_user.getText();
         String note = fxnote.getText();
+        reclamation_id = fxcb.getValue();
 
         // Validate input fields
         if (id_user == null || id_user.isEmpty()) {
@@ -120,17 +129,23 @@ public class AjouterReponseController implements Initializable {
         }
 
         // Ajouter la réponse avec la date de création
-        sql = "insert into reponse(id_user,note, created_at) values (?,?,?)";
+        sql = "insert into reponse(reclamation_id,id_user,note, created_at) values (?,?,?,?)";
         try {
             PreparedStatement ste = cnx.prepareStatement(sql);
-            ste.setString(1, rep.getId_user());
-            ste.setString(2, rep.getNote());
-            ste.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+            ste.setInt(1, reclamation_id.getId());
+            ste.setString(2, rep.getId_user());
+            ste.setString(3, rep.getNote());
+            ste.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+
             ste.executeUpdate();
-            System.out.println("Réponse ajoutée !");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText("La réponse a été ajoutée avec succès.");
+        alert.showAndWait();
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
     }
 
     public void redirectToList() {
