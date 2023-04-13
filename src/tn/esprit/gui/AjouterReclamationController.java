@@ -156,7 +156,7 @@ fxreference.setText(reference);
    String email = fxemail.getText();
    String commentaire = fxcommentaire.getText();
    String tel = fxtel.getText();
-   String file = r.getFile();
+
     // Validate input fields 
 if (reference == null || !reference.matches("^[a-zA-Z0-9]+$")) {
     Alert alert = new Alert(Alert.AlertType.ERROR);

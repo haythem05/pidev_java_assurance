@@ -53,7 +53,54 @@ public void ajouter(Reclamation r) {
 
 
 
+public Reclamation recup(int id){
+        Reclamation A = new Reclamation();
+        
+          try {
+            Statement st = cnx.createStatement();
+            String query = "select * FROM reclamation WHERE id='" + id + "'";
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {   
+             
+             
+                             
+                A.setId(rs.getInt(1));
 
+                  A.setReference(rs.getString(2));
+        A.setNom_d(rs.getString(3));
+        A.setPrenom_d(rs.getString(4));
+        A.setCin(rs.getInt(5));
+        A.setEmail(rs.getString(6));
+        A.setCommentaire(rs.getString(7));
+        A.setFile(rs.getString(10));
+        A.setTel(rs.getString(11));
+      
+                
+                
+                
+                System.out.println("!!!");
+               
+              
+                /*ch.setId(("id"));
+                ch.setTitre(rst.getString(2));
+                ch.setType(rst.getString(3));
+                ch.setDescription(rst.getString(4));
+                ch.setImg(rst.getString(5));
+                ch.setDate_debut(rst.getDate(6));
+                ch.setDate_fin(rst.getDate(7));
+                ch.setNb_participants(rst.getInt(8));
+                ch.setEtat(rst.getString(9));
+                ch.setNiveau(rst.getInt(10));*/
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("erreur get IdOBJ pour suivi");
+            System.out.println(ex);
+        }
+        
+            return A;
+        
+    }
 
 
 
@@ -117,6 +164,10 @@ public void modifier(int id, Reclamation nouvelleReclamation) {
         e.printStackTrace();
     }
 }
+
+    public Reclamation getById(int reclamationId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 
 }
