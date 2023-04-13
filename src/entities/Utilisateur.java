@@ -6,6 +6,8 @@
 package entities;
 //import java.util.Date;
 
+import java.sql.Date;
+
 /**
  *
  * @author Ranim
@@ -13,7 +15,7 @@ package entities;
 public class Utilisateur {
     private int id,numtel,cin;
     private String email,password,nom,prenom;
-    private String datedenaissance;
+    private Date datedenaissance;
     
     public Utilisateur(){    
     }
@@ -23,7 +25,7 @@ public class Utilisateur {
         this.password=password;
     }
     
-    public Utilisateur(int id, int numtel, int cin, String password, String email, String datedenaissance, String nom, String prenom) {
+    public Utilisateur(int id, int numtel, int cin, String password, String email, Date datedenaissance, String nom, String prenom) {
         this.id = id;
         this.numtel = numtel;
         this.cin = cin;
@@ -90,11 +92,11 @@ public class Utilisateur {
         this.password = password;
     }
     
-     public String getDatedenaissance() {
+     public Date getDatedenaissance() {
         return datedenaissance;
     }
 
-    public void setDatedenaissance(String datedenaissance) {
+    public void setDatedenaissance(Date datedenaissance) {
         this.datedenaissance = datedenaissance;
     }
     

@@ -9,15 +9,23 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import entities.Utilisateur;
 import java.sql.PreparedStatement;
 import static java.time.Clock.system;
+
+import java.io.IOException;
+
 import services.UtilisateurService;
 
 /**
@@ -48,7 +56,7 @@ public class LoginController implements Initializable {
     }
     
     @FXML
-private void handleLoginButtonAction(ActionEvent event) {
+    private void handleLoginButtonAction(ActionEvent event) throws IOException {
 
     String email = loginmailtf.getText();
     String password = loginmdptf.getText();
@@ -69,11 +77,11 @@ private void handleLoginButtonAction(ActionEvent event) {
 
     if (isValidCredentials) {
         // Afficher un message de succès
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Succès");
-        alert.setHeaderText(null);
-        alert.setContentText("Connexion réussie!");
-        alert.showAndWait();
+        Parent root = FXMLLoader.load(getClass().getResource("homeusers.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     } else {
         // Afficher un message d'erreur
         Alert alert = new Alert(AlertType.ERROR);
@@ -84,9 +92,18 @@ private void handleLoginButtonAction(ActionEvent event) {
     }
 }
 
-    
-    /*
     @FXML
+    void toRegister(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("signup.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    
+    
+    /*@FXML
     private void handleLoginButtonAction(ActionEvent event) {
         
                 
@@ -102,8 +119,8 @@ private void handleLoginButtonAction(ActionEvent event) {
         alert.setContentText("Veuillez remplir tous les champs!");
         alert.showAndWait();
         return;
-    }*/
-    /*
+    }
+    
     // Vérifier si les identifiants sont valides (par exemple, en les vérifiant avec une base de données)
     boolean isValidCredentials = checkCredentials(email, password);
     

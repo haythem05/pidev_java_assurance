@@ -13,7 +13,7 @@ import entities.Utilisateur;
 public interface IService<T> {
     public void ajouter(T t);
     public List<T> afficher();
-    public void supprimer(T t);
+    public void supprimer(int id);
     public void modifier(T t);
     public boolean checkCredentials(String email, String password);
 }

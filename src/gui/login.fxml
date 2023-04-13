@@ -23,10 +23,11 @@
          <children>
             <TextField fx:id="loginmailtf" promptText="Votre Mail" GridPane.columnIndex="1" />
             <TextField fx:id="loginmdptf" promptText="Votre mot de passe" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="validloginbtn" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="25.0" prefWidth="119.0" text="Valider" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="validloginbtn" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="25.0" prefWidth="119.0" text="login" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="loginemaill" text="Email:" />
             <Label fx:id="loginmdpl" text="Mot de passe:" GridPane.rowIndex="1" />
          </children>
       </GridPane>
+      <Button fx:id="registerBtn" layoutX="306.0" layoutY="229.0" mnemonicParsing="false" onAction="#toRegister" prefHeight="25.0" prefWidth="119.0" text="register" />
    </children>
 </AnchorPane>

@@ -22,8 +22,8 @@ import tools.MaConnexion;
  * @author Ranim
  */
 public class UtilisateurService implements IService<Utilisateur>{
-    Connection cnx;
-    String sql="";
+    public Connection cnx;
+    public Statement sql;
 
     public UtilisateurService() {
         cnx = MaConnexion.getInstance().getCnx();
@@ -31,14 +31,14 @@ public class UtilisateurService implements IService<Utilisateur>{
 
     @Override
     public void ajouter(Utilisateur u) {
-        sql = "INSERT INTO user(nom, prenom, email, password, datedenaissance,cin,numtel) VALUES (?, ?, ?, ?, ?,?,?)";
+        String sql = "INSERT INTO user(UserName, prenom, Email, Password, datedenaissance,CIN,numtel) VALUES (?, ?, ?, ?, ?,?,?)";
         try {
             PreparedStatement statement = cnx.prepareStatement(sql);
             statement.setString(1, u.getNom());
             statement.setString(2, u.getPrenom());
             statement.setString(3, u.getEmail());
             statement.setString(4, u.getPassword());
-            statement.setString(5, u.getDatedenaissance());
+            statement.setDate(5, u.getDatedenaissance());
             statement.setInt(6,u.getCin());
             statement.setInt(7,u.getNumtel());
             statement.executeUpdate();
@@ -57,7 +57,20 @@ public class UtilisateurService implements IService<Utilisateur>{
             PreparedStatement pst = cnx.prepareStatement(req);
             ResultSet rs = pst.executeQuery();
             while(rs.next()) {
-                list.add(new Utilisateur(rs.getInt(1),rs.getInt(2),rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
+                Utilisateur utilisateur = new Utilisateur();
+
+                utilisateur.setId(rs.getInt("id"));
+                utilisateur.setNom(rs.getString("UserName"));
+                utilisateur.setPrenom(rs.getString("prenom"));
+                utilisateur.setDatedenaissance(rs.getDate("datedenaissance"));
+                utilisateur.setEmail(rs.getString("Email"));
+                utilisateur.setPassword(rs.getString("Password"));
+                utilisateur.setNumtel(rs.getInt("numtel"));
+                utilisateur.setCin(rs.getInt("CIN"));
+
+                list.add(utilisateur);
+
+                
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -67,11 +80,11 @@ public class UtilisateurService implements IService<Utilisateur>{
     }
 
     @Override
-    public void supprimer(Utilisateur u) {
+    public void supprimer(int id) {
         String sql = "DELETE FROM user WHERE id=?";
         try {
             PreparedStatement statement = cnx.prepareStatement(sql);
-            statement.setInt(1, u.getId());
+            statement.setInt(1, id);
             statement.executeUpdate();
             System.out.println("Utilisateur supprimé avec succès !");
         } catch (SQLException ex) {
@@ -82,13 +95,13 @@ public class UtilisateurService implements IService<Utilisateur>{
     @Override
     public void modifier(Utilisateur t) {
         try {
-            String req = "UPDATE user SET numtel=?,cin=?,password=?,email=?,datedenaissance=?,nom=?,prenom=? WHERE id=?";
+            String req = "UPDATE user SET numtel=?,CIN=?,Password=?,Email=?,datedenaissance=?,UserName=?,prenom=? WHERE id=?";
             PreparedStatement pst = cnx.prepareStatement(req);
             pst.setInt(1, t.getNumtel());
             pst.setInt(2, t.getCin());
             pst.setString(3, t.getPassword());
             pst.setString(4, t.getEmail());
-            pst.setString(5, t.getDatedenaissance());
+            pst.setDate(5, t.getDatedenaissance());
             pst.setString(6, t.getNom());
             pst.setString(7, t.getPrenom());
             pst.setInt(8, t.getId());
@@ -102,7 +115,7 @@ public class UtilisateurService implements IService<Utilisateur>{
     public boolean checkCredentials(String email, String password) {
     boolean result = false;
     try {
-        String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
+        String sql = "SELECT * FROM user WHERE Email = ? AND Password = ?";
         PreparedStatement statement = cnx.prepareStatement(sql);
         statement.setString(1, email);
         statement.setString(2, password);
