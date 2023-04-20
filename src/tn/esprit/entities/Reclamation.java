@@ -23,6 +23,8 @@ private Date created_at;
 private String statut;
 private String file;
 private String tel;
+ Reponse rep;
+ String note;
 
 public Reclamation() {
 }
@@ -49,6 +51,22 @@ public Reclamation(Integer id, String reference, String nom_d, String prenom_d, 
     this.file = file;
     this.tel = tel;
 }
+
+    public Reclamation(Integer id, String reference, String nom_d, String prenom_d, Integer cin, String email, String commentaire, Date created_at, String statut, String file, String tel, String note) {
+        this.id = id;
+        this.reference = reference;
+        this.nom_d = nom_d;
+        this.prenom_d = prenom_d;
+        this.cin = cin;
+        this.email = email;
+        this.commentaire = commentaire;
+        this.created_at = created_at;
+        this.statut = statut;
+        this.file = file;
+        this.tel = tel;
+        this.note = note;
+    }
+
 
 public Integer getId() {
     return id;
@@ -138,10 +156,21 @@ public void setTel(String tel) {
     this.tel = tel;
 }
 
-@Override
-public String toString() {
-    return "Reclamation{" + "id=" + id + ", reference=" + reference + ", nom_d=" + nom_d + ", prenom_d=" + prenom_d + ", cin=" + cin + ", email=" + email + ", commentaire=" + commentaire + ", created_at=" + created_at + ", statut=" + statut + ", file=" + file + ", tel=" + tel + '}';
-}
+public Reponse getReponse() {
+        return rep;
+    }
+
+    public void setReponse(Reponse rep) {
+        this.rep = rep;
+    }
+
+    @Override
+    public String toString() {
+        return   reference ;
+    }
+
+
+ 
  // Méthode statique pour générer une référence aléatoire de 8 caractères
     public static String genererReference() {
         final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

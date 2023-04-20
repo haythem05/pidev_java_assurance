@@ -68,6 +68,8 @@ import java.sql.SQLException;
 import javafx.scene.image.ImageView;
 import tn.esprit.services.ReponseService;
 import tn.esprit.entities.Reponse;
+import javafx.scene.control.Alert.AlertType;
+
 
 
 /**
@@ -87,6 +89,8 @@ public class ReponseController implements Initializable {
     private  ListView<Reponse> lvReponse;
     @FXML
     private Pane paneReponses;
+     @FXML
+    private Button reclamation;
     
     public Connection cnx;
     public Statement stm;
@@ -94,6 +98,11 @@ public class ReponseController implements Initializable {
     public int idSelected= -1;
     @FXML
     private Button refresh;
+    @FXML
+    private Pane paneReclamations;
+    @FXML
+    private ImageView image;
+  
    
     
   @Override
@@ -111,6 +120,10 @@ public void initialize(URL url, ResourceBundle rb) {
     ModifierR.setOnAction((ActionEvent event) -> {
         GoToModifierR();
     });
+    reclamation.setOnAction((ActionEvent event) -> {
+            reclamation();
+        });
+
 
     // Appel de la méthode ShowListe() pour afficher la liste des réclamations
     ShowListe();
@@ -129,16 +142,23 @@ private void GoToCréer() {
 }
 
 private void GoToModifierR() {
-    this.idSelected = lvReponse.getSelectionModel().getSelectedItem().getId();
-
-    Pane view;
+    Reponse selectedReponse = lvReponse.getSelectionModel().getSelectedItem();
+    if (selectedReponse == null) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Aucune réponse sélectionnée");
+        alert.setHeaderText("Sélectionnez une réponse à modifier");
+        alert.showAndWait();
+        return;
+    }
+    this.idSelected = selectedReponse.getId();
 
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierReponse.fxml"));
         Parent root = loader.load();
 
-        ModifierReponseController HomeScene = loader.getController();
-        HomeScene.initializeFxml(this.idSelected);
+        ModifierReponseController controller = loader.getController();
+        controller.initializeFxml(this.idSelected);
+
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
@@ -148,16 +168,22 @@ private void GoToModifierR() {
     }
 }
 
+
+
+
+
 public ObservableList<Reponse> getReponseList() {
     cnx = MaConnexion.getInstance().getCnx();
     ObservableList<Reponse> ReponseList = FXCollections.observableArrayList();
     try {
-        String query2 = "SELECT * from reponse ";
+        String query2 = "SELECT * from reponse LEFT JOIN reclamation ON reponse.reclamation_id = reclamation.id";
         PreparedStatement smt = cnx.prepareStatement(query2);
         ResultSet rs = smt.executeQuery();
         while (rs.next()) {
-            // Create the Reponse object without fetching the Reclamation object
-            Reponse rep = new Reponse(rs.getInt("id"), rs.getString("id_user"), rs.getString("note"), rs.getDate("created_at"), null);
+            // Create the Reponse object and fetch the Reclamation object
+            Reclamation rec = new Reclamation(rs.getInt("reclamation.id"), rs.getString("reference"), rs.getString("nom_d"), rs.getString("prenom_d"), rs.getInt("cin"), rs.getString("email"), rs.getString("commentaire"), rs.getDate("created_at"), rs.getString("statut"), rs.getString("file"), rs.getString("tel"));
+            Reponse rep = new Reponse(rs.getInt("id"), rs.getString("id_user"), rs.getString("note"), rs.getDate("created_at"), rec);
+            
             ReponseList.add(rep);
         }
     } catch (SQLException ex) {
@@ -181,11 +207,12 @@ public void ShowListe() {
                 protected void updateItem(Reponse item, boolean empty) {
                     super.updateItem(item, empty);
                     if (item != null) {
-                        // Définir le texte à afficher pour chaque attribut de l'objet Reponse
-                        setText("ID: " + item.getId() + "\n"
-                                + "Id_User: " + item.getId_user() + "\n"
+                        // Définir le texte à afficher pour chaque attribut de l'objet Reponse et Reclamation
+                        setText(
+                                 "Id_User: " + item.getId_user() + "\n"
                                 + "Note: " + item.getNote() + "\n"
-                                + "Créé le: " + item.getCreated_at());
+                                + "Créé le: " + item.getCreated_at() + "\n"
+                                + "Réclamation: " + item.getReclamation().getReference());
 
                     } else {
                         setText(null);
@@ -195,6 +222,7 @@ public void ShowListe() {
         }
     });
 }
+
 
     @FXML
     private void functionTest(MouseEvent event) {
@@ -209,16 +237,40 @@ public void ShowListe() {
     }
 
     @FXML
-    private void supprimer(ActionEvent event) {
-                this.idSelected = lvReponse.getSelectionModel().getSelectedItem().getId();
-  ReponseService reponseService = new ReponseService();
-           reponseService.supprimer(this.idSelected);
-              Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText("La reponse a été supprimée avec succès.");
-        alert.showAndWait();
-        ShowListe();
+private void supprimer(ActionEvent event) {
+Reponse selectedReponse = lvReponse.getSelectionModel().getSelectedItem();
+if (selectedReponse == null) {
+Alert alert = new Alert(Alert.AlertType.ERROR);
+alert.setTitle("Erreur");
+alert.setHeaderText(null);
+alert.setContentText("Veuillez sélectionner une réponse à supprimer.");
+alert.showAndWait();
+return;
+}
+int selectedId = selectedReponse.getId();
+ReponseService reponseService = new ReponseService();
+reponseService.supprimer(selectedId);
+
+Alert alert = new Alert(Alert.AlertType.INFORMATION);
+alert.setTitle("Information");
+alert.setHeaderText(null);
+alert.setContentText("La réponse a été supprimée avec succès.");
+alert.showAndWait();
+
+ShowListe();
+
+}
+    @FXML
+  private void reclamation() {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("Reclamations.fxml"));
+            Scene c = new Scene(root);
+            Stage stage = (Stage) reclamation.getScene().getWindow();
+            stage.setScene(c);
+        } catch (IOException ex) {
+            Logger.getLogger(ReclamationsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
 

@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 
 
 import tn.esprit.entities.Reclamation;
+import tn.esprit.entities.Reponse;
 import tn.esprit.tools.MaConnexion;
 
 public class ReclamationService implements NewInterface<Reclamation> {
@@ -107,7 +108,7 @@ public Reclamation recup(int id){
    @Override
 public List<Reclamation> afficher() {
     List<Reclamation> reclamations = new ArrayList<>();
-    sql = "select * from reclamation";
+    sql = "SELECT r.*, re.note FROM reclamation r LEFT JOIN reponse re ON r.id = re.reclamation_id";
     try {
         Statement ste = cnx.createStatement();
         ResultSet rs = ste.executeQuery(sql);
@@ -125,6 +126,12 @@ public List<Reclamation> afficher() {
                     rs.getString("file"),
                     rs.getString("tel")
             );
+            // Ajouter la note de la réponse si elle existe
+            if (rs.getString("note") != null) {
+                Reponse rep = new Reponse();
+                rep.setNote(rs.getString("note"));
+                r.setReponse(rep);
+            }
             reclamations.add(r);
         }
     } catch (SQLException ex) {
@@ -132,6 +139,7 @@ public List<Reclamation> afficher() {
     }
     return reclamations;
 }
+
 
 
 @Override

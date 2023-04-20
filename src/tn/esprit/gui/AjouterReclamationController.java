@@ -75,37 +75,35 @@ public class AjouterReclamationController implements Initializable {
 
  @Override
 public void initialize(URL url, ResourceBundle rb) {
-    Reclamation r = new Reclamation();
-
     try {
         // Initialize your database connection here
         cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/assurancepidev", "root", "");
     } catch (SQLException ex) {
         System.out.println("Failed to connect to database: " + ex.getMessage());
     } 
-
-    // Générer automatiquement la référence
-    String reference = Reclamation.genererReference(); // Appel à la méthode genererReference() de la classe Reclamation
-    fxreference.setText(reference);
-
-    ajout.setOnAction(new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent event) {
-            r.setNom_d(fxnom_d.getText());
-            r.setPrenom_d(fxprenom_d.getText());
-            int cin = Integer.parseInt(fxcin.getText());
-            r.setCin(cin);
-            r.setEmail(fxemail.getText());
-            r.setCommentaire(fxcommentaire.getText());
-            r.setTel(fxtel.getText());
-
-        
+    Reclamation r = new Reclamation();
 
 
-                ajouter(r);
-                
-            }
-        });
+ajout.setOnAction(new EventHandler<ActionEvent>() {
+    @Override
+    public void handle(ActionEvent event) {
+        Reclamation r = new Reclamation();
+        r.setNom_d(fxnom_d.getText());
+        r.setPrenom_d(fxprenom_d.getText());
+        int cin = 0;
+        if (!fxcin.getText().isEmpty() && fxcin.getText().matches("\\d+")) {
+            cin = Integer.parseInt(fxcin.getText());
+        }
+        r.setCin(cin);
+        r.setEmail(fxemail.getText());
+        r.setCommentaire(fxcommentaire.getText());
+        r.setTel(fxtel.getText());
+
+        ajouter(r);
+    }
+});
+
+
 
        fxfile.setOnAction(new EventHandler<ActionEvent>() {
     @Override
@@ -146,16 +144,28 @@ public void initialize(URL url, ResourceBundle rb) {
     
 
      
-    public void ajouter(Reclamation r) {
+   public void ajouter(Reclamation r) {
    // Générer la référence aléatoire
  String reference = Reclamation.genererReference();
-fxreference.setText(reference);
-   String nom_d = fxnom_d.getText();
-   String prenom_d = fxprenom_d.getText();
-   int cin = Integer.parseInt(fxcin.getText());
-   String email = fxemail.getText();
-   String commentaire = fxcommentaire.getText();
-   String tel = fxtel.getText();
+ fxreference.setText(reference);
+   String nom_d = r.getNom_d();
+   String prenom_d = r.getPrenom_d();
+   int cin = r.getCin();
+   String email = r.getEmail();
+   String commentaire = r.getCommentaire();
+   String tel = r.getTel();
+   
+   
+   // Vérifier si tous les champs sont vides
+if (nom_d.isEmpty() && prenom_d.isEmpty() && cin == 0
+        && email.isEmpty() && commentaire.isEmpty() && tel.isEmpty()) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setHeaderText(null);
+    alert.setContentText("Tous les champs sont obligatoires!");
+    alert.showAndWait();
+    return;
+}
+
 
     // Validate input fields 
 if (reference == null || !reference.matches("^[a-zA-Z0-9]+$")) {
@@ -172,6 +182,7 @@ if (nom_d == null || nom_d.isEmpty()) {
     alert.setContentText("Le champ nom est obligatoire!");
     alert.showAndWait();
     return;
+
 } else if (!nom_d.matches("^[a-zA-Z]+$")) {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setHeaderText(null);
@@ -186,6 +197,7 @@ if (prenom_d == null || prenom_d.isEmpty()) {
     alert.setContentText("Le champ prénom est obligatoire!");
     alert.showAndWait();
     return;
+
 } else if (!prenom_d.matches("^[a-zA-Z]+$")) {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setHeaderText(null);
@@ -215,6 +227,8 @@ if (email == null || email.isEmpty()) {
     alert.setContentText("Le champ email est obligatoire!");
     alert.showAndWait();
     return;
+
+
 } else if (!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$")) {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setHeaderText(null);
@@ -240,7 +254,7 @@ if (commentaire == null || commentaire.isEmpty()) {
 if (tel == null || tel.isEmpty()) {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setHeaderText(null);
-    alert.setContentText("Le champ tel est obligatoire!");
+    alert.setContentText("Le champ téléphone est obligatoire!");
     alert.showAndWait();
     return;
 }

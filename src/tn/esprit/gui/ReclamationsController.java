@@ -6,6 +6,7 @@
 package tn.esprit.gui;
 
 import tn.esprit.entities.Reclamation;
+import tn.esprit.entities.Reponse;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -137,47 +138,49 @@ public class ReclamationsController implements Initializable {
         }
     }
 
-    private void GoToModifierR() {
-                this.idSelected = lvReclamation.getSelectionModel().getSelectedItem().getId();
+private void GoToModifierR() {
+Reclamation selectedReclamation = lvReclamation.getSelectionModel().getSelectedItem();
+if (selectedReclamation == null) {
+Alert alert = new Alert(Alert.AlertType.WARNING);
+alert.setTitle("Aucune réclamation sélectionnée");
+alert.setHeaderText("Sélectionnez une réclamation à modifier");
+alert.showAndWait();
+return;
+}
+this.idSelected = selectedReclamation.getId();
+try {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierReclamation.fxml"));
+    Parent root = loader.load();
 
-        Pane view;
-
-        try {
-
-            
-            
-            
-            
-            
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierReclamation.fxml"));
-            Parent root = loader.load();
-
-
-            ModifierReclamationController HomeScene = loader.getController();
-            HomeScene.initializeFxml(this.idSelected);
-             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (IOException ex) {
-            Logger.getLogger(AjouterReclamationController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    ModifierReclamationController modifierReclamationController = loader.getController();
+    modifierReclamationController.initializeFxml(this.idSelected);
+    
+    Stage stage = new Stage();
+    stage.setScene(new Scene(root));
+    stage.show();
+} catch (IOException ex) {
+    Logger.getLogger(AjouterReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+}
+}
 
 public ObservableList<Reclamation> getReclamationList() {
-    cnx = MaConnexion.getInstance().getCnx();
-    ObservableList<Reclamation> ReclamationList = FXCollections.observableArrayList();
-    try {
-        String query2 = "SELECT * from reclamation ";
-        PreparedStatement smt = cnx.prepareStatement(query2);
-        ResultSet rs = smt.executeQuery();
-        while (rs.next()) {
-            Reclamation r = new Reclamation(rs.getInt("id"), rs.getString("reference"), rs.getString("nom_d"), rs.getString("prenom_d"), rs.getInt("cin"), rs.getString("email"), rs.getString("commentaire"), rs.getDate("created_at"), rs.getString("statut"), rs.getString("file"), rs.getString("tel"));
-            ReclamationList.add(r);
-        }
-    } catch (SQLException ex) {
-        System.out.println(ex.getMessage());
-    }
+cnx = MaConnexion.getInstance().getCnx();
+ObservableList<Reclamation> ReclamationList = FXCollections.observableArrayList();
+try {
+String query2 = "SELECT * from reclamation LEFT JOIN reponse ON reclamation.id = reponse.reclamation_id";
+PreparedStatement smt = cnx.prepareStatement(query2);
+ResultSet rs = smt.executeQuery();
+while (rs.next()) {
+Reclamation r = new Reclamation(rs.getInt("id"), rs.getString("reference"), rs.getString("nom_d"), rs.getString("prenom_d"), rs.getInt("cin"), rs.getString("email"), rs.getString("commentaire"), rs.getDate("created_at"), rs.getString("statut"), rs.getString("file"), rs.getString("tel"));
+if (rs.getInt("reponse.id") != 0) {
+Reponse rep = new Reponse(rs.getInt("reponse.id"), rs.getString("reponse.id_user"), rs.getString("reponse.note"), rs.getDate("reponse.created_at"), r);
+    r.setReponse(rep);
+}
+ReclamationList.add(r);
+}
+} catch (SQLException ex) {
+System.out.println(ex.getMessage());
+}
 
     return ReclamationList;
 }
@@ -185,7 +188,7 @@ public ObservableList<Reclamation> getReclamationList() {
 public void ShowListe() {
     ObservableList<Reclamation> list = getReclamationList();
     lvReclamation.setItems(list);
-    
+
     // Définir la cellFactory pour le ListView
     lvReclamation.setCellFactory(new Callback<ListView<Reclamation>, ListCell<Reclamation>>() {
         @Override
@@ -196,8 +199,7 @@ public void ShowListe() {
                     super.updateItem(item, empty);
                     if (item != null) {
                         // Définir le texte à afficher pour chaque attribut de l'objet Reclamation
-                        setText("ID: " + item.getId() + "\n"
-                                + "Référence: " + item.getReference() + "\n"
+                        setText( "Référence: " + item.getReference() + "\n"
                                 + "Nom: " + item.getNom_d() + "\n"
                                 + "Prénom: " + item.getPrenom_d() + "\n"
                                 + "CIN: " + item.getCin() + "\n"
@@ -206,7 +208,15 @@ public void ShowListe() {
                                 + "Créé le: " + item.getCreated_at() + "\n"
                                 + "Statut: " + item.getStatut() + "\n"
                                 + "Fichier: " + item.getFile() + "\n"
-                                + "Téléphone: " + item.getTel());
+                                + "Téléphone: " + item.getTel() + "\n");
+
+                        // Si l'objet Reclamation a une réponse associée, ajouter le texte de la réponse
+ if (item.getReponse() != null) {
+    Reponse rep = item.getReponse();
+    setText(getText() + "Note de la réponse: " + rep.getNote() + "\n");
+} else {
+    setText(getText() + "Note de la réponse: N/A\n");
+}
                     } else {
                         setText(null);
                     }
@@ -215,6 +225,8 @@ public void ShowListe() {
         }
     });
 }
+
+
 
     @FXML
     private void functionTest(MouseEvent event) {
@@ -244,30 +256,63 @@ public void ShowListe() {
     }
 
     @FXML
-    private void supprimer(ActionEvent event) {
-                this.idSelected = lvReclamation.getSelectionModel().getSelectedItem().getId();
-  ReclamationService reclamationService = new ReclamationService();
-           reclamationService.supprimer(this.idSelected);
-              Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
+  private void supprimer(ActionEvent event) {
+    Reclamation selectedReclamation = lvReclamation.getSelectionModel().getSelectedItem();
+    if (selectedReclamation == null) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Avertissement");
         alert.setHeaderText(null);
-        alert.setContentText("La réclamation a été supprimée avec succès.");
+        alert.setContentText("Veuillez sélectionner une réclamation à supprimer.");
         alert.showAndWait();
-        ShowListe();
+        return;
     }
+    int selectedReclamationId = selectedReclamation.getId();
+    ReclamationService reclamationService = new ReclamationService();
+    reclamationService.supprimer(selectedReclamationId);
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Information");
+    alert.setHeaderText(null);
+    alert.setContentText("La réclamation a été supprimée avec succès.");
+    alert.showAndWait();
+    ShowListe();
+}
 
-    @FXML
-  private void reponse() {
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("AjouterReponse.fxml"));
-            Scene c = new Scene(root);
-            Stage stage = (Stage) reponse.getScene().getWindow();
-            stage.setScene(c);
-        } catch (IOException ex) {
-            Logger.getLogger(AjouterReponseController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+  @FXML
+private void reponse() {
+try {
+// Récupérer la réclamation sélectionnée dans le ListView
+Reclamation selectedReclamation = lvReclamation.getSelectionModel().getSelectedItem();
+if (selectedReclamation == null) {
+// Si aucune réclamation n'est sélectionnée, afficher un message d'erreur
+Alert alert = new Alert(Alert.AlertType.ERROR);
+ alert.setTitle("Erreur");
+alert.setHeaderText(null);
+alert.setContentText("Veuillez sélectionner une réclamation avant de répondre.");
+alert.showAndWait();
+return;
+}
+    // Charger la page AjouterReponse.fxml
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("AjouterReponse.fxml"));
+    Parent root = loader.load();
+
+    // Passer la référence de la réclamation sélectionnée au contrôleur de la page AjouterReponse.fxml
+    AjouterReponseController ajouterReponseController = loader.getController();
+    ajouterReponseController.setReclamation(selectedReclamation);
+
+    // Créer une nouvelle scène avec la page AjouterReponse.fxml et l'afficher
+    Scene c = new Scene(root);
+    Stage stage = (Stage) reponse.getScene().getWindow();
+    stage.setScene(c);
+} catch (IOException ex) {
+    Logger.getLogger(AjouterReponseController.class.getName()).log(Level.SEVERE, null, ex);
+}
+
+}
+
+  
+  
+  
+  
 }
 
 

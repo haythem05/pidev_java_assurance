@@ -14,11 +14,12 @@
         <group>
             <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/ReclamationsController.java</file>
             <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/entities/Reclamation.java</file>
-            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/services/ReponseService.java</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/ModifierReclamationController.java</file>
             <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/AjouterReclamationController.java</file>
             <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/services/ReclamationService.java</file>
-            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/ReponseController.java</file>
             <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/AjouterReponseController.java</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/ReponseController.java</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/entities/Reponse.java</file>
         </group>
     </open-files>
 </project-private>

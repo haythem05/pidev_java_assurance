@@ -55,8 +55,9 @@ public class AjouterReponseController implements Initializable {
     private TextArea fxnote;
     @FXML
     private ComboBox<Reclamation> fxcb;
+    @FXML
     private Reclamation reclamation_id;
-
+    @FXML
     private List<Reclamation> Reclamations;
     @FXML
     private Button ajout;
@@ -66,7 +67,11 @@ public class AjouterReponseController implements Initializable {
     public Connection cnx;
     public Statement stm;
     String sql = "";
-
+    
+    public void setReclamation(Reclamation reclamation) {
+        fxcb.setValue(reclamation);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -104,12 +109,21 @@ public class AjouterReponseController implements Initializable {
         String id_user = fxid_user.getText();
         String note = fxnote.getText();
         reclamation_id = fxcb.getValue();
+        
+        // Vérifier si tous les champs sont vides
+if (id_user.isEmpty() && note.isEmpty()) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setHeaderText(null);
+    alert.setContentText("Tous les champs sont obligatoires!");
+    alert.showAndWait();
+    return;
+}
 
         // Validate input fields
         if (id_user == null || id_user.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setContentText("Le champ utilisateur est obligatoire!");
+            alert.setContentText("Le champ id_user est obligatoire!");
             alert.showAndWait();
             return;
         }
