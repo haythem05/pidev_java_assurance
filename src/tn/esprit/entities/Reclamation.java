@@ -67,6 +67,19 @@ public Reclamation(Integer id, String reference, String nom_d, String prenom_d, 
         this.note = note;
     }
 
+    public Reclamation( String reference, String nom_d, String prenom_d, Integer cin, String email, String commentaire, String file, String tel) {
+       
+        this.reference = reference;
+        this.nom_d = nom_d;
+        this.prenom_d = prenom_d;
+        this.cin = cin;
+        this.email = email;
+        this.commentaire = commentaire;
+        this.file = file;
+        this.tel = tel;
+    }
+    
+
 
 public Integer getId() {
     return id;

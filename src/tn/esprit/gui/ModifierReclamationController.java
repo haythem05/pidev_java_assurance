@@ -107,27 +107,25 @@ public void initializeFxml(int id ) {
 }
 
 // Méthode pour modifier une réclamation
+// Méthode pour modifier une réclamation
 public void modifier() {
+    // Créer une nouvelle réclamation avec les valeurs modifiées
+    Reclamation nouvelleReclamation = new Reclamation();
+    ReclamationService reclamationService = new ReclamationService();
 
-        // Créer une nouvelle réclamation avec les valeurs modifiées
-        Reclamation nouvelleReclamation = new Reclamation();
-            ReclamationService reclamationService = new ReclamationService();
+    nouvelleReclamation.setReference(fxreferenceM.getText());
+    nouvelleReclamation.setNom_d(fxnom_dM.getText());
+    nouvelleReclamation.setPrenom_d(fxprenom_dM.getText());
+    nouvelleReclamation.setCin(Integer.parseInt(fxcinM.getText()));
+    nouvelleReclamation.setEmail(fxemailM.getText());
+    nouvelleReclamation.setCommentaire(fxcommentaireM.getText());
+    nouvelleReclamation.setTel(fxtelM.getText());
+    nouvelleReclamation.setFile(fxfileM.getText());
+    nouvelleReclamation.setStatut("En cours");
 
-        nouvelleReclamation.setReference(fxreferenceM.getText());
-        nouvelleReclamation.setNom_d(fxnom_dM.getText());
-        nouvelleReclamation.setPrenom_d(fxprenom_dM.getText());
-        nouvelleReclamation.setCin(Integer.parseInt(fxcinM.getText()));
-        nouvelleReclamation.setEmail(fxemailM.getText());
-        nouvelleReclamation.setCommentaire(fxcommentaireM.getText());
-        nouvelleReclamation.setTel(fxtelM.getText());
-        nouvelleReclamation.setFile(fxfileM.getText());
-
-        // Appeler la méthode de modification de la classe Reclamation
-        reclamationService.modifier(this.idSelected, nouvelleReclamation);
+    // Appeler la méthode de modification de la classe Reclamation
+    reclamationService.modifier(this.idSelected, nouvelleReclamation);
     try {
-        // Appeler la méthode de modification de la classe Reclamation
-        // en utilisant l'ID et la nouvelle réclamation
-
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText(null);
@@ -147,32 +145,33 @@ public void modifier() {
     }
 }
 
-    @FXML
-    private void modifierRec(ActionEvent event) {
-        System.out.println("heey");
-         Reclamation nouvelleReclamation = new Reclamation();
-            ReclamationService reclamationService = new ReclamationService();
+@FXML
+private void modifierRec(ActionEvent event) {
+    System.out.println("heey");
+    Reclamation nouvelleReclamation = new Reclamation();
+    ReclamationService reclamationService = new ReclamationService();
 
-        nouvelleReclamation.setReference(fxreferenceM.getText());
-        nouvelleReclamation.setNom_d(fxnom_dM.getText());
-        nouvelleReclamation.setPrenom_d(fxprenom_dM.getText());
-        nouvelleReclamation.setCin(Integer.parseInt(fxcinM.getText()));
-        nouvelleReclamation.setEmail(fxemailM.getText());
-        nouvelleReclamation.setCommentaire(fxcommentaireM.getText());
-        nouvelleReclamation.setTel(fxtelM.getText());
-        nouvelleReclamation.setFile(fxfileM.getText());
+    nouvelleReclamation.setReference(fxreferenceM.getText());
+    nouvelleReclamation.setNom_d(fxnom_dM.getText());
+    nouvelleReclamation.setPrenom_d(fxprenom_dM.getText());
+    nouvelleReclamation.setCin(Integer.parseInt(fxcinM.getText()));
+    nouvelleReclamation.setEmail(fxemailM.getText());
+    nouvelleReclamation.setCommentaire(fxcommentaireM.getText());
+    nouvelleReclamation.setTel(fxtelM.getText());
+    nouvelleReclamation.setFile(fxfileM.getText());
+    nouvelleReclamation.setStatut("En cours");
 
-        // Appeler la méthode de modification de la classe Reclamation
-        reclamationService.modifier(this.idSelected, nouvelleReclamation);
+    // Appeler la méthode de modification de la classe Reclamation
+    reclamationService.modifier(this.idSelected, nouvelleReclamation);
     try {
-        // Appeler la méthode de modification de la classe Reclamation
-        // en utilisant l'ID et la nouvelle réclamation
-
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText(null);
         alert.setContentText("La réclamation a été modifiée avec succès.");
         alert.showAndWait();
+
+       
+
 
         // Fermer la fenêtre de modification
         Stage stage = (Stage) modifierRec.getScene().getWindow();

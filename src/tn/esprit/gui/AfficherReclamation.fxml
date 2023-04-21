@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.AfficherReclamationController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="671.0" prefWidth="1164.0">
+         <children>
+            <VBox prefHeight="671.0" prefWidth="211.0" style="-fx-background-color: #720000;">
+               <children>
+                  <ImageView fitHeight="114.0" fitWidth="159.0" pickOnBounds="true">
+                     <VBox.margin>
+                        <Insets bottom="75.0" left="35.0" top="30.0" />
+                     </VBox.margin>
+                     <image>
+                        <Image url="@../../../../../PIDEV/logo_java.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <StackPane layoutX="215.0" layoutY="28.0">
+               <children>
+                  <Pane fx:id="paneReclamation">
+                     <children>
+                        <Label layoutX="12.0" prefHeight="39.0" prefWidth="235.0" text="Liste des réclamations" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfrecherche" layoutX="618.0" layoutY="6.0" prefHeight="17.0" prefWidth="220.0" promptText="Rechercher ..." style="-fx-background-color: #fff; -fx-border-color: #720000; -fx-border-radius: 2em;" />
+                        <ScrollPane layoutY="132.0" prefHeight="484.0" prefWidth="1285.0" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="paneReclamations" layoutX="10.0" layoutY="10.0" prefHeight="616.0" prefWidth="3188.0">
+                     <children>
+                        <Button fx:id="Créer" layoutX="504.0" layoutY="93.0" mnemonicParsing="false" text="Créer " />
+                        <Button fx:id="ModifierR" layoutX="607.0" layoutY="93.0" mnemonicParsing="false" text="Modifier" />
+                        <Button fx:id="Supprimer" layoutX="727.0" layoutY="93.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+                        <ListView fx:id="lvReclamation" layoutY="132.0" onMouseClicked="#functionTest" prefHeight="484.0" prefWidth="1285.0" />
+                        <Button fx:id="refresh" layoutX="412.0" layoutY="93.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
+                        <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" layoutX="1318.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </Pane>
+               </children>
+            </StackPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

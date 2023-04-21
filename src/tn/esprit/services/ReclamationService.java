@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 
 
@@ -156,22 +158,29 @@ public void supprimer(int id) {
 }
 public void modifier(int id, Reclamation nouvelleReclamation) {
     try {
-        String req = "UPDATE reclamation SET nom_d = ?, prenom_d = ?, cin = ?, email = ?, commentaire = ?, tel = ?, file = ? WHERE id = ?";
+        String req = "UPDATE reclamation SET nom_d = ?, prenom_d = ?, cin = ?, email = ?, commentaire = ?, statut = ?, file = ?, tel = ? WHERE id = ?";
         PreparedStatement st = cnx.prepareStatement(req);
         st.setString(1, nouvelleReclamation.getNom_d());
         st.setString(2, nouvelleReclamation.getPrenom_d());
         st.setInt(3, nouvelleReclamation.getCin());
         st.setString(4, nouvelleReclamation.getEmail());
         st.setString(5, nouvelleReclamation.getCommentaire());
-        st.setString(6, nouvelleReclamation.getTel());
+        st.setString(6, nouvelleReclamation.getStatut());
         st.setString(7, nouvelleReclamation.getFile());
-        st.setInt(8, id);
+        st.setString(8, nouvelleReclamation.getTel());
+      
+        st.setInt(9, id);
         st.executeUpdate();
         System.out.println("Réclamation modifiée avec succès.");
     } catch (SQLException e) {
         e.printStackTrace();
     }
 }
+ public List<Reclamation> triParDate(){
+        return afficher().stream()
+                .sorted(Comparator.comparing((reclamation) -> reclamation.getCreated_at()))
+                .collect(Collectors.toList());
+    }
 
     
 

@@ -66,31 +66,26 @@ import javafx.util.Callback;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.function.Predicate;
 import javafx.scene.image.ImageView;
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
-import static tn.esprit.gui.ReclamationsController.SmsSender.sendSms;
+import tn.esprit.services.ReponseService;
+
 
 /**
  * FXML Controller class
  *
  * @author MSI
  */
-public class ReclamationsController implements Initializable {
-     
-    @FXML
+public class AfficherReclamationController implements Initializable {
+
+  
+     @FXML
     private Button Créer;
     @FXML
     private Button ModifierR;
     @FXML
     private Button Supprimer;
-      @FXML
-    private Button reponse;
-        @FXML
-    private Button approuver;
-          @FXML
-    private Button refuser;
+     
     @FXML
     private  ListView<Reclamation> lvReclamation;
     @FXML
@@ -106,54 +101,82 @@ public class ReclamationsController implements Initializable {
     private Button refresh;
     @FXML
     private ImageView image;
-   @FXML
-    private Button tric;
-    @FXML
-    private Button trid;
-     @FXML
-    private Button  btnSms ;
-   
-      
-   
+      @FXML
+    private TextField tfrecherche;
+          ReclamationService rs=new ReclamationService();
+    ReponseService reps=new ReponseService();
     
     
     
-    @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
+      try {
             // Initialize your database connection here
             cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/assurancepidev", "root", "");
         } catch (SQLException ex) {
             System.out.println("Failed to connect to database: " + ex.getMessage());
         }
-       
-        
-        reponse.setOnAction((ActionEvent event) -> {
-            reponse();
+        Créer.setOnAction((ActionEvent event) -> {
+            GoToCréer();
         });
-         approuver.setOnAction((ActionEvent event) -> {
-    approuver(event);
-});
-
-refuser.setOnAction((ActionEvent event) -> {
-    refuser(event);
-});
-tric.setOnAction(event -> {
-    trierReclamationsParDate(true); // Tri par date croissante
-});
-trid.setOnAction(event -> {
-    trierReclamationsParDate(false); // Tri par date decroissante
-});
-btnSms.setOnAction(event -> {
-    sendSms();
-});
+        
+        ModifierR.setOnAction((ActionEvent event) -> {
+            GoToModifierR();
+        });
+        
+       
 
         // Appel de la méthode ShowListe() pour afficher la liste des réclamations
         ShowListe();
         
+        tfrecherche.textProperty().addListener((observable, oldValue, newValue) -> {
+        rechercherReclamations(newValue);
+    });
+       
     }
 
-   
+    private void GoToCréer() {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("AjouterReclamation.fxml"));
+            Scene c = new Scene(root);
+            Stage stage = (Stage) Créer.getScene().getWindow();
+            stage.setScene(c);
+        } catch (IOException ex) {
+            Logger.getLogger(AjouterReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+private void GoToModifierR() {
+Reclamation selectedReclamation = lvReclamation.getSelectionModel().getSelectedItem();
+if (selectedReclamation == null) {
+Alert alert = new Alert(Alert.AlertType.WARNING);
+alert.setTitle("Aucune réclamation sélectionnée");
+alert.setHeaderText("Sélectionnez une réclamation à modifier");
+alert.showAndWait();
+return;
+}
+if (selectedReclamation.getStatut().equals("En cours")) {
+Alert alert = new Alert(Alert.AlertType.WARNING);
+alert.setTitle("Avertissement");
+alert.setHeaderText(null);
+alert.setContentText("Vous ne pouvez pas modifier une réclamation en cours de traitement.");
+alert.showAndWait();
+return;
+}
+this.idSelected = selectedReclamation.getId();
+try {
+FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierReclamation.fxml"));
+Parent root = loader.load();
+    ModifierReclamationController modifierReclamationController = loader.getController();
+    modifierReclamationController.initializeFxml(this.idSelected);
+
+    Stage stage = new Stage();
+    stage.setScene(new Scene(root));
+    stage.show();
+} catch (IOException ex) {
+    Logger.getLogger(AjouterReclamationController.class.getName()).log(Level.SEVERE, null, ex);
+}
+}
 
 public ObservableList<Reclamation> getReclamationList() {
 cnx = MaConnexion.getInstance().getCnx();
@@ -247,136 +270,81 @@ public void ShowListe() {
         ShowListe();
     }
 
-   
-
-  @FXML
-private void reponse() {
-try {
-// Récupérer la réclamation sélectionnée dans le ListView
+   @FXML
+private void supprimer(ActionEvent event) {
 Reclamation selectedReclamation = lvReclamation.getSelectionModel().getSelectedItem();
 if (selectedReclamation == null) {
-// Si aucune réclamation n'est sélectionnée, afficher un message d'erreur
-Alert alert = new Alert(Alert.AlertType.ERROR);
- alert.setTitle("Erreur");
+Alert alert = new Alert(Alert.AlertType.WARNING);
+alert.setTitle("Avertissement");
 alert.setHeaderText(null);
-alert.setContentText("Veuillez sélectionner une réclamation avant de répondre.");
+alert.setContentText("Veuillez sélectionner une réclamation à supprimer.");
 alert.showAndWait();
 return;
 }
-    // Charger la page AjouterReponse.fxml
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("AjouterReponse.fxml"));
-    Parent root = loader.load();
-
-    // Passer la référence de la réclamation sélectionnée au contrôleur de la page AjouterReponse.fxml
-    AjouterReponseController ajouterReponseController = loader.getController();
-    ajouterReponseController.setReclamation(selectedReclamation);
-
-    // Créer une nouvelle scène avec la page AjouterReponse.fxml et l'afficher
-    Scene c = new Scene(root);
-    Stage stage = (Stage) reponse.getScene().getWindow();
-    stage.setScene(c);
-} catch (IOException ex) {
-    Logger.getLogger(AjouterReponseController.class.getName()).log(Level.SEVERE, null, ex);
+if (selectedReclamation.getReponse() != null && selectedReclamation.getReponse().getNote() != null) {
+Alert alert = new Alert(Alert.AlertType.WARNING);
+alert.setTitle("Avertissement");
+alert.setHeaderText(null);
+alert.setContentText("Vous ne pouvez pas supprimer une réclamation qui possède une réponse .");
+alert.showAndWait();
+return;
+}
+int selectedReclamationId = selectedReclamation.getId();
+ReclamationService reclamationService = new ReclamationService();
+reclamationService.supprimer(selectedReclamationId);
+Alert alert = new Alert(Alert.AlertType.INFORMATION);
+alert.setTitle("Information");
+alert.setHeaderText(null);
+alert.setContentText("La réclamation a été supprimée avec succès.");
+alert.showAndWait();
+ShowListe();
 }
 
-}
-@FXML
-private void approuver(ActionEvent event) {
-    Reclamation selectedReclamation = lvReclamation.getSelectionModel().getSelectedItem();
-    if (selectedReclamation == null) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Avertissement");
-        alert.setHeaderText(null);
-        alert.setContentText("Veuillez sélectionner une réclamation à approuver.");
-        alert.showAndWait();
-        return;
+public void rechercherReclamations(String recherche) {
+    ObservableList<Reclamation> list = getReclamationList();
+
+    if (recherche != null && !recherche.isEmpty()) {
+        Predicate<Reclamation> predicate = reclamation -> {
+            String reference = reclamation.getReference();
+            String nom = reclamation.getNom_d();
+            String prenom = reclamation.getPrenom_d();
+            String statut = reclamation.getStatut();
+
+            return reference.contains(recherche)
+                    || nom.contains(recherche)
+                    || prenom.contains(recherche)
+                    || statut.contains(recherche);
+        };
+
+        list = list.filtered(predicate);
     }
-    int selectedReclamationId = selectedReclamation.getId();
-    ReclamationService reclamationService = new ReclamationService();
-    selectedReclamation.setStatut("Approuvée");
-    try {
-        reclamationService.modifier(selectedReclamationId, selectedReclamation); // Appel à la méthode modifier
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText("La réclamation a été approuvée avec succès.");
-        alert.showAndWait();
-        ShowListe();
-    } catch (Exception e) {
-        e.printStackTrace();
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erreur");
-        alert.setHeaderText(null);
-        alert.setContentText("Une erreur est survenue lors de la modification de la réclamation.");
-        alert.showAndWait();
-    }
+
+    lvReclamation.setItems(list);
 }
 
 
-@FXML
-private void refuser(ActionEvent event) {
-    Reclamation selectedReclamation = lvReclamation.getSelectionModel().getSelectedItem();
-    if (selectedReclamation == null) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Avertissement");
-        alert.setHeaderText(null);
-        alert.setContentText("Veuillez sélectionner une réclamation à refuser.");
-        alert.showAndWait();
-        return;
-    }
-    int selectedReclamationId = selectedReclamation.getId();
-    ReclamationService reclamationService = new ReclamationService();
-    selectedReclamation.setStatut("Refusée");
-    try {
-        reclamationService.modifier(selectedReclamationId, selectedReclamation); // Appel à la méthode modifier
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText("La réclamation a été refusée avec succès.");
-        alert.showAndWait();
-        ShowListe();
-    } catch (Exception e) {
-        e.printStackTrace();
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erreur");
-        alert.setHeaderText(null);
-        alert.setContentText("Une erreur est survenue lors de la modification de la réclamation.");
-        alert.showAndWait();
-    }
 }
-public void trierReclamationsParDate(boolean croissant) {
-    ObservableList<Reclamation> reclamations = lvReclamation.getItems();
-
-    Comparator<Reclamation> comparator = (r1, r2) -> {
-        if (croissant) {
-            return r1.getCreated_at().compareTo(r2.getCreated_at());
-        } else {
-            return r2.getCreated_at().compareTo(r1.getCreated_at());
-        }
-    };
-
-    FXCollections.sort(reclamations, comparator);
-    lvReclamation.setItems(reclamations);
-}
-public static class SmsSender {
     
-        public static final String ACCOUNT_SID = "AC8d0ef4234781bddf96867d3ec05586cb";
-        public static final String AUTH_TOKEN = "f2fc4dec0de3f6f3338a9c5539ee79a0";
-    
-        public static void sendSms() {
-        
-            Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-        
-            Message message = Message.creator(
-                    new PhoneNumber("+21652983903"), // Numéro de téléphone destinataire
-                    new PhoneNumber("+21652983903"), // Numéro de téléphone Twilio
-                    "Votre réclamation a été reçue avec succes!") // Message
-                .create();
-        
-            System.out.println(message.getSid());
-        }
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

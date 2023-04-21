@@ -294,7 +294,7 @@ if (tel == null || tel.isEmpty()) {
 
      public void redirectToList() {
     try {
-        Parent root = FXMLLoader.load(getClass().getResource("Reclamations.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("AfficherReclamation.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage) retour.getScene().getWindow();
         stage.setScene(scene);
