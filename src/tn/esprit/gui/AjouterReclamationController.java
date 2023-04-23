@@ -5,6 +5,9 @@
  */
 package tn.esprit.gui;
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 import java.util.UUID;
 import java.io.File;
 import java.io.IOException;
@@ -261,32 +264,45 @@ if (tel == null || tel.isEmpty()) {
 
 
  
-    // Ajouter la réclamation avec la référence générée, la date de création et le statut "En cours"
-    sql = "insert into reclamation(reference, nom_d, prenom_d, cin, email, commentaire, tel, created_at, statut, file) values (?,?,?,?,?,?,?,?,?,?)";
-    try {
-        PreparedStatement ste = cnx.prepareStatement(sql);
-        ste.setString(1, reference);
-        ste.setString(2, r.getNom_d());
-        ste.setString(3, r.getPrenom_d());
-        ste.setInt(4, r.getCin());
-        ste.setString(5, r.getEmail());
-        ste.setString(6, r.getCommentaire());
-        ste.setString(7, r.getTel());
-        ste.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
-        ste.setString(9, "En cours");
-        ste.setString(10, r.getFile());
-        ste.executeUpdate();
-        // Définir la référence générée pour la nouvelle réclamation
-        r.setReference(reference);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText("La réclamation a été ajoutée avec succès.");
-        alert.showAndWait();
-    } catch (SQLException ex) {
-        System.out.println(ex.getMessage());
-    }
+   // Ajouter la réclamation avec la référence générée, la date de création et le statut "En cours"
+sql = "insert into reclamation(reference, nom_d, prenom_d, cin, email, commentaire, tel, created_at, statut, file) values (?,?,?,?,?,?,?,?,?,?)";
+try {
+    PreparedStatement ste = cnx.prepareStatement(sql);
+    ste.setString(1, reference);
+    ste.setString(2, r.getNom_d());
+    ste.setString(3, r.getPrenom_d());
+    ste.setInt(4, r.getCin());
+    ste.setString(5, r.getEmail());
+    ste.setString(6, r.getCommentaire());
+    ste.setString(7, r.getTel());
+    ste.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
+    ste.setString(9, "En cours");
+    ste.setString(10, r.getFile());
+    ste.executeUpdate();
+    // Définir la référence générée pour la nouvelle réclamation
+    r.setReference(reference);
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Information");
+    alert.setHeaderText(null);
+    alert.setContentText("La réclamation a été ajoutée avec succès.");
+    alert.showAndWait();
+    
+    // Envoyer un SMS avec Twilio
+    String ACCOUNT_SID = "AC8d0ef4234781bddf96867d3ec05586cb";
+    String AUTH_TOKEN = "aa19f40710f58d6534e313d6d95cf7e9";
+    String TWILIO_NUMBER = "+16813346926";
+    String message = "Votre réclamation a été ajoutée avec la référence : " + reference;
+    PhoneNumber toNumber = new PhoneNumber(r.getTel());
+    PhoneNumber fromNumber = new PhoneNumber(TWILIO_NUMBER);
+
+    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+    Message twilioMessage = Message.creator(toNumber, fromNumber, message).create();
+    System.out.println("SMS envoyé avec succès !");
+} catch (SQLException ex) {
+    System.out.println(ex.getMessage());
 }
+   }
+
 
 
 

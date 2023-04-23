@@ -70,7 +70,7 @@ import javafx.scene.image.ImageView;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
-import static tn.esprit.gui.ReclamationsController.SmsSender.sendSms;
+import pidevj3a40.PidevJ3A40;
 
 /**
  * FXML Controller class
@@ -110,10 +110,9 @@ public class ReclamationsController implements Initializable {
     private Button tric;
     @FXML
     private Button trid;
-     @FXML
-    private Button  btnSms ;
-   
-      
+    
+       ObservableList<Reclamation> data=FXCollections.observableArrayList();
+  
    
     
     
@@ -144,9 +143,7 @@ tric.setOnAction(event -> {
 trid.setOnAction(event -> {
     trierReclamationsParDate(false); // Tri par date decroissante
 });
-btnSms.setOnAction(event -> {
-    sendSms();
-});
+
 
         // Appel de la méthode ShowListe() pour afficher la liste des réclamations
         ShowListe();
@@ -358,22 +355,21 @@ public void trierReclamationsParDate(boolean croissant) {
     FXCollections.sort(reclamations, comparator);
     lvReclamation.setItems(reclamations);
 }
-public static class SmsSender {
-    
-        public static final String ACCOUNT_SID = "AC8d0ef4234781bddf96867d3ec05586cb";
-        public static final String AUTH_TOKEN = "f2fc4dec0de3f6f3338a9c5539ee79a0";
-    
-        public static void sendSms() {
-        
-            Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-        
-            Message message = Message.creator(
-                    new PhoneNumber("+21652983903"), // Numéro de téléphone destinataire
-                    new PhoneNumber("+21652983903"), // Numéro de téléphone Twilio
-                    "Votre réclamation a été reçue avec succes!") // Message
-                .create();
-        
-            System.out.println(message.getSid());
+
+   @FXML
+    private void stat(ActionEvent event) {
+        Stage stageclose=(Stage)((Node)event.getSource()).getScene().getWindow();
+        stageclose.close();
+        try {
+            Parent root=FXMLLoader.load(getClass().getResource("/tn.esprit.gui/StatReclamation.fxml"));
+
+            Scene scene = new Scene(root);
+            Stage primaryStage=new Stage();
+            primaryStage.setTitle("Gestion recalamation");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(PidevJ3A40.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

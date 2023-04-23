@@ -1,5 +1,7 @@
 package tn.esprit.services;
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +13,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.stream.Collectors;
+import com.twilio.type.PhoneNumber;
+
 
 
 
@@ -48,10 +52,24 @@ public void ajouter(Reclamation r) {
         // Définir la référence générée pour la nouvelle réclamation
         r.setReference(reference);
         System.out.println("Réclamation ajoutée !");
+        
+        // Envoyer un SMS avec Twilio
+        String ACCOUNT_SID = "AC8d0ef4234781bddf96867d3ec05586cb";
+        String AUTH_TOKEN = "aa19f40710f58d6534e313d6d95cf7e9";
+        String TWILIO_NUMBER = "+21652983903";
+        String message = "Votre réclamation a été ajoutée avec la référence : " + reference;
+        PhoneNumber toNumber = new PhoneNumber(r.getTel());
+        PhoneNumber fromNumber = new PhoneNumber(TWILIO_NUMBER);
+
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        Message twilioMessage = Message.creator(toNumber, fromNumber, message).create();
+        System.out.println("SMS envoyé avec succès !");
+        
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
     }
 }
+
 
 
 

@@ -18,8 +18,8 @@ public class PidevJ3A40 extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Reclamations.fxml")); //admin
-         // FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/AfficherReclamation.fxml")); //user
+            // FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Reclamations.fxml")); //admin
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/AfficherReclamation.fxml")); //user
            
       
  // Correction du chemin du fichier FXML
