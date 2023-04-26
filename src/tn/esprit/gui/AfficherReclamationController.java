@@ -66,7 +66,9 @@ import javafx.util.Callback;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.function.Predicate;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
 import tn.esprit.services.ReponseService;
 
@@ -270,7 +272,7 @@ public void ShowListe() {
         ShowListe();
     }
 
-   @FXML
+  @FXML
 private void supprimer(ActionEvent event) {
 Reclamation selectedReclamation = lvReclamation.getSelectionModel().getSelectedItem();
 if (selectedReclamation == null) {
@@ -285,12 +287,18 @@ if (selectedReclamation.getReponse() != null && selectedReclamation.getReponse()
 Alert alert = new Alert(Alert.AlertType.WARNING);
 alert.setTitle("Avertissement");
 alert.setHeaderText(null);
-alert.setContentText("Vous ne pouvez pas supprimer une réclamation qui possède une réponse .");
+alert.setContentText("Vous ne pouvez pas supprimer une réclamation qui possède une réponse.");
 alert.showAndWait();
 return;
 }
 int selectedReclamationId = selectedReclamation.getId();
 ReclamationService reclamationService = new ReclamationService();
+Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+confirmation.setTitle("Confirmation");
+confirmation.setHeaderText(null);
+confirmation.setContentText("Voulez-vous vraiment supprimer cette réclamation ?");
+Optional<ButtonType> result = confirmation.showAndWait();
+if (result.get() == ButtonType.OK) {
 reclamationService.supprimer(selectedReclamationId);
 Alert alert = new Alert(Alert.AlertType.INFORMATION);
 alert.setTitle("Information");
@@ -298,6 +306,7 @@ alert.setHeaderText(null);
 alert.setContentText("La réclamation a été supprimée avec succès.");
 alert.showAndWait();
 ShowListe();
+}
 }
 
 public void rechercherReclamations(String recherche) {

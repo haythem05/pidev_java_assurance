@@ -41,6 +41,13 @@ import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfWriter;
 
 
 
@@ -71,6 +78,7 @@ public class AjouterReclamationController implements Initializable {
     private Button ajout;
     @FXML
     private Button retour;
+   
 
     public Connection cnx;
     public Statement stm;
@@ -179,34 +187,34 @@ if (reference == null || !reference.matches("^[a-zA-Z0-9]+$")) {
     return;
 }
 
-if (nom_d == null || nom_d.isEmpty()) {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setHeaderText(null);
-    alert.setContentText("Le champ nom est obligatoire!");
-    alert.showAndWait();
-    return;
+if (nom_d == null || nom_d.trim().isEmpty()) {
+Alert alert = new Alert(Alert.AlertType.ERROR);
+alert.setHeaderText(null);
+alert.setContentText("Le champ nom est obligatoire!");
+alert.showAndWait();
+return;
 
-} else if (!nom_d.matches("^[a-zA-Z]+$")) {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setHeaderText(null);
-    alert.setContentText("Le champ nom ne doit contenir que des lettres.");
-    alert.showAndWait();
-    return;
+} else if (!nom_d.matches("^[a-zA-Z ]+$")) {
+Alert alert = new Alert(Alert.AlertType.ERROR);
+alert.setHeaderText(null);
+alert.setContentText("Le champ nom ne doit contenir que des lettres et des espaces.");
+alert.showAndWait();
+return;
 }
 
-if (prenom_d == null || prenom_d.isEmpty()) {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setHeaderText(null);
-    alert.setContentText("Le champ prénom est obligatoire!");
-    alert.showAndWait();
-    return;
+if (prenom_d == null || prenom_d.trim().isEmpty()) {
+Alert alert = new Alert(Alert.AlertType.ERROR);
+alert.setHeaderText(null);
+alert.setContentText("Le champ prénom est obligatoire!");
+alert.showAndWait();
+return;
 
-} else if (!prenom_d.matches("^[a-zA-Z]+$")) {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setHeaderText(null);
-    alert.setContentText("Le champ prénom ne doit contenir que des lettres.");
-    alert.showAndWait();
-    return;
+} else if (!prenom_d.matches("^[a-zA-Z ]+$")) {
+Alert alert = new Alert(Alert.AlertType.ERROR);
+alert.setHeaderText(null);
+alert.setContentText("Le champ prénom ne doit contenir que des lettres et des espaces.");
+alert.showAndWait();
+return;
 }
 
 if (cin == 0) {
@@ -289,9 +297,10 @@ try {
     
     // Envoyer un SMS avec Twilio
     String ACCOUNT_SID = "AC8d0ef4234781bddf96867d3ec05586cb";
-    String AUTH_TOKEN = "aa19f40710f58d6534e313d6d95cf7e9";
+    String AUTH_TOKEN = "d209a1b342ee86aa9bb3a02883bcacc6";
     String TWILIO_NUMBER = "+16813346926";
-    String message = "Votre réclamation a été ajoutée avec la référence : " + reference;
+   String message = "Votre réclamation sous le nom de " + nom_d + " " + prenom_d + " a été ajoutée avec la référence : " + reference;
+
     PhoneNumber toNumber = new PhoneNumber(r.getTel());
     PhoneNumber fromNumber = new PhoneNumber(TWILIO_NUMBER);
 

@@ -106,9 +106,10 @@ public void initializeFxml(int id ) {
 
 }
 
-// Méthode pour modifier une réclamation
+
 // Méthode pour modifier une réclamation
 public void modifier() {
+    
     // Créer une nouvelle réclamation avec les valeurs modifiées
     Reclamation nouvelleReclamation = new Reclamation();
     ReclamationService reclamationService = new ReclamationService();
@@ -147,6 +148,7 @@ public void modifier() {
 
 @FXML
 private void modifierRec(ActionEvent event) {
+    if (verifierSaisie()) {
     System.out.println("heey");
     Reclamation nouvelleReclamation = new Reclamation();
     ReclamationService reclamationService = new ReclamationService();
@@ -184,7 +186,130 @@ private void modifierRec(ActionEvent event) {
         alert.setContentText("Une erreur s'est produite lors de la modification de la réclamation.");
         alert.showAndWait();
     }
+ 
     }
+}
+private boolean verifierSaisie() {
+String reference = fxreferenceM.getText();
+String nom_d = fxnom_dM.getText();
+String prenom_d = fxprenom_dM.getText();
+String cinString = fxcinM.getText();
+String email = fxemailM.getText();
+String commentaire = fxcommentaireM.getText();
+String tel = fxtelM.getText();
+if (reference.isEmpty() || nom_d.isEmpty() || prenom_d.isEmpty()
+        || cinString.isEmpty() || email.isEmpty() || commentaire.isEmpty()
+        || tel.isEmpty()) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setHeaderText(null);
+    alert.setContentText("Tous les champs sont obligatoires!");
+    alert.showAndWait();
+    return false;
+}
+
+// Validate input fields
+if (!reference.matches("^[a-zA-Z0-9]+$")) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setHeaderText(null);
+    alert.setContentText("La référence doit contenir uniquement des lettres et des chiffres!");
+    alert.showAndWait();
+    return false;
+}
+
+if (nom_d == null || nom_d.isEmpty()) {
+Alert alert = new Alert(Alert.AlertType.ERROR);
+alert.setHeaderText(null);
+alert.setContentText("Le champ nom est obligatoire!");
+alert.showAndWait();
+return false;
+} else if (!nom_d.matches("^[a-zA-Z ]+$")) {
+Alert alert = new Alert(Alert.AlertType.ERROR);
+alert.setHeaderText(null);
+alert.setContentText("Le champ nom ne doit contenir que des lettres et des espaces.");
+alert.showAndWait();
+return false;
+}
+
+if (prenom_d == null || prenom_d.isEmpty()) {
+Alert alert = new Alert(Alert.AlertType.ERROR);
+alert.setHeaderText(null);
+alert.setContentText("Le champ prénom est obligatoire!");
+alert.showAndWait();
+return false;
+} else if (!prenom_d.matches("^[a-zA-Z ]+$")) {
+Alert alert = new Alert(Alert.AlertType.ERROR);
+alert.setHeaderText(null);
+alert.setContentText("Le champ prénom ne doit contenir que des lettres et des espaces.");
+alert.showAndWait();
+return false;
+}
+
+
+int cin = 0;
+try {
+    cin = Integer.parseInt(cinString);
+} catch (NumberFormatException e) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setHeaderText(null);
+    alert.setContentText("Le champ CIN doit contenir uniquement des chiffres.");
+    alert.showAndWait();
+    return false;
+}
+if (cin == 0) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setHeaderText(null);
+    alert.setContentText("Le champ CIN est obligatoire!");
+    alert.showAndWait();
+    return false;
+} else if (String.valueOf(cin).length() != 8) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setHeaderText(null);
+    alert.setContentText("Le champ CIN doit contenir exactement 8 chiffres sans caractères.");
+    alert.showAndWait();
+    return false;
+}
+
+if (email == null || email.isEmpty()) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setHeaderText(null);
+    alert.setContentText("Le champ email est obligatoire!");
+    alert.showAndWait();
+    return false;
+} else if (!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$")) {
+   
+// Check if email is valid
+Alert alert = new Alert(Alert.AlertType.ERROR);
+alert.setHeaderText(null);
+alert.setContentText("L'adresse email n'est pas valide.");
+alert.showAndWait();
+return false;
+}
+
+if (commentaire == null || commentaire.isEmpty()) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setHeaderText(null);
+    alert.setContentText("Le champ commentaire est obligatoire!");
+    alert.showAndWait();
+    return false;
+} else if (commentaire.length() < 10) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setHeaderText(null);
+    alert.setContentText("Le champ commentaire doit contenir au moins 10 caractères.");
+    alert.showAndWait();
+    return false;
+}
+
+if (tel == null || tel.isEmpty()) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setHeaderText(null);
+    alert.setContentText("Le champ téléphone est obligatoire!");
+    alert.showAndWait();
+    return false;
+}
+
+// if everything is valid, return true
+return true;
+}
 
 
 
@@ -195,6 +320,7 @@ Stage stage = (Stage) retourM.getScene().getWindow();
 // Close the stage
 stage.close();
     }
+    
 }
 
 

@@ -78,6 +78,16 @@ public Reclamation(Integer id, String reference, String nom_d, String prenom_d, 
         this.file = file;
         this.tel = tel;
     }
+
+    public Reclamation(String nom_d, String prenom_d, Integer cin, String email, String commentaire, Date created_at, String tel) {
+        this.nom_d = nom_d;
+        this.prenom_d = prenom_d;
+        this.cin = cin;
+        this.email = email;
+        this.commentaire = commentaire;
+        this.created_at = created_at;
+        this.tel = tel;
+    }
     
 
 

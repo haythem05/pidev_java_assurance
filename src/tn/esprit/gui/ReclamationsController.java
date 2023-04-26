@@ -70,7 +70,10 @@ import javafx.scene.image.ImageView;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+import java.util.Map;
+import javafx.scene.control.Alert.AlertType;
 import pidevj3a40.PidevJ3A40;
+import tn.esprit.services.ReponseService;
 
 /**
  * FXML Controller class
@@ -110,9 +113,13 @@ public class ReclamationsController implements Initializable {
     private Button tric;
     @FXML
     private Button trid;
+      @FXML
+    private Button handleStatButton;
     
        ObservableList<Reclamation> data=FXCollections.observableArrayList();
-  
+       
+    ReclamationService sr=new ReclamationService();
+    ReponseService srep=new ReponseService();
    
     
     
@@ -142,6 +149,9 @@ tric.setOnAction(event -> {
 });
 trid.setOnAction(event -> {
     trierReclamationsParDate(false); // Tri par date decroissante
+});
+handleStatButton.setOnAction((ActionEvent event) -> {
+    handleStatButton(event);
 });
 
 
@@ -356,22 +366,43 @@ public void trierReclamationsParDate(boolean croissant) {
     lvReclamation.setItems(reclamations);
 }
 
-   @FXML
-    private void stat(ActionEvent event) {
-        Stage stageclose=(Stage)((Node)event.getSource()).getScene().getWindow();
-        stageclose.close();
-        try {
-            Parent root=FXMLLoader.load(getClass().getResource("/tn.esprit.gui/StatReclamation.fxml"));
+ @FXML
+private void handleStatButton(ActionEvent event) {
+try {
+// Fermez la fenêtre actuelle
+Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+currentStage.close();
+// Chargez le fichier FXML pour l'écran des statistiques
+FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Statistiques.fxml"));
+Parent root = loader.load();
 
-            Scene scene = new Scene(root);
-            Stage primaryStage=new Stage();
-            primaryStage.setTitle("Gestion recalamation");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(PidevJ3A40.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+// Créez une nouvelle fenêtre pour afficher les statistiques
+Stage stage = new Stage();
+stage.setTitle("Statistiques des réclamations");
+stage.setScene(new Scene(root));
+
+// Obtenez le contrôleur de l'écran des statistiques
+StatistiquesController controller = loader.getController();
+
+// Générez les statistiques de réclamation
+Map<String, Integer> stats = controller.generateClaimStatistics();
+
+// Affichez les statistiques dans le graphique circulaire
+controller.displayStatistics(stats);
+
+// Affichez la nouvelle fenêtre
+stage.show();
+} catch (IOException e) {
+e.printStackTrace();
+} catch (SQLException ex) {
+Alert alert = new Alert(AlertType.ERROR);
+alert.setTitle("Erreur SQL");
+alert.setHeaderText("Une erreur s'est produite lors de la génération des statistiques");
+alert.setContentText(ex.getMessage());
+alert.showAndWait();
+Logger.getLogger(ReclamationsController.class.getName()).log(Level.SEVERE, null, ex);
+}
+}
 }
 
 

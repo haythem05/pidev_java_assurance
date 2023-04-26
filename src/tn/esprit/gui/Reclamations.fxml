@@ -56,7 +56,7 @@
                   <Button fx:id="refuser" layoutX="219.0" layoutY="93.0" mnemonicParsing="false" onAction="#refuser" text="Refuser" />
                   <Button fx:id="tric" layoutX="326.0" layoutY="93.0" mnemonicParsing="false" text="TriC" />
                   <Button fx:id="trid" layoutX="503.0" layoutY="93.0" mnemonicParsing="false" text="TriD" />
-                  <Button layoutX="643.0" layoutY="93.0" mnemonicParsing="false" onAction="#stat" text="Stat" />
+                  <Button fx:id="handleStatButton" layoutX="643.0" layoutY="93.0" mnemonicParsing="false" onAction="#handleStatButton" text="Stat" />
                 
                </children>
             </Pane>
