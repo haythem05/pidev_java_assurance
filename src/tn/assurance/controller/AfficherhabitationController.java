@@ -67,7 +67,23 @@ static public float     capitalmobilier,capitalimmobilier,devis;
     }
 
     @FXML
-    private void modifier(ActionEvent event) {
+    private void modifier(ActionEvent event)  throws IOException {
+        
+        ListView<Habitation> list = listView;
+        
+        Habitation h = list.getSelectionModel().getSelectedItem(); // use getSelectedItem() to get the selected item, not getSelectedItems()*
+        
+        
+        id = h.getId();
+        idclient=h.getIdclient();
+                nbpieceimmobilier=h.getNbpieceimmobilier();
+                capitalimmobilier=h.getCapitalimmobilier();
+                        capitalmobilier=h.getCapitalmobilier();
+                        devis=h.getDevis();
+
+        
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/modifierHabitation.fxml"));
+        rootPane.getChildren().setAll(pane);
     }
 
     @FXML

@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -30,6 +31,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
 /**
@@ -49,6 +51,8 @@ public class AjouterCategorieBackfxmlController implements Initializable {
     @FXML
     private ImageView imageV;
     public String url_image;
+    @FXML
+    private AnchorPane rootPane;
 
     /**
      * Initializes the controller class.
@@ -92,7 +96,7 @@ public class AjouterCategorieBackfxmlController implements Initializable {
     }
 
     @FXML
-    private void validerC(ActionEvent event) {
+    private void validerC(ActionEvent event) throws IOException {
 
         nom = nomF.getText();
         description = descriptionF.getText();
@@ -127,6 +131,10 @@ public class AjouterCategorieBackfxmlController implements Initializable {
         categorieS cS = new categorieS();
 
         cS.ajouterCategorie(ca);
+        
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/affichercategorie.fxml"));  
+        
+            rootPane.getChildren().setAll(pane);
 
     }
 

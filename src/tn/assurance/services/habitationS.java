@@ -57,7 +57,7 @@ public class habitationS {
     
      public void modifierHabitation(Habitation h, int id) {
         try {
-            String req = "UPDATE `assurance_habitation` SET `id_client` = '" +  h.getType_Id().getId() + "', `nb_piece_immobilier` = '" + h.getNbpieceimmobilier() +  "', `capital_immobilier` = '" + h.getCapitalimmobilier() + "', `capital_mobilier` = '" + h.getCapitalmobilier() +
+            String req = "UPDATE `assurance_habitation` SET `id_client` = '"  + h.getIdclient()+ "', `nb_piece_immobilier` = '" + h.getNbpieceimmobilier() +  "', `capital_immobilier` = '" + h.getCapitalimmobilier() + "', `capital_mobilier` = '" + h.getCapitalmobilier() +
                      "', `devis` = '" + h.getDevis()+"' WHERE `assurance_habitation`.`id` = " + id;
             Statement st = conn.createStatement();
             st.executeUpdate(req);

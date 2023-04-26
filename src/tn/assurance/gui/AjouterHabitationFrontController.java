@@ -7,8 +7,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import tn.assurance.models.Categorie;
@@ -56,50 +54,22 @@ public class AjouterHabitationFrontController implements Initializable {
     }
 
     @FXML
-   private void validerh(ActionEvent event) {
-    // retrieve user input and selected category
-    if (idclienth.getText().isEmpty() || nbpieceimmobilierh.getText().isEmpty() || capitalimmobilierh.getText().isEmpty() || capitalmobilierh.getText().isEmpty() || devish.getText().isEmpty()) {
-        // show an error message and return if any field is empty
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("All fields are required.");
-        alert.showAndWait();
-        return;
-    }
+    private void validerh(ActionEvent event) {
 
-    // validate input for positive values
-    try {
+        // retrieve user input and selected category
         idclient = Integer.parseInt(idclienth.getText());
         nbpieceimmobilier = Integer.parseInt(nbpieceimmobilierh.getText());
         capitalimmobilier = Float.parseFloat(capitalimmobilierh.getText());
         capitalmobilier = Float.parseFloat(capitalmobilierh.getText());
         devis = Float.parseFloat(devish.getText());
+        type_id = type_Idh.getValue();
 
-        if (idclient <= 0 || nbpieceimmobilier <= 0 || capitalimmobilier <= 0 || capitalmobilier <= 0 || devis <= 0) {
-            // show an error message and return if any field has a non-positive value
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("All fields must have positive values.");
-            alert.showAndWait();
-            return;
-        }
-    } catch (NumberFormatException e) {
-   
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("All fields must have numeric values.");
-        alert.showAndWait();
-        return;
+        // create new Habitation object with user input and selected category
+        Habitation habitation = new Habitation(idclient, nbpieceimmobilier, capitalimmobilier, capitalmobilier, devis, type_id);
+habitationS hS= new  habitationS();
+hS.ajouterHabitation(habitation, type_id);
+
+
     }
-
-    // create new Habitation object with user input and selected category
-    Habitation habitation = new Habitation(idclient, nbpieceimmobilier, capitalimmobilier, capitalmobilier, devis, type_id);
-    habitationS hS = new habitationS();
-    hS.ajouterHabitation(habitation, type_id);
-}
-
 
 }

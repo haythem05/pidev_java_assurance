@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package tn.assurance.controller;
 
 import java.io.File;
@@ -64,6 +65,16 @@ public class affichercategorieController implements Initializable {
 
     @FXML
     private void modifier(ActionEvent event) throws IOException {
+        
+        ListView<Categorie> list = listView;
+        
+        Categorie c = list.getSelectionModel().getSelectedItem(); // use getSelectedItem() to get the selected item, not getSelectedItems()*
+        
+        id = c.getId();
+        nom = c.getNom();
+        description = c.getDescription();
+        url_image = c.getCategorieimage();
+        
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/modifiercategorie.fxml"));
         rootPane.getChildren().setAll(pane);
     }
