@@ -51,7 +51,7 @@ public class SinistreService implements Fonctions<Sinistre>{
     }*/
     
     public void ajouterSinistre (Sinistre t, Type type) {
-        sql = "insert into sinistre(date_heure, lieu, statut, degats, description, type_id) values (?,?,?,?,?,?)";
+        sql = "insert into sinistre(date_heure, lieu, statut, degats, description, file, type_id) values (?,?,?,?,?,?,?)";
         try {
             PreparedStatement ste = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ste.setTimestamp(1, t.getDate_heure());
@@ -59,7 +59,8 @@ public class SinistreService implements Fonctions<Sinistre>{
             ste.setString(3, "En attente de traitement");
             ste.setString(4, t.getDegats());
             ste.setString(5, t.getDescription());
-            ste.setInt(6, type.getId());
+            ste.setString(6, t.getFile());
+            ste.setInt(7, type.getId());
             ste.executeUpdate();
             ResultSet rs = ste.getGeneratedKeys();
             if (rs.next()) {
@@ -90,33 +91,7 @@ public class SinistreService implements Fonctions<Sinistre>{
             s.setStatut(rs.getString(5));
             s.setDegats(rs.getString(6));
             s.setDescription(rs.getString(7));
-            
-            sinistres.add(s);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return sinistres;
-    }
-    
-    public List<Sinistre> affichersanst() {
-        List<Sinistre> sinistres = new ArrayList<>();
-        sql="select s.*, t.nom from sinistre s inner join type t on s.type_id = t.id";
-        try {
-            Statement ste = cnx.createStatement();
-            ResultSet rs = ste.executeQuery(sql);
-            while (rs.next()){
-            Sinistre s = new Sinistre();
-            s.setId(rs.getInt(1));
-            Type t = new Type();
-            t.setId(rs.getInt(2));
-            t.setNom(rs.getString("nom"));
-            s.setType(t);
-            s.setDate_heure(rs.getTimestamp(3));
-            s.setLieu(rs.getString(4));
-            s.setStatut(rs.getString(5));
-            s.setDegats(rs.getString(6));
-            s.setDescription(rs.getString(7));
+            s.setFile(rs.getString(8));
             
             sinistres.add(s);
             }
@@ -141,6 +116,17 @@ public class SinistreService implements Fonctions<Sinistre>{
     @Override
     public void modifier(Sinistre t, int id) {
         sql="update sinistre set date_heure = ' " + t.getDate_heure() + " ', lieu = ' " + t.getLieu() + " ', statut = ' " + t.getStatut() + " ', degats = ' " + t.getDegats()+ " ', description = ' " + t.getDescription() + " ', type_id = '" + t.getType().getId() + " ' where id= " + id;
+        try {
+            Statement ste = cnx.createStatement();
+            ste.executeUpdate(sql);
+            System.out.println("Sinistre modifié avec succès.");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public void modifiersanst(Sinistre t, int id) {
+        sql="update sinistre set date_heure = ' " + t.getDate_heure() + " ', lieu = ' " + t.getLieu() + " ', statut = ' " + t.getStatut() + " ', degats = ' " + t.getDegats()+ " ', description = ' " + t.getDescription() + " ' where id= " + id;
         try {
             Statement ste = cnx.createStatement();
             ste.executeUpdate(sql);

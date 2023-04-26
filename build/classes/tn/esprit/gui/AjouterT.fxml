@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.AjouterTController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.AjouterTController">
    <children>
       <Label layoutX="230.0" layoutY="29.0" text="Ajouter un type de sinistre" textAlignment="CENTER" textFill="#b10909">
          <font>
@@ -14,7 +14,8 @@
          </font>
       </Label>
       <Label layoutX="116.0" layoutY="156.0" text="Nom du type" />
-      <Button layoutX="281.0" layoutY="321.0" mnemonicParsing="false" onAction="#ajouterType" prefHeight="25.0" prefWidth="70.0" text="Ajouter" />
+      <Button layoutX="202.0" layoutY="296.0" mnemonicParsing="false" onAction="#ajouterType" prefHeight="25.0" prefWidth="70.0" text="Ajouter" />
       <TextField fx:id="tf_nom" layoutX="244.0" layoutY="152.0" prefHeight="25.0" prefWidth="172.0" />
+      <Button layoutX="350.0" layoutY="296.0" mnemonicParsing="false" onAction="#retour" prefHeight="25.0" prefWidth="70.0" text="Retour" />
    </children>
 </AnchorPane>

@@ -45,13 +45,11 @@ public class ModifierTController implements Initializable {
     @FXML
     private void modifierT(ActionEvent event) {
         try {
-            int id = AfficherController.id;
+            int id = AfficherTController.id;
             String nom = tf_nom.getText();
             
             Type t = new Type(nom);
-
             TypeService ts = new TypeService();
-
             ts.modifier(t, id);
             
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherT.fxml"));
@@ -59,6 +57,12 @@ public class ModifierTController implements Initializable {
         } catch (IOException ex) {
             System.err.println(ex);
         }
+    }
+
+    @FXML
+    private void retour(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherT.fxml"));
+        rootPane.getChildren().setAll(pane);
     }
     
 }

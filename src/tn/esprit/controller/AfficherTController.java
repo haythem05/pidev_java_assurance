@@ -58,11 +58,6 @@ public class AfficherTController implements Initializable {
     @FXML
     private void modifierT(ActionEvent event) {
         ListView<Type> liste = (ListView<Type>) listT; // assuming listView is a ListView<CoVoiturage>
-
-        TypeService ts = new TypeService();
-
-        int selectedID = liste.getSelectionModel().getSelectedIndex();
-
         Type t = liste.getSelectionModel().getSelectedItem(); // use getSelectedItem() to get the selected item, not getSelectedItems()*
 
         id = t.getId();

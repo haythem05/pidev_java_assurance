@@ -21,7 +21,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -31,10 +33,12 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import tn.esprit.entities.Sinistre;
 import tn.esprit.entities.Type;
-import tn.esprit.services.SinistreService;
+import tn.esprit.services.Emailsender;
+import tn.esprit.services.SinistreService;  
 import tn.esprit.services.TypeService;
 
 /**
@@ -56,16 +60,18 @@ public class AjouterController implements Initializable {
 
     private String path;
     File selectedFile;
-    private String lieu,statut,degats,description;
+    private String lieu, statut, degats, description;
     public String url_image;
     private Timestamp date_heure;
     @FXML
     private DatePicker date;
-    
+
     private Type type;
     @FXML
     private ChoiceBox<Type> list_types;
     private List<Type> types;
+    @FXML
+    private AnchorPane rootPane;
 
     /**
      * Initializes the controller class.
@@ -74,7 +80,7 @@ public class AjouterController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         types = new TypeService().afficher();
         list_types.getItems().addAll(types);
-        
+
         imageV.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 Dragboard db = event.getDragboard();
@@ -132,12 +138,12 @@ public class AjouterController implements Initializable {
 
             // Create a new file in the destination directory
             File destinationFile = new File("C:\\Users\\HD\\Desktop\\Installations\\XAMPP\\htdocs\\imagePi\\" + selectedFile.getName());
-            // url_image = "C:\\xampp\\htdocs\\image_trippie_cov\\" + file.getName();
             url_image = selectedFile.getName();
+            System.out.println("image ajoutée");
 
             try {
-                // Copy the selected file to the destination file
-                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            // Copy the selected file to the destination file
+            Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 System.err.println(e);
             }
@@ -153,10 +159,45 @@ public class AjouterController implements Initializable {
         LocalDate d = date.getValue();
         date_heure = Timestamp.valueOf(d.atStartOfDay(ZoneId.systemDefault()).toLocalDateTime());
         type = list_types.getValue();
+
         
+        if (lieu.isEmpty() || degats.isEmpty() || description.isEmpty() || date_heure == null || type == null) {
+            // Afficher un message d'erreur si un champ obligatoire est vide
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez remplir tous les champs obligatoires.");
+            alert.showAndWait();
+            return;
+        }
+
+        LocalDate now = LocalDate.now();
+        if (d.isAfter(now)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Erreur de saisie");
+            alert.setContentText("La date sélectionnée ne peut pas dépasser la date actuelle.");
+            alert.showAndWait();
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Ajout réussi");
+        alert.setHeaderText(null);
+        alert.setContentText("Le sinistre a été ajouté avec succès à la base de données.");
+        alert.showAndWait();
+
         Sinistre s = new Sinistre(date_heure, lieu, degats, statut, description, url_image, type);
         SinistreService ss = new SinistreService();
-        ss.ajouterSinistre(s,type);
+        ss.ajouterSinistre(s, type);
+        
+        Emailsender.sendEmail_add("nourhouda.bejaoui@esprit.tn", "'Merci pour votre confiance.\nNous avons bien reçu votre déclaration.\nPatientez quelques instants, votre sinistre est en attente de traitement.\n\nÀ bientôt.'");
+        
+    }
+
+    @FXML
+    private void retour(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Afficher.fxml"));
+        rootPane.getChildren().setAll(pane);
     }
 
 }

@@ -45,7 +45,7 @@ public class AfficherController implements Initializable {
         ListView list2 = list;
         Sinistre r = new Sinistre();
         SinistreService ss = new SinistreService();
-        List<Sinistre> liste = ss.affichersanst();
+        List<Sinistre> liste = ss.afficher();
         for (int i = 0; i < liste.size(); i++) {
             Sinistre s = liste.get(i);
             list2.getItems().add(s);
@@ -55,10 +55,6 @@ public class AfficherController implements Initializable {
     @FXML
     private void modifier(ActionEvent event) {
         ListView<Sinistre> liste = list; // assuming listView is a ListView<CoVoiturage>
-
-        SinistreService ss = new SinistreService();
-
-        int selectedID = liste.getSelectionModel().getSelectedIndex();
 
         Sinistre s = liste.getSelectionModel().getSelectedItem(); // use getSelectedItem() to get the selected item, not getSelectedItems()*
 

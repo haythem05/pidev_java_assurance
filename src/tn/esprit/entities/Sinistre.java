@@ -160,7 +160,7 @@ public class Sinistre {
 
     @Override
     public String toString() {
-        return "Sinistre{" + "id=" + id + ", date_heure=" + date_heure + ", lieu=" + lieu + ", degats=" + degats + ", statut=" + statut + ", description=" + description + ", file=" + file + ", type=" + type + "} \n";
+        return "Sinistre : Date : " + date_heure + " | Lieu : " + lieu + " | Degats : " + degats + " | Statut : " + statut + " | Description : " + description + " | Image : " + file + " | Type : " + type + " \n";
     }
 
     

@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="tn.esprit.controller.ModifierTController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.ModifierTController">
    <children>
       <Label layoutX="246.0" layoutY="45.0" text="Modifier ce type" textFill="#b10909">
          <font>
@@ -16,6 +15,7 @@
       </Label>
       <Label layoutX="176.0" layoutY="178.0" text="Nom" />
       <TextField fx:id="tf_nom" layoutX="268.0" layoutY="174.0" onAction="#modifierT" />
-      <Button layoutX="268.0" layoutY="310.0" mnemonicParsing="false" onAction="#modifierT" text="Modifier" />
+      <Button layoutX="222.0" layoutY="297.0" mnemonicParsing="false" onAction="#modifierT" text="Modifier" />
+      <Button layoutX="343.0" layoutY="297.0" mnemonicParsing="false" onAction="#retour" prefHeight="25.0" prefWidth="61.0" text="Retour" />
    </children>
 </AnchorPane>
