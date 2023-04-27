@@ -533,7 +533,7 @@ successAlert.showAndWait();
 //Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 //Message twilioMessage = Message.creator(toNumber, fromNumber, message).create();
 //System.out.println("SMS envoyé avec succès !");
-Emailsender.sendEmail_add("adam.messaoudi@esprit.tn", "Merci pour votre confiance.\nNous avons bien reçu votre réclamation.\nPatientez quelques instants, elle est en cours de traitement.\n\nÀ bientôt.");
+//Emailsender.sendEmail_add("adam.messaoudi@esprit.tn", "Merci pour votre confiance.\nNous avons bien reçu votre réclamation.\nPatientez quelques instants, elle est en cours de traitement.\n\nÀ bientôt.");
 
    }
 

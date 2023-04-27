@@ -342,6 +342,19 @@ public void rechercherReclamations(String recherche) {
 
     lvReclamation.setItems(list);
 }
+@FXML
+private void openChatbotWindow() {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ChatBot.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
  
 }
 

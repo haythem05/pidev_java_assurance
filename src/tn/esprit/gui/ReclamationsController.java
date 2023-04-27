@@ -160,8 +160,7 @@ handleStatButton.setOnAction((ActionEvent event) -> {
 
         // Appel de la méthode ShowListe() pour afficher la liste des réclamations
         ShowListe();
-        //Appel de Checkout
-        checkEnCoursReclamations();
+       
         //recherche
              tfrecherche.textProperty().addListener((observable, oldValue, newValue) -> {
         rechercherReclamations(newValue);
@@ -413,22 +412,7 @@ alert.showAndWait();
 Logger.getLogger(ReclamationsController.class.getName()).log(Level.SEVERE, null, ex);
 }
 }
-public void checkEnCoursReclamations() {
-    String sql = "select * from reclamation where statut='En cours'";
-    try {
-        Statement st = cnx.createStatement();
-        ResultSet rs = st.executeQuery(sql);
-        if (rs.next()) {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information");
-            alert.setHeaderText(null);
-            alert.setContentText("Il y a une ou plusieurs réclamations en cours !");
-            alert.showAndWait();
-        }
-    } catch (SQLException ex) {
-        System.out.println(ex.getMessage());
-    }
-}
+
 public void rechercherReclamations(String recherche) {
     ObservableList<Reclamation> list = getReclamationList();
 
