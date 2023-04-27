@@ -84,6 +84,7 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.net.MalformedURLException;
+import tn.esprit.services.Emailsender;
 
 
 
@@ -532,6 +533,8 @@ successAlert.showAndWait();
 //Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 //Message twilioMessage = Message.creator(toNumber, fromNumber, message).create();
 //System.out.println("SMS envoyé avec succès !");
+Emailsender.sendEmail_add("adam.messaoudi@esprit.tn", "Merci pour votre confiance.\nNous avons bien reçu votre réclamation.\nPatientez quelques instants, elle est en cours de traitement.\n\nÀ bientôt.");
+
    }
 
      public void redirectToList() {
