@@ -102,8 +102,7 @@ public class AfficherReclamationController implements Initializable {
     private  ListView<Reclamation> lvReclamation;
     @FXML
     private Pane paneReclamations;
-     @FXML
-    private TextField recherche;
+    
     
     public Connection cnx;
     public Statement stm;

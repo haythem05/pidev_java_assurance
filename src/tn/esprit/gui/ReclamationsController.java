@@ -71,6 +71,7 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import java.util.Map;
+import java.util.function.Predicate;
 import javafx.scene.control.Alert.AlertType;
 import pidevj3a40.PidevJ3A40;
 import tn.esprit.services.ReponseService;
@@ -118,8 +119,10 @@ public class ReclamationsController implements Initializable {
     
        ObservableList<Reclamation> data=FXCollections.observableArrayList();
        
-    ReclamationService sr=new ReclamationService();
-    ReponseService srep=new ReponseService();
+    @FXML
+    private TextField tfrecherche;
+          ReclamationService rs=new ReclamationService();
+    ReponseService reps=new ReponseService();
    
     
     
@@ -159,6 +162,11 @@ handleStatButton.setOnAction((ActionEvent event) -> {
         ShowListe();
         //Appel de Checkout
         checkEnCoursReclamations();
+        //recherche
+             tfrecherche.textProperty().addListener((observable, oldValue, newValue) -> {
+        rechercherReclamations(newValue);
+    });
+       
     }
 
    
@@ -228,7 +236,7 @@ public void ShowListe() {
 
 
 
-    @FXML
+   @FXML
     private void functionTest(MouseEvent event) {
         this.idSelected = lvReclamation.getSelectionModel().getSelectedItem().getId();
         
@@ -236,8 +244,9 @@ public void ShowListe() {
             Reclamation reclamation =reclamationService.recup(this.idSelected);
 
         
-        
-        String imagePath = "file:\\" + reclamation.getFile(); // Replace with the actual file path
+        String imagePath = "file:\\C:\\xampp\\htdocs\\imagesAssurance\\" + reclamation.getFile(); // Replace with the actual file path
+                System.out.println(imagePath);
+
 
         Image image = new Image(imagePath); 
         
@@ -419,6 +428,27 @@ public void checkEnCoursReclamations() {
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
     }
+}
+public void rechercherReclamations(String recherche) {
+    ObservableList<Reclamation> list = getReclamationList();
+
+    if (recherche != null && !recherche.isEmpty()) {
+        Predicate<Reclamation> predicate = reclamation -> {
+            String reference = reclamation.getReference();
+            String nom = reclamation.getNom_d();
+            String prenom = reclamation.getPrenom_d();
+            String statut = reclamation.getStatut();
+
+            return reference.contains(recherche)
+                    || nom.contains(recherche)
+                    || prenom.contains(recherche)
+                    || statut.contains(recherche);
+        };
+
+        list = list.filtered(predicate);
+    }
+
+    lvReclamation.setItems(list);
 }
 
 }

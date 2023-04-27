@@ -46,14 +46,23 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.sql.ResultSet;
 import java.util.Base64;
+import java.util.Optional;
 import java.util.zip.GZIPOutputStream;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
@@ -299,7 +308,7 @@ if (tel == null || tel.isEmpty()) {
  // Ajouter la réclamation avec la référence générée, la date de création et le statut "En cours"
 sql = "insert into reclamation(reference, nom_d, prenom_d, cin, email, commentaire, tel, created_at, statut, file) values (?,?,?,?,?,?,?,?,?,?)";
 try {
-    PreparedStatement ste = cnx.prepareStatement(sql);
+    PreparedStatement ste = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
     ste.setString(1, reference);
     ste.setString(2, r.getNom_d());
     ste.setString(3, r.getPrenom_d());
@@ -312,27 +321,95 @@ try {
     ste.setString(10, this.file); // Ajouter le nom de fichier à la base de données
 
     ste.executeUpdate();
-    // Définir la référence générée pour la nouvelle réclamation
-    r.setReference(reference);
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle("Information");
+    ResultSet rs = ste.getGeneratedKeys();
+    if (rs.next()) {
+        // Définir la référence générée pour la nouvelle réclamation
+        int id = rs.getInt(1);
+        r.setReference("REF" + String.format("%06d", id));
+    }
+    
+    // Afficher une alerte pour proposer à l'utilisateur de générer et télécharger un PDF de la réclamation
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Confirmation");
     alert.setHeaderText(null);
-    alert.setContentText("La réclamation a été ajoutée avec succès.");
-    alert.showAndWait();
+    alert.setContentText("Voulez-vous générer et télécharger un PDF de la réclamation ?");
 
-    // Envoyer un SMS avec Twilio
-    String ACCOUNT_SID = "AC8d0ef4234781bddf96867d3ec05586cb";
-    String AUTH_TOKEN = "4f05938ff4b3f5376ec2276918e0d119";
-    String TWILIO_NUMBER = "+16813346926";
-    String message = "Votre réclamation sous le nom de " + nom_d + " " + prenom_d + " a été ajoutée avec la référence : " + reference;
-    PhoneNumber toNumber = new PhoneNumber(r.getTel());
-    PhoneNumber fromNumber = new PhoneNumber(TWILIO_NUMBER);
+    ButtonType buttonTypeYes = new ButtonType("Oui");
+    ButtonType buttonTypeNo = new ButtonType("Non");
+    alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 
-    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-    Message twilioMessage = Message.creator(toNumber, fromNumber, message).create();
-    System.out.println("SMS envoyé avec succès !");
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.get() == buttonTypeYes) {
+        // Générer et télécharger le PDF de la réclamation
+        try {
+            String pdfFileName = "reclamation_" + r.getReference() + ".pdf";
+            OutputStream outputStream = new FileOutputStream(pdfFileName);
+            Document document = new Document();
+            PdfWriter.getInstance(document, outputStream);
+
+            document.open();
+            PdfPTable table = new PdfPTable(2); // créer un tableau avec 2 colonnes
+
+            // Ajouter les cellules du tableau avec les données de la réclamation
+            table.addCell(new PdfPCell(new Phrase("Référence de la réclamation")));
+            table.addCell(new PdfPCell(new Phrase(r.getReference())));
+
+            table.addCell(new PdfPCell(new Phrase("Nom du demandeur")));
+            table.addCell(new PdfPCell(new Phrase(r.getNom_d() + " " + r.getPrenom_d())));
+
+            table.addCell(new PdfPCell(new Phrase("CIN du demandeur")));
+            table.addCell(new PdfPCell(new Phrase(String.valueOf(r.getCin()))));
+
+            table.addCell(new PdfPCell(new Phrase("Email du demandeur")));
+            table.addCell(new PdfPCell(new Phrase(r.getEmail())));
+
+            table.addCell(new PdfPCell(new Phrase("Commentaire")));
+            table.addCell(new PdfPCell(new Phrase(r.getCommentaire())));
+
+            table.addCell(new PdfPCell(new Phrase("Téléphone du demandeur")));
+            table.addCell(new PdfPCell(new Phrase(r.getTel())));
+
+            document.add(table); // ajouter le tableau au document
+            document.close();
+
+            // Afficher une alerte pour confirmer la génération et le téléchargement du PDF
+Alert alertPdf = new Alert(Alert.AlertType.INFORMATION);
+alertPdf.setTitle("Information");
+alertPdf.setHeaderText(null);
+alertPdf.setContentText("La réclamation a été ajoutée avec succès et le PDF a été généré et téléchargé sous le nom : " + pdfFileName);
+alertPdf.showAndWait();
+} catch (Exception ex) {
+ex.printStackTrace();
+Alert alertPdfError = new Alert(Alert.AlertType.ERROR);
+alertPdfError.setTitle("Erreur");
+alertPdfError.setHeaderText(null);
+alertPdfError.setContentText("Une erreur est survenue lors de la génération du PDF !");
+alertPdfError.showAndWait();
+}
+} else {
+// Afficher une alerte pour informer l'utilisateur que la réclamation a été ajoutée avec succès
+Alert alertSuccess = new Alert(Alert.AlertType.INFORMATION);
+alertSuccess.setTitle("Information");
+alertSuccess.setHeaderText(null);
+alertSuccess.setContentText("La réclamation a été ajoutée avec succès !");
+alertSuccess.showAndWait();
+}
 } catch (SQLException ex) {
-    System.out.println(ex.getMessage());
+ex.printStackTrace();
+Alert alertError = new Alert(Alert.AlertType.ERROR);
+alertError.setTitle("Erreur");
+alertError.setHeaderText(null);
+alertError.setContentText("Une erreur est survenue lors de l'ajout de la réclamation !");
+alertError.showAndWait();
+} finally {
+// Fermer la connexion à la base de données
+if (cnx != null) {
+try {
+cnx.close();
+} catch (SQLException ex) {
+ex.printStackTrace();
+}
+}
 }
    }
 
