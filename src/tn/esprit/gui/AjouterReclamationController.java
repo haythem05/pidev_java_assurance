@@ -5,6 +5,9 @@
  */
 package tn.esprit.gui;
 
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
@@ -54,6 +57,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Desktop;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
@@ -68,6 +72,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.FontFactory;
+
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.net.MalformedURLException;
 
 
 
@@ -305,10 +321,10 @@ if (tel == null || tel.isEmpty()) {
 
 
  
- // Ajouter la réclamation avec la référence générée, la date de création et le statut "En cours"
+// Ajouter la réclamation avec la référence générée, la date de création et le statut "En cours"
 sql = "insert into reclamation(reference, nom_d, prenom_d, cin, email, commentaire, tel, created_at, statut, file) values (?,?,?,?,?,?,?,?,?,?)";
 try {
-    PreparedStatement ste = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+    PreparedStatement ste = cnx.prepareStatement(sql);
     ste.setString(1, reference);
     ste.setString(2, r.getNom_d());
     ste.setString(3, r.getPrenom_d());
@@ -321,101 +337,202 @@ try {
     ste.setString(10, this.file); // Ajouter le nom de fichier à la base de données
 
     ste.executeUpdate();
-    ResultSet rs = ste.getGeneratedKeys();
-    if (rs.next()) {
-        // Définir la référence générée pour la nouvelle réclamation
-        int id = rs.getInt(1);
-        r.setReference("REF" + String.format("%06d", id));
-    }
-    
-    // Afficher une alerte pour proposer à l'utilisateur de générer et télécharger un PDF de la réclamation
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    alert.setTitle("Confirmation");
-    alert.setHeaderText(null);
-    alert.setContentText("Voulez-vous générer et télécharger un PDF de la réclamation ?");
+    // Définir la référence générée pour la nouvelle réclamation
+    r.setReference(reference);
+} catch (SQLException ex) {
+    System.out.println(ex.getMessage());
+}
 
-    ButtonType buttonTypeYes = new ButtonType("Oui");
-    ButtonType buttonTypeNo = new ButtonType("Non");
-    alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+// Demander si l'utilisateur souhaite générer et télécharger le PDF
+Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+alert.setTitle("Génération de PDF");
+alert.setHeaderText(null);
+alert.setContentText("Voulez-vous générer et télécharger un PDF pour cette réclamation ?");
 
-    Optional<ButtonType> result = alert.showAndWait();
-    if (result.get() == buttonTypeYes) {
-        // Générer et télécharger le PDF de la réclamation
-        try {
-            String pdfFileName = "reclamation_" + r.getReference() + ".pdf";
-            OutputStream outputStream = new FileOutputStream(pdfFileName);
-            Document document = new Document();
-            PdfWriter.getInstance(document, outputStream);
+Optional<ButtonType> result = alert.showAndWait();
 
-            document.open();
-            PdfPTable table = new PdfPTable(2); // créer un tableau avec 2 colonnes
+if (result.isPresent() && result.get() == ButtonType.OK) {
+    // Générer et télécharger le PDF
+    try {
+        Document document = new Document();
+        PdfWriter.getInstance(document, new FileOutputStream("reclamation_" + reference + ".pdf"));
+        document.open();
 
-            // Ajouter les cellules du tableau avec les données de la réclamation
-            table.addCell(new PdfPCell(new Phrase("Référence de la réclamation")));
-            table.addCell(new PdfPCell(new Phrase(r.getReference())));
+       // Ajouter un logo en haut à gauche de la page
+String logoPath = "C:\\Users\\MSI\\Desktop\\PidevJ3A40\\src\\tn\\esprit\\images\\logo_java.png"; // Remplacez par le chemin d'accès réel du fichier de logo
+com.itextpdf.text.Image logo = null;
+try {
+    logo = com.itextpdf.text.Image.getInstance(logoPath);
+    logo.setAbsolutePosition(30, 730); // Modifier la position absolue du logo pour le faire monter plus haut à gauche
+    logo.scaleAbsolute(100, 100); // Réduire la taille du logo à 50x50 pixels
+    document.add(logo);
+} catch (IOException | BadElementException e) {
+    e.printStackTrace();
+}
+        
+        document.add(new Paragraph(" ")); // Ajouter un espacement après le logo
 
-            table.addCell(new PdfPCell(new Phrase("Nom du demandeur")));
-            table.addCell(new PdfPCell(new Phrase(r.getNom_d() + " " + r.getPrenom_d())));
+        // Ajouter un message de confirmation centré avec un espacement avant
+        String confirmationMessage = "Bonjour cher(e) client, votre réclamation a bien été reçue. Nous la traiterons dans les meilleurs délais.";
+        Paragraph confirmation = new Paragraph(confirmationMessage);
+        confirmation.setAlignment(Element.ALIGN_CENTER);
+        confirmation.setSpacingBefore(50); // Ajouter un espacement avant le message
+        document.add(confirmation);
 
-            table.addCell(new PdfPCell(new Phrase("CIN du demandeur")));
-            table.addCell(new PdfPCell(new Phrase(String.valueOf(r.getCin()))));
+        // Ajouter un espacement entre le message de confirmation et le tableau
+        document.add(new Paragraph(" "));
 
-            table.addCell(new PdfPCell(new Phrase("Email du demandeur")));
-            table.addCell(new PdfPCell(new Phrase(r.getEmail())));
+        PdfPTable table = new PdfPTable(2);
+        table.setWidthPercentage(100); // Définir la largeur du tableau à 100%
+        table.setSpacingBefore(10); // Ajouter un espacement avant le tableau
 
-            table.addCell(new PdfPCell(new Phrase("Commentaire")));
-            table.addCell(new PdfPCell(new Phrase(r.getCommentaire())));
+        // Ajouter un fond mauve clair pour les cellules de la première colonne
+        PdfPCell cellAttribut = new PdfPCell(new Phrase("Attribut"));
+        cellAttribut.setBackgroundColor(new BaseColor(204, 153, 255)); // Mauve clair
+        table.addCell(cellAttribut);
 
-            table.addCell(new PdfPCell(new Phrase("Téléphone du demandeur")));
-            table.addCell(new PdfPCell(new Phrase(r.getTel())));
+        // Ajouter un fond mauve clair pour les cellules de la deuxième colonne
+        PdfPCell cellValeur = new PdfPCell(new Phrase("Valeur"));
+        cellValeur.setBackgroundColor(new BaseColor(204, 153, 255)); // Mauve clair
+        table.addCell(cellValeur);
 
-            document.add(table); // ajouter le tableau au document
-            document.close();
+        // Créer une instance de BaseColor pour la couleur bleu ciel
+        BaseColor bleuCiel = new BaseColor(135, 206, 235); // bleu ciel
 
-            // Afficher une alerte pour confirmer la génération et le téléchargement du PDF
-Alert alertPdf = new Alert(Alert.AlertType.INFORMATION);
-alertPdf.setTitle("Information");
-alertPdf.setHeaderText(null);
-alertPdf.setContentText("La réclamation a été ajoutée avec succès et le PDF a été généré et téléchargé sous le nom : " + pdfFileName);
-alertPdf.showAndWait();
-} catch (Exception ex) {
-ex.printStackTrace();
-Alert alertPdfError = new Alert(Alert.AlertType.ERROR);
-alertPdfError.setTitle("Erreur");
-alertPdfError.setHeaderText(null);
-alertPdfError.setContentText("Une erreur est survenue lors de la génération du PDF !");
-alertPdfError.showAndWait();
+        PdfPCell cellReference = new PdfPCell(new Phrase("Référence"));
+        cellReference.setBackgroundColor(bleuCiel);
+        table.addCell(cellReference);
+
+        PdfPCell cellReferenceValue = new PdfPCell(new Phrase(reference));
+        cellReferenceValue.setBackgroundColor(bleuCiel);
+        table.addCell(cellReferenceValue);
+            PdfPCell cellNom = new PdfPCell(new Phrase("Nom"));
+    cellNom.setBackgroundColor(bleuCiel);
+    table.addCell(cellNom);
+
+    PdfPCell cellNomValue = new PdfPCell(new Phrase(r.getNom_d()));
+    cellNomValue.setBackgroundColor(bleuCiel);
+    table.addCell(cellNomValue);
+
+    PdfPCell cellPrenom = new PdfPCell(new Phrase("Prénom"));
+    cellPrenom.setBackgroundColor(bleuCiel);
+    table.addCell(cellPrenom);
+
+    PdfPCell cellPrenomValue = new PdfPCell(new Phrase(r.getPrenom_d()));
+    cellPrenomValue.setBackgroundColor(bleuCiel);
+    table.addCell(cellPrenomValue);
+
+    PdfPCell cellCIN = new PdfPCell(new Phrase("CIN"));
+    cellCIN.setBackgroundColor(bleuCiel);
+    table.addCell(cellCIN);
+
+    PdfPCell cellCINValue = new PdfPCell(new Phrase(String.valueOf(r.getCin())));
+    cellCINValue.setBackgroundColor(bleuCiel);
+    table.addCell(cellCINValue);
+
+    PdfPCell cellEmail = new PdfPCell(new Phrase("Email"));
+    cellEmail.setBackgroundColor(bleuCiel);
+    table.addCell(cellEmail);
+
+    PdfPCell cellEmailValue = new PdfPCell(new Phrase(r.getEmail()));
+    cellEmailValue.setBackgroundColor(bleuCiel);
+    table.addCell(cellEmailValue);
+
+    PdfPCell cellCommentaire = new PdfPCell(new Phrase("Commentaire"));
+    cellCommentaire.setBackgroundColor(bleuCiel);
+    table.addCell(cellCommentaire);
+
+    PdfPCell cellCommentaireValue = new PdfPCell(new Phrase(r.getCommentaire()));
+    cellCommentaireValue.setBackgroundColor(bleuCiel);
+    table.addCell(cellCommentaireValue);
+
+    PdfPCell cellTel = new PdfPCell(new Phrase("Téléphone"));
+    cellTel.setBackgroundColor(bleuCiel);
+    table.addCell(cellTel);
+
+    PdfPCell cellTelValue = new PdfPCell(new Phrase(r.getTel()));
+    cellTelValue.setBackgroundColor(bleuCiel);
+    table.addCell(cellTelValue);
+
+    PdfPCell cellDateCreation = new PdfPCell(new Phrase("Date de création"));
+    cellDateCreation.setBackgroundColor(bleuCiel);
+    table.addCell(cellDateCreation);
+
+    PdfPCell cellDateCreationValue = new PdfPCell(new Phrase(new Timestamp(System.currentTimeMillis()).toString()));
+    cellDateCreationValue.setBackgroundColor(bleuCiel);
+    table.addCell(cellDateCreationValue);
+
+    PdfPCell cellStatut = new PdfPCell(new Phrase("Statut"));
+    cellStatut.setBackgroundColor(bleuCiel);
+    table.addCell(cellStatut);
+
+    PdfPCell cellStatutValue = new PdfPCell(new Phrase("En cours"));
+    cellStatutValue.setBackgroundColor(bleuCiel);
+    table.addCell(cellStatutValue);
+
+    document.add(table);
+
+    // Ajouter une phrase à droite en bas de la page
+    Paragraph cordialement = new Paragraph("Cordialement");
+    cordialement.setAlignment(Element.ALIGN_RIGHT);
+    cordialement.setSpacingBefore(50); // Ajouter un espacement avant la phrase
+    cordialement.setFont(FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12)); // Minimiser l'écriture et rendre la phrase en gras
+    document.add(cordialement);
+
+    // Ajouter une photo de signature avec son path en dessous de la phrase "Cordialement"
+    String signaturePath = "C:\\Users\\MSI\\Desktop\\PidevJ3A40\\src\\tn\\esprit\\images\\signature_ines_besaad.jpg"; // Remplacez par le chemin d'accès réel du fichier de signature
+    com.itextpdf.text.Image signature = null;
+    try {
+        signature = com.itextpdf.text.Image.getInstance(signaturePath);
+        signature.setAlignment(Element.ALIGN_RIGHT); // Aligner la signature à droite de la page
+        signature.scaleAbsolute(100, 50); // Réduire la taille de la signature à 100x50 pixels
+        document.add(signature);
+} catch (IOException | BadElementException e) {
+e.printStackTrace();
+}
+// Ajouter le nom et poste de la directrice en dessous de la photo de signature
+Paragraph directeur = new Paragraph("Ines Bessaad");
+directeur.setAlignment(Element.ALIGN_RIGHT);
+directeur.setSpacingBefore(10); // Ajouter un espacement avant le nom du directeur
+directeur.setFont(FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10)); // Minimiser l'écriture et rendre le nom du directeur en gras
+document.add(directeur);
+
+Paragraph posteDirecteur = new Paragraph("PDG SecurAssur");
+posteDirecteur.setAlignment(Element.ALIGN_RIGHT);
+posteDirecteur.setFont(FontFactory.getFont(FontFactory.HELVETICA, 10)); // Changer la police d'écriture pour le poste de la directrice
+document.add(posteDirecteur);
+
+
+        document.close();
+
+    Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+    successAlert.setTitle("Information");
+    successAlert.setHeaderText(null);
+    successAlert.setContentText("Le PDF a été généré et téléchargé avec succès.");
+    successAlert.showAndWait();
+} catch (FileNotFoundException | DocumentException ex) {
+    System.out.println(ex.getMessage());
 }
 } else {
-// Afficher une alerte pour informer l'utilisateur que la réclamation a été ajoutée avec succès
-Alert alertSuccess = new Alert(Alert.AlertType.INFORMATION);
-alertSuccess.setTitle("Information");
-alertSuccess.setHeaderText(null);
-alertSuccess.setContentText("La réclamation a été ajoutée avec succès !");
-alertSuccess.showAndWait();
+Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+successAlert.setTitle("Information");
+successAlert.setHeaderText(null);
+successAlert.setContentText("La réclamation a été ajoutée avec succès.");
+successAlert.showAndWait();
 }
-} catch (SQLException ex) {
-ex.printStackTrace();
-Alert alertError = new Alert(Alert.AlertType.ERROR);
-alertError.setTitle("Erreur");
-alertError.setHeaderText(null);
-alertError.setContentText("Une erreur est survenue lors de l'ajout de la réclamation !");
-alertError.showAndWait();
-} finally {
-// Fermer la connexion à la base de données
-if (cnx != null) {
-try {
-cnx.close();
-} catch (SQLException ex) {
-ex.printStackTrace();
-}
-}
-}
+
+//// Envoyer un SMS avec Twilio
+//String ACCOUNT_SID = "AC8d0ef4234781bddf96867d3ec05586cb";
+//String AUTH_TOKEN = "4f05938ff4b3f5376ec2276918e0d119";
+//String TWILIO_NUMBER = "+16813346926";
+//String message = "Votre réclamation sous le nom de " + r.getNom_d() + " " + r.getPrenom_d() + " a été ajoutée avec la référence : " + reference;
+//PhoneNumber toNumber = new PhoneNumber(r.getTel());
+//PhoneNumber fromNumber = new PhoneNumber(TWILIO_NUMBER);
+//
+//Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+//Message twilioMessage = Message.creator(toNumber, fromNumber, message).create();
+//System.out.println("SMS envoyé avec succès !");
    }
-
-
-
-
 
      public void redirectToList() {
     try {
