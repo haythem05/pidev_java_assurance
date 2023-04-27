@@ -158,7 +158,9 @@ private void generatePDF(ActionEvent event) throws FileNotFoundException, Docume
 
     // Add content to the PDF document
     document.open();
-    
+    PdfContentByte cb = writer.getDirectContent();
+cb.rectangle(30,30, 540, 800); // (36, 36) est la position du coin supérieur gauche du cadre, 540 est la largeur et 756 est la hauteur
+cb.stroke();
     // Add logo to the first page
 // Add the logo
 Image logo = Image.getInstance("C:/xampp/htdocs/logo.png");

@@ -2,14 +2,16 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="tn.assurance.controller.AfficherhabitationController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.assurance.controller.AfficherhabitationController">
    <children>
       <ListView fx:id="listView" layoutX="10.0" layoutY="14.0" prefHeight="334.0" prefWidth="562.0" />
       <Button layoutX="329.0" layoutY="361.0" mnemonicParsing="false" onAction="#supprimer" text="supprimer" />
       <Button layoutX="193.0" layoutY="361.0" mnemonicParsing="false" onAction="#modifier" text="modifier" />
       <Button layoutX="76.0" layoutY="361.0" mnemonicParsing="false" onAction="#ajouter" text="ajouter" />
+      <RadioButton layoutX="456.0" layoutY="353.0" mnemonicParsing="false" onAction="#sortAsc" text="Tri ASC" />
+      <RadioButton layoutX="449.0" layoutY="370.0" mnemonicParsing="false" onAction="#sortDesc" text="tri Desc" />
    </children>
 </AnchorPane>

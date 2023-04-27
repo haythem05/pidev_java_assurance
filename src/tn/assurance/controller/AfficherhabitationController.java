@@ -7,6 +7,7 @@ package tn.assurance.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -90,6 +91,33 @@ static public float     capitalmobilier,capitalimmobilier,devis;
     private void ajouter(ActionEvent event) throws IOException {
           AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/ajouterHabitationFront.fxml"));
         rootPane.getChildren().setAll(pane);
+    }
+public List<Habitation> getHabitationsSortedAscDevis() {
+      habitationS hs = new habitationS();
+    List<Habitation> habitationList = hs.afficherHabitation();
+    habitationList.sort(Comparator.comparing(Habitation::getDevis));
+    return habitationList;
+}
+
+public List<Habitation> getHabitationsSortedDescDevis() {
+       habitationS hs = new habitationS();
+    List<Habitation> habitationList = hs.afficherHabitation();
+    habitationList.sort(Comparator.comparing(Habitation::getDevis).reversed());
+    return habitationList;
+}
+
+    
+    @FXML
+    private void sortAsc(ActionEvent event) {
+       
+    listView.getItems().clear();
+    listView.getItems().addAll(getHabitationsSortedAscDevis());
+    }
+
+    @FXML
+    private void sortDesc(ActionEvent event) {
+         listView.getItems().clear();
+    listView.getItems().addAll(getHabitationsSortedDescDevis());
     }
     
 }
