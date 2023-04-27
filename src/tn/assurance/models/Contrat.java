@@ -18,12 +18,12 @@ public class Contrat {
     private String avantages,marque,modele;
     Categorie  type_Id;
 
-    public Contrat(int id, int idclient, int nbplace, float valeurcatalogue, float prix, Date datedebut, Date datefin, Date datecirculation, String avantages, String marque, String modele, Categorie type_Id) {
+    public Contrat(int id, int idclient, int nbplace, float valeurcatalogue, Date datedebut, Date datefin, Date datecirculation, String avantages, String marque, String modele, Categorie type_Id) {
         this.id = id;
         this.idclient = idclient;
         this.nbplace = nbplace;
         this.valeurcatalogue = valeurcatalogue;
-        this.prix = prix;
+
         this.datedebut = datedebut;
         this.datefin = datefin;
         this.datecirculation = datecirculation;
@@ -35,11 +35,11 @@ public class Contrat {
 
     
     
-    public Contrat(int idclient, int nbplace, float valeurcatalogue, float prix, Date datedebut, Date datefin, Date datecirculation, String avantages, String marque, String modele, Categorie type_Id) {
+    public Contrat(int idclient, int nbplace, float valeurcatalogue, Date datedebut, Date datefin, Date datecirculation, String avantages, String marque, String modele, Categorie type_Id) {
         this.idclient = idclient;
         this.nbplace = nbplace;
         this.valeurcatalogue = valeurcatalogue;
-        this.prix = prix;
+
         this.datedebut = datedebut;
         this.datefin = datefin;
         this.datecirculation = datecirculation;

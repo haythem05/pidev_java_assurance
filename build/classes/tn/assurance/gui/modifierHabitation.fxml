@@ -11,12 +11,10 @@
       <Label layoutX="88.0" layoutY="135.0" text="nombre piece Immobilier :" />
       <Label layoutX="88.0" layoutY="191.0" text="capital immobilier :" />
       <Label layoutX="88.0" layoutY="245.0" text="capital mobilier :" />
-      <Label layoutX="88.0" layoutY="318.0" text="devis :" />
       <TextField fx:id="idclienth" layoutX="151.0" layoutY="68.0" />
       <TextField fx:id="nbpieceh" layoutX="228.0" layoutY="131.0" />
       <TextField fx:id="capitalimmobilierh" layoutX="197.0" layoutY="187.0" />
       <TextField fx:id="capitalmobilierh" layoutX="183.0" layoutY="250.0" />
-      <TextField fx:id="devish" layoutX="132.0" layoutY="314.0" />
       <Button layoutX="438.0" layoutY="314.0" mnemonicParsing="false" onAction="#modifier" text="Valider" />
       <Label layoutX="268.0" layoutY="14.0" text="Modifier Habitation " />
    </children>

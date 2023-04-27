@@ -12,6 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,40 +29,54 @@ public class contratS {
         Statement ste;
     Connection conn = MyConnection.getInstance().getConn();
     
-    
-    
+
     
  
-    public void ajouterContrat(Contrat C,Categorie  cat) {
-        try {
-            String query = "INSERT INTO contrat(type_id,id_client,nb_place,valeur_catalogue,prix,date_debut,date_fin,date_circulation,avantages,marque,modele) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement preparedStatement = conn.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
-            
-            preparedStatement.setInt(1,cat.getId());
-            preparedStatement.setInt(2,C.getIdclient());
-            preparedStatement.setInt(3,C.getNbplace());
-            preparedStatement.setFloat(4,C.getValeurcatalogue());
-            preparedStatement.setFloat(5,C.getPrix());
-            preparedStatement.setString(6,C.getDatedebut().toString());
+ public void ajouterContrat(Contrat C, Categorie cat) {
+    try {
+        String query = "INSERT INTO contrat(type_id,id_client,nb_place,valeur_catalogue,prix,date_debut,date_fin,date_circulation,avantages,marque,modele) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        PreparedStatement preparedStatement = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+        preparedStatement.setInt(1, cat.getId());
+        preparedStatement.setInt(2, C.getIdclient());
+        preparedStatement.setInt(3, C.getNbplace());
+        preparedStatement.setFloat(4, C.getValeurcatalogue());
+    preparedStatement.setString(6,C.getDatedebut().toString());
             preparedStatement.setString(7,C.getDatefin().toString());
             preparedStatement.setString(8,C.getDatecirculation().toString());
             preparedStatement.setString(9,C.getAvantages());
             preparedStatement.setString(10,C.getMarque());
             preparedStatement.setString(11,C.getModele());
-            
-            ResultSet rs = preparedStatement.getGeneratedKeys();
-            if (rs.next()) {
-                C.setId(rs.getInt(1));
-        
-            }
-        
-            preparedStatement.executeUpdate();
-               System.out.print("succes!!!");
-        } catch (SQLException e) {
-            
-            System.err.println(e.getMessage());
+        // Calculate the price using the formula you described
+        float prix = C.getValeurcatalogue();
+        int months = (int) ((C.getDatefin().getTime() - C.getDatedebut().getTime()) / (1000 * 60 * 60 * 24 * 30)); // number of months between dates
+        months = Math.max(1, months); // make sure there's at least one month
+        prix += months * 10; // increase price by 10 for each month of the rental period
+
+        LocalDate today = LocalDate.now();
+LocalDate circulationDate = new java.util.Date(C.getDatecirculation().getTime()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+
+        long diffInMonths = ChronoUnit.MONTHS.between(circulationDate.withDayOfMonth(1), today.withDayOfMonth(1)); // number of months between dates
+        diffInMonths = Math.max(1, diffInMonths); // make sure there's at least one month
+        prix += diffInMonths * 5; // increase price by 5 for each month of difference between circulation date and today
+
+        C.setPrix(prix); // set the calculated price in the Contrat object
+        preparedStatement.setFloat(5, prix);
+
+        ResultSet rs = preparedStatement.getGeneratedKeys();
+        if (rs.next()) {
+            C.setId(rs.getInt(1));
         }
+
+        preparedStatement.executeUpdate();
+        System.out.print("succes!!!");
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
     }
+}
+
+
     
     
     

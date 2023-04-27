@@ -21,11 +21,9 @@
       <Label layoutX="307.0" layoutY="202.0" text="model :" />
       <ChoiceBox fx:id="typeidc" layoutX="188.0" layoutY="292.0" prefWidth="150.0" />
       <Label layoutX="73.0" layoutY="140.0" />
-      <Label layoutX="26.0" layoutY="145.0" text="prix :" />
       <TextField fx:id="idclientc" layoutX="83.0" layoutY="25.0" />
       <TextField fx:id="nbdeplacec" layoutX="121.0" layoutY="64.0" />
       <TextField fx:id="valeurcataloguec" layoutX="140.0" layoutY="101.0" />
-      <TextField fx:id="prixc" layoutX="83.0" layoutY="145.0" />
       <TextField fx:id="avantagesc" layoutX="90.0" layoutY="211.0" />
       <TextField fx:id="modelc" layoutX="388.0" layoutY="198.0" />
       <TextField fx:id="marquec" layoutX="388.0" layoutY="163.0" />

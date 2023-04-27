@@ -37,7 +37,6 @@ public class AjouterContratBackController implements Initializable {
     private TextField nbdeplacec;
     @FXML
     private TextField valeurcataloguec;
-    @FXML
     private TextField prixc;
     @FXML
     private TextField avantagesc;
@@ -76,7 +75,7 @@ public class AjouterContratBackController implements Initializable {
         idclient = Integer.parseInt(idclientc.getText());
         nbplace = Integer.parseInt(nbdeplacec.getText());
         valeurcatalogue = Float.parseFloat(valeurcataloguec.getText());
-        prix = Float.parseFloat(prixc.getText());
+    
 
 LocalDate d = datedebutc.getValue();
 datedebut = java.sql.Date.valueOf(d);
@@ -98,7 +97,7 @@ type_Id=typeidc.getValue();
  
     
     
-                Contrat c = new Contrat( idclient,  nbplace,  valeurcatalogue,  prix,  datedebut,  datefin,  datecirculation,  avantages,  marque,  modele,  type_Id);
+                Contrat c = new Contrat( idclient,  nbplace,  valeurcatalogue,    datedebut,  datefin,  datecirculation,  avantages,  marque,  modele,  type_Id);
                 contratS cs=new contratS();
                 cs.ajouterContrat(c, type_Id);
                 
