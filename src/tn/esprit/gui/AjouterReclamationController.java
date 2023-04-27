@@ -48,6 +48,17 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.Base64;
+import java.util.zip.GZIPOutputStream;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 
 
 
@@ -72,8 +83,12 @@ public class AjouterReclamationController implements Initializable {
     private TextArea fxcommentaire;
     @FXML
     private TextArea fxtel;
+    File  selectedFile;
+    
     @FXML
-    private Button fxfile;
+    private ImageView imageV;
+    public String file;
+ 
     @FXML
     private Button ajout;
     @FXML
@@ -84,51 +99,36 @@ public class AjouterReclamationController implements Initializable {
     public Statement stm;
     String sql = "";
 
- @Override
-public void initialize(URL url, ResourceBundle rb) {
-    try {
-        // Initialize your database connection here
-        cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/assurancepidev", "root", "");
-    } catch (SQLException ex) {
-        System.out.println("Failed to connect to database: " + ex.getMessage());
-    } 
-    Reclamation r = new Reclamation();
-
-
-ajout.setOnAction(new EventHandler<ActionEvent>() {
-    @Override
-    public void handle(ActionEvent event) {
+@Override
+    public void initialize(URL url, ResourceBundle rb) {
+        try {
+            // Initialize your database connection here
+            cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/assurancepidev", "root", "");
+        } catch (SQLException ex) {
+            System.out.println("Failed to connect to database: " + ex.getMessage());
+        } 
         Reclamation r = new Reclamation();
-        r.setNom_d(fxnom_d.getText());
-        r.setPrenom_d(fxprenom_d.getText());
-        int cin = 0;
-        if (!fxcin.getText().isEmpty() && fxcin.getText().matches("\\d+")) {
-            cin = Integer.parseInt(fxcin.getText());
-        }
-        r.setCin(cin);
-        r.setEmail(fxemail.getText());
-        r.setCommentaire(fxcommentaire.getText());
-        r.setTel(fxtel.getText());
-
-        ajouter(r);
-    }
-});
 
 
+        ajout.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Reclamation r = new Reclamation();
+                r.setNom_d(fxnom_d.getText());
+                r.setPrenom_d(fxprenom_d.getText());
+                int cin = 0;
+                if (!fxcin.getText().isEmpty() && fxcin.getText().matches("\\d+")) {
+                    cin = Integer.parseInt(fxcin.getText());
+                }
+                r.setCin(cin);
+                r.setEmail(fxemail.getText());
+                r.setCommentaire(fxcommentaire.getText());
+                r.setTel(fxtel.getText());
 
-       fxfile.setOnAction(new EventHandler<ActionEvent>() {
-    @Override
-    public void handle(ActionEvent event) {
-        // Appel à la méthode pour récupérer le chemin du fichier
-        String file = selectFile();
+                ajouter(r);
+            }
+        });
 
-        // Enregistrer le chemin absolu du fichier dans l'objet Reclamation
-        r.setFile(file);
-
-        // Mettre à jour le texte du bouton fxfile avec le nom du fichier sélectionné
-        fxfile.setText(file != null ? file : "Aucun fichier sélectionné");
-    }
-});
 
         retour.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -136,18 +136,42 @@ ajout.setOnAction(new EventHandler<ActionEvent>() {
                 redirectToList();
             }
         });
-    }
 
+  imageV.setOnDragDropped(new EventHandler<DragEvent>() {
+    public void handle(DragEvent event) {
+        Dragboard db = event.getDragboard();
+        boolean success = false;
+        if (db.hasFiles()) {
+            success = true;
+            String path = null;
+            for (File file : db.getFiles()) {
+                path = file.getName();
+                System.out.println("Drag and drop file done and path=" + file.getAbsolutePath());
+                imageV.setImage(new Image("file:" + file.getAbsolutePath()));
 
-    private String selectFile() {
-        FileChooser fileChooser = new FileChooser();
-        // Configurer le file chooser
-        fileChooser.setTitle("Importer");
-        File selectedFile = fileChooser.showOpenDialog(new Stage());
-        if (selectedFile != null) {
-            return selectedFile.getAbsolutePath();
+                // Vérifier la taille du fichier
+                long fileSize = file.length();
+                if (fileSize > 1048576) { // Limite de 1 Mo
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Avertissement");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Le fichier ne doit pas dépasser 1 Mo.");
+                    alert.showAndWait();
+                    return;
+                }
+
+                // Ajouter le nom de l'image à l'objet r
+                r.setFile(file.getName());
+            }
         }
-        return null;
+        event.setDropCompleted(success);
+        event.consume();
+    }
+});
+
+
+
+imageV.setImage(new Image("file:C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/images/drag-drop.gif"));
     }
 
 
@@ -272,7 +296,7 @@ if (tel == null || tel.isEmpty()) {
 
 
  
-   // Ajouter la réclamation avec la référence générée, la date de création et le statut "En cours"
+ // Ajouter la réclamation avec la référence générée, la date de création et le statut "En cours"
 sql = "insert into reclamation(reference, nom_d, prenom_d, cin, email, commentaire, tel, created_at, statut, file) values (?,?,?,?,?,?,?,?,?,?)";
 try {
     PreparedStatement ste = cnx.prepareStatement(sql);
@@ -285,7 +309,8 @@ try {
     ste.setString(7, r.getTel());
     ste.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
     ste.setString(9, "En cours");
-    ste.setString(10, r.getFile());
+    ste.setString(10, this.file); // Ajouter le nom de fichier à la base de données
+
     ste.executeUpdate();
     // Définir la référence générée pour la nouvelle réclamation
     r.setReference(reference);
@@ -294,13 +319,12 @@ try {
     alert.setHeaderText(null);
     alert.setContentText("La réclamation a été ajoutée avec succès.");
     alert.showAndWait();
-    
+
     // Envoyer un SMS avec Twilio
     String ACCOUNT_SID = "AC8d0ef4234781bddf96867d3ec05586cb";
-    String AUTH_TOKEN = "d209a1b342ee86aa9bb3a02883bcacc6";
+    String AUTH_TOKEN = "4f05938ff4b3f5376ec2276918e0d119";
     String TWILIO_NUMBER = "+16813346926";
-   String message = "Votre réclamation sous le nom de " + nom_d + " " + prenom_d + " a été ajoutée avec la référence : " + reference;
-
+    String message = "Votre réclamation sous le nom de " + nom_d + " " + prenom_d + " a été ajoutée avec la référence : " + reference;
     PhoneNumber toNumber = new PhoneNumber(r.getTel());
     PhoneNumber fromNumber = new PhoneNumber(TWILIO_NUMBER);
 
@@ -311,7 +335,6 @@ try {
     System.out.println(ex.getMessage());
 }
    }
-
 
 
 
@@ -329,11 +352,54 @@ try {
     }
 }
 
-    @FXML
     private void retour(MouseEvent event) {
         this.redirectToList();
     }
 
+  @FXML
+    private void addImage(MouseEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File(System.getProperty("user.home") + "\\Desktop"));
+        fc.setTitle("Veuillez choisir l'image");
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image", "*.jpg", "*.png"),
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg")
+        );
+        selectedFile = fc.showOpenDialog(null);
+
+        if (selectedFile != null) {
+
+            // Load the selected image into the image view
+            Image image1 = new Image(selectedFile.toURI().toString());
+
+            System.out.println(selectedFile.toURI().toString());
+            imageV.setImage(image1);
+
+            // Create a new file in the destination directory
+            File destinationFile = new File("C:\\xampp\\htdocs\\imagesAssurance\\" + selectedFile.getName());
+
+            this.file = selectedFile.getName();
+
+            try {
+                // Copy the selected file to the destination file
+                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+
+        }
+    }
+
+ 
+
+   
+
+}
+    
 
     
-}
+
+
+    
+

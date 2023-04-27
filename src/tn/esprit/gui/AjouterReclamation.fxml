@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -35,11 +36,11 @@
             <TextArea fx:id="fxcommentaire" layoutX="198.0" layoutY="421.0" opacity="0.51" prefHeight="39.0" prefWidth="238.0" />
             <TextArea fx:id="fxtel" layoutX="198.0" layoutY="480.0" opacity="0.51" prefHeight="39.0" prefWidth="238.0" />
             <ButtonBar layoutX="145.0" layoutY="522.0" prefHeight="40.0" prefWidth="200.0" />
-            <Button fx:id="fxfile" layoutX="245.0" layoutY="548.0" mnemonicParsing="false" text="Importer" />
             <Label layoutX="14.0" layoutY="372.0" prefHeight="22.0" prefWidth="109.0" text="E-mail" />
             <TextArea fx:id="fxemail" layoutX="198.0" layoutY="364.0" opacity="0.51" prefHeight="39.0" prefWidth="238.0" />
             <Label layoutX="14.0" layoutY="246.0" prefHeight="22.0" prefWidth="109.0" text="Prenom demandeur" />
             <Label fx:id="fxreference" layoutX="199.0" layoutY="117.0" prefHeight="46.0" prefWidth="238.0" style="-fx-background-color: #FFFFFF;" />
+            <ImageView fx:id="imageV" fitHeight="115.0" fitWidth="180.0" layoutX="227.0" layoutY="536.0" onMouseClicked="#addImage" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </children>

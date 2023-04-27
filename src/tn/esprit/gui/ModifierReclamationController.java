@@ -5,9 +5,12 @@
  */
 package tn.esprit.gui;
 
+import java.io.File;
 import tn.esprit.entities.Reclamation;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -40,7 +43,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import tn.esprit.services.ReclamationService;
 
@@ -73,7 +79,11 @@ public class ModifierReclamationController implements Initializable {
     private Button retourM;
      private Reclamation reclamation;
      public int idSelected= -1;
-   
+   File  selectedFile;
+    
+    @FXML
+    private ImageView imageV;
+    public String file;
     
 @Override
 public void initialize(URL url, ResourceBundle rb) {
@@ -96,7 +106,8 @@ public void initializeFxml(int id ) {
                 fxemailM.setText(reclamation.getEmail());
                   fxcommentaireM.setText(reclamation.getCommentaire());
                     fxtelM.setText(reclamation.getTel());
-                      fxfileM.setText(reclamation.getFile());
+                    this.file = reclamation.getFile();
+                     
         
         
         
@@ -121,7 +132,7 @@ public void modifier() {
     nouvelleReclamation.setEmail(fxemailM.getText());
     nouvelleReclamation.setCommentaire(fxcommentaireM.getText());
     nouvelleReclamation.setTel(fxtelM.getText());
-    nouvelleReclamation.setFile(fxfileM.getText());
+    nouvelleReclamation.setFile(this.file );
     nouvelleReclamation.setStatut("En cours");
 
     // Appeler la méthode de modification de la classe Reclamation
@@ -160,7 +171,7 @@ private void modifierRec(ActionEvent event) {
     nouvelleReclamation.setEmail(fxemailM.getText());
     nouvelleReclamation.setCommentaire(fxcommentaireM.getText());
     nouvelleReclamation.setTel(fxtelM.getText());
-    nouvelleReclamation.setFile(fxfileM.getText());
+    nouvelleReclamation.setFile(this.file);
     nouvelleReclamation.setStatut("En cours");
 
     // Appeler la méthode de modification de la classe Reclamation
@@ -320,6 +331,44 @@ Stage stage = (Stage) retourM.getScene().getWindow();
 // Close the stage
 stage.close();
     }
+    
+    @FXML
+    private void addImage(MouseEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File(System.getProperty("user.home") + "\\Desktop"));
+        fc.setTitle("Veuillez choisir l'image");
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image", "*.jpg", "*.png"),
+                new FileChooser.ExtensionFilter("PNG", "*.png"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg")
+        );
+        selectedFile = fc.showOpenDialog(null);
+
+        if (selectedFile != null) {
+
+            // Load the selected image into the image view
+            Image image1 = new Image(selectedFile.toURI().toString());
+
+            System.out.println(selectedFile.toURI().toString());
+            imageV.setImage(image1);
+
+            // Create a new file in the destination directory
+            File destinationFile = new File("C:\\xampp\\htdocs\\imagesAssurance\\" + selectedFile.getName());
+
+            this.file = selectedFile.getName();
+
+            try {
+                // Copy the selected file to the destination file
+                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+
+        }
+    }
+
+ 
+    
     
 }
 

@@ -55,7 +55,7 @@ public void ajouter(Reclamation r) {
         
         // Envoyer un SMS avec Twilio
         String ACCOUNT_SID = "AC8d0ef4234781bddf96867d3ec05586cb";
-        String AUTH_TOKEN = "aa19f40710f58d6534e313d6d95cf7e9";
+        String AUTH_TOKEN = "4f05938ff4b3f5376ec2276918e0d119";
         String TWILIO_NUMBER = "+21652983903";
         String message = "Votre réclamation a été ajoutée avec la référence : " + reference;
         PhoneNumber toNumber = new PhoneNumber(r.getTel());

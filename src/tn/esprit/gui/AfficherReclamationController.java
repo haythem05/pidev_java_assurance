@@ -5,6 +5,11 @@
  */
 package tn.esprit.gui;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
 import tn.esprit.entities.Reclamation;
 import tn.esprit.entities.Reponse;
 import java.io.IOException;
@@ -47,6 +52,9 @@ import javafx.scene.input.MouseEvent;
   
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import javafx.scene.image.Image;
 import java.util.Collections;
 import java.util.Comparator;
@@ -87,6 +95,8 @@ public class AfficherReclamationController implements Initializable {
     private Button ModifierR;
     @FXML
     private Button Supprimer;
+      @FXML
+    private Button generatePdfButton;
      
     @FXML
     private  ListView<Reclamation> lvReclamation;
@@ -124,6 +134,8 @@ public class AfficherReclamationController implements Initializable {
         ModifierR.setOnAction((ActionEvent event) -> {
             GoToModifierR();
         });
+        
+
         
        
 
@@ -253,8 +265,9 @@ public void ShowListe() {
             Reclamation reclamation =reclamationService.recup(this.idSelected);
 
         
-        
-        String imagePath = "file:\\" + reclamation.getFile(); // Replace with the actual file path
+        String imagePath = "file:\\C:\\xampp\\htdocs\\imagesAssurance\\" + reclamation.getFile(); // Replace with the actual file path
+                System.out.println(imagePath);
+
 
         Image image = new Image(imagePath); 
         
@@ -330,9 +343,11 @@ public void rechercherReclamations(String recherche) {
 
     lvReclamation.setItems(list);
 }
-
-
+ 
 }
+
+
+
     
 
 
