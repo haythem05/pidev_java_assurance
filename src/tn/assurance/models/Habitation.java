@@ -23,21 +23,21 @@ public class Habitation {
     public Habitation() {
     }
 
-    public Habitation(int idclient, int nbpieceimmobilier, float capitalimmobilier, float capitalmobilier, float devis, Categorie type_Id) {
+    public Habitation(int idclient, int nbpieceimmobilier, float capitalimmobilier, float capitalmobilier, Categorie type_Id) {
         this.idclient = idclient;
         this.nbpieceimmobilier = nbpieceimmobilier;
         this.capitalimmobilier = capitalimmobilier;
         this.capitalmobilier = capitalmobilier;
-        this.devis = devis;
+
         this.type_Id = type_Id;
     }
 
-    public Habitation(int idclient, int nbpieceimmobilier, float capitalimmobilier, float capitalmobilier, float devis) {
+    public Habitation(int idclient, int nbpieceimmobilier, float capitalimmobilier, float capitalmobilier) {
         this.idclient = idclient;
         this.nbpieceimmobilier = nbpieceimmobilier;
         this.capitalimmobilier = capitalimmobilier;
         this.capitalmobilier = capitalmobilier;
-        this.devis = devis;
+
     }
     
     

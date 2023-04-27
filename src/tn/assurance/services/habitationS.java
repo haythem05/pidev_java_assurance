@@ -32,33 +32,35 @@ public class habitationS {
  
     public void ajouterHabitation(Habitation h,Categorie  cat) {
         try {
-            String query = "INSERT INTO  assurance_habitation  ( id_client,  type_id,  nb_piece_immobilier,  capital_immobilier,  capital_mobilier, devis) VALUES (?, ?, ?,?,?,?)";
+            String query = "INSERT INTO  assurance_habitation  ( id_client,  type_id,  nb_piece_immobilier,  capital_immobilier,  capital_mobilier,devis) VALUES (?, ?, ?,?,?,?)";
             PreparedStatement preparedStatement = conn.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1,h.getIdclient());
             preparedStatement.setInt(2,cat.getId());
             preparedStatement.setInt(3,h.getNbpieceimmobilier());
             preparedStatement.setFloat(4,h.getCapitalimmobilier());
             preparedStatement.setFloat(5,h.getCapitalmobilier());
-            preparedStatement.setFloat(6,h.getDevis());
-          
-            preparedStatement.executeUpdate();
-            ResultSet rs = preparedStatement.getGeneratedKeys();
-            if (rs.next()) {
-                h.setId(rs.getInt(1));
             
+     float devis = h.getNbpieceimmobilier() * h.getCapitalimmobilier() * 0.1f + h.getCapitalmobilier() * 0.05f;
+        preparedStatement.setFloat(6, devis);
+
+        preparedStatement.executeUpdate();
+        ResultSet rs = preparedStatement.getGeneratedKeys();
+        if (rs.next()) {
+            h.setId(rs.getInt(1));
             System.out.println("Habitation ajouté avec succès.");
+        } else {
+            System.out.println("ECHEC");
         }
-            else   System.out.println("ECHEC");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
     }
+}
     
     
      public void modifierHabitation(Habitation h, int id) {
         try {
-            String req = "UPDATE `assurance_habitation` SET `id_client` = '"  + h.getIdclient()+ "', `nb_piece_immobilier` = '" + h.getNbpieceimmobilier() +  "', `capital_immobilier` = '" + h.getCapitalimmobilier() + "', `capital_mobilier` = '" + h.getCapitalmobilier() +
-                     "', `devis` = '" + h.getDevis()+"' WHERE `assurance_habitation`.`id` = " + id;
+            String req = "UPDATE `assurance_habitation` SET `id_client` = '"  + h.getIdclient()+ "', `nb_piece_immobilier` = '" + h.getNbpieceimmobilier() +  "', `capital_immobilier` = '" + h.getCapitalimmobilier() + "', `capital_mobilier` = '" + h.getCapitalmobilier() 
+                    +"' WHERE `assurance_habitation`.`id` = " + id;
             Statement st = conn.createStatement();
             st.executeUpdate(req);
             System.out.println("habitation  updated  !");

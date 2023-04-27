@@ -28,8 +28,7 @@ public class AjouterHabitationFrontController implements Initializable {
     @FXML
     private TextField capitalmobilierh;
 
-    @FXML
-    private TextField devish;
+
 
     @FXML
     private ChoiceBox<Categorie> type_Idh;
@@ -61,11 +60,10 @@ public class AjouterHabitationFrontController implements Initializable {
         nbpieceimmobilier = Integer.parseInt(nbpieceimmobilierh.getText());
         capitalimmobilier = Float.parseFloat(capitalimmobilierh.getText());
         capitalmobilier = Float.parseFloat(capitalmobilierh.getText());
-        devis = Float.parseFloat(devish.getText());
         type_id = type_Idh.getValue();
 
         // create new Habitation object with user input and selected category
-        Habitation habitation = new Habitation(idclient, nbpieceimmobilier, capitalimmobilier, capitalmobilier, devis, type_id);
+        Habitation habitation = new Habitation(idclient, nbpieceimmobilier, capitalimmobilier, capitalmobilier, type_id);
 habitationS hS= new  habitationS();
 hS.ajouterHabitation(habitation, type_id);
 

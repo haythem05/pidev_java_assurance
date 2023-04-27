@@ -29,7 +29,7 @@ public class main extends Application {
      //Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/affichercategorie.fxml"));  
            // Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/ajouterHabitationFront.fxml"));  
          
-         Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/afficherhabitation.fxml"));  
+        Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/afficherhabitation.fxml"));  
   //Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/afficherContrat.fxml"));  
   
            

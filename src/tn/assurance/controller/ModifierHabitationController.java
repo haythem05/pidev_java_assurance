@@ -46,9 +46,9 @@ private void modifier(ActionEvent event) throws IOException {
     int nbpieceimmobilier = Integer.parseInt(nbpieceh.getText());
     float capitalmobilier = Float.parseFloat(capitalmobilierh.getText());
     float capitalimmobilier = Float.parseFloat(capitalimmobilierh.getText());
-    float devis = Float.parseFloat(devish.getText());
+
     
-    Habitation habitation = new Habitation(idclient, nbpieceimmobilier, capitalimmobilier, capitalmobilier, devis);
+    Habitation habitation = new Habitation(idclient, nbpieceimmobilier, capitalimmobilier, capitalmobilier);
     habitationS hS = new habitationS();
     hS.modifierHabitation(habitation, id);
     
