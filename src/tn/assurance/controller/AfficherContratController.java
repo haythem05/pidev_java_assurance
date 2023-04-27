@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import tn.assurance.models.Categorie;
 import tn.assurance.models.Contrat;
@@ -39,7 +40,9 @@ public class AfficherContratController implements Initializable {
  static  public  Date datedebut, datefin, datecirculation;
  static  public  String avantages, marque, modele;
     Categorie type_Id;
-
+    @FXML
+    private TextField searchField;
+private contratS contratService;
     /**
      * Initializes the controller class.
      */
@@ -55,6 +58,11 @@ public class AfficherContratController implements Initializable {
             list2.getItems().add(c1);
 
         }
+          contratService = new contratS();
+        updateListView();
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateListView(newValue);
+        });
 
     }
 
@@ -98,4 +106,20 @@ public class AfficherContratController implements Initializable {
         list_supp.getItems().remove(selectedID);
 
     }
+    
+    
+    
+
+
+    private void updateListView() {
+        List<Contrat> contrats = contratService.getAllContrats();
+        listView.getItems().setAll(contrats);
+    }
+
+
+    private void updateListView(String search) {
+        List<Contrat> contrats = contratService.searchContrats(search);
+        listView.getItems().setAll(contrats);
+    }
+
 }

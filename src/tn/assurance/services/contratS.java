@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -122,6 +123,44 @@ public class contratS {
 }
 
     
+     public List<Contrat> searchContrats(String search) {
+    List<Contrat> contrats = getAllContrats();
+    List<Contrat> results = new ArrayList<>();
+    for (Contrat contrat : contrats) {
+        if (contrat.getMarque().toLowerCase().contains(search.toLowerCase())) {
+            results.add(contrat);
+        }
+    }
+    return results;
+     }
+     
+     public List<Contrat> getAllContrats() {
+  
+    List<Contrat> contrats = new ArrayList<>();
+    try {
+        PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM contrat");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            int idclient = resultSet.getInt("id_client");
+            int nbplace = resultSet.getInt("nb_place");
+            float valeurcatalogue = resultSet.getFloat("valeur_catalogue");
+            float prix = resultSet.getFloat("prix");
+            Date datedebut = resultSet.getDate("date_debut");
+            Date datefin = resultSet.getDate("date_fin");
+            Date datecirculation = resultSet.getDate("date_circulation");
+            String avantages = resultSet.getString("avantages");
+            String marque = resultSet.getString("marque");
+            String modele = resultSet.getString("modele");
+            Contrat contrat = new Contrat(id, idclient, nbplace, valeurcatalogue, prix, datedebut, datefin, datecirculation, avantages, marque, modele );
+            contrats.add(contrat);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return contrats;
+}
+
      
    /*
      public Contrat getById(int id) {

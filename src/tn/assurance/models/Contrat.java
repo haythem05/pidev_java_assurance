@@ -18,6 +18,21 @@ public class Contrat {
     private String avantages,marque,modele;
     Categorie  type_Id;
 
+    public Contrat(int id, int idclient, int nbplace, float valeurcatalogue, float prix, Date datedebut, Date datefin, Date datecirculation, String avantages, String marque, String modele, Categorie type_Id) {
+        this.id = id;
+        this.idclient = idclient;
+        this.nbplace = nbplace;
+        this.valeurcatalogue = valeurcatalogue;
+        this.prix = prix;
+        this.datedebut = datedebut;
+        this.datefin = datefin;
+        this.datecirculation = datecirculation;
+        this.avantages = avantages;
+        this.marque = marque;
+        this.modele = modele;
+        this.type_Id = type_Id;
+    }
+
     
     
     public Contrat(int idclient, int nbplace, float valeurcatalogue, float prix, Date datedebut, Date datefin, Date datecirculation, String avantages, String marque, String modele, Categorie type_Id) {
@@ -47,7 +62,7 @@ public class Contrat {
 @Override
 public String toString() {
     return "Contrat{" + "id=" + id + ", idclient=" + idclient + ", nbplace=" + nbplace + ", valeurcatalogue=" + valeurcatalogue + ", prix=" + prix + ", datedebut=" + datedebut + ", datefin=" + datefin + ", datecirculation=" + datecirculation + ", avantages=" + avantages + ", marque=" + marque + ", modele=" +
-            modele + ", type_Id=" + type_Id.getId() + ", nom=" + type_Id.getNom() +  "}\n";
+            modele +  "}\n";
 }
 
 
