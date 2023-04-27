@@ -5,6 +5,22 @@
  */
 package tn.assurance.controller;
 
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
@@ -14,11 +30,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import tn.assurance.models.Categorie;
 import tn.assurance.models.Contrat;
+import tn.assurance.models.PDFGenerator;
 import tn.assurance.services.contratS;
 
 
@@ -121,5 +140,74 @@ private contratS contratService;
         List<Contrat> contrats = contratService.searchContrats(search);
         listView.getItems().setAll(contrats);
     }
+
+@FXML
+private void generatePDF(ActionEvent event) throws FileNotFoundException, DocumentException, IOException {
+
+    // Get the selected contrat
+    ListView<Contrat> list = listView;
+    Contrat c = list.getSelectionModel().getSelectedItem();
+
+    // Create the PDF document
+    Document document = new Document();
+
+    // Set the location path for the generated PDF
+    String locationPath = "C:/xampp/htdocs/PDFContrat/" + c.getId() + ".pdf";
+    FileOutputStream outputStream = new FileOutputStream(locationPath);
+    PdfWriter writer = PdfWriter.getInstance(document, outputStream);
+
+    // Add content to the PDF document
+    document.open();
+    
+    // Add logo to the first page
+// Add the logo
+Image logo = Image.getInstance("C:/xampp/htdocs/logo.png");
+logo.scaleToFit(120, 120);
+logo.setAbsolutePosition(document.getPageSize().getWidth() - 120, document.getPageSize().getHeight() - 120);
+document.add(logo);
+
+    
+    // Add content to the first page
+    BaseFont bf = BaseFont.createFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+    Font titleFont = new Font(bf, 16, Font.BOLD);
+    Font nameFont = new Font(bf, 12, Font.BOLD, BaseColor.RED);
+    Font valueFont = new Font(bf, 12);
+    
+    Paragraph title = new Paragraph("Contrat details:", titleFont);
+    title.setAlignment(Element.ALIGN_CENTER);
+    document.add(title);
+    
+   
+    document.add(new Paragraph("Nombre de place: ", nameFont));
+    document.add(new Paragraph(String.valueOf(c.getNbplace()), valueFont));
+    document.add(new Paragraph("Valeur catalogue: ", nameFont));
+    document.add(new Paragraph(String.valueOf(c.getValeurcatalogue()), valueFont));
+    document.add(new Paragraph("Prix: ", nameFont));
+    document.add(new Paragraph(String.valueOf(c.getPrix()), valueFont));
+    document.add(new Paragraph("Date debut: ", nameFont));
+    document.add(new Paragraph(c.getDatedebut().toString(), valueFont));
+    document.add(new Paragraph("Date fin: ", nameFont));
+    document.add(new Paragraph(c.getDatefin().toString(), valueFont));
+    document.add(new Paragraph("Date circulation: ", nameFont));
+    document.add(new Paragraph(c.getDatecirculation().toString(), valueFont));
+    document.add(new Paragraph("Avantages: ", nameFont));
+    document.add(new Paragraph(c.getAvantages(), valueFont));
+    document.add(new Paragraph("Marque: ", nameFont));
+    document.add(new Paragraph(c.getMarque(), valueFont));
+    document.add(new Paragraph("Modele: ", nameFont));
+    document.add(new Paragraph(c.getModele(), valueFont));
+
+    // Close the PDF document
+    document.close();
+
+    // Show success message to user
+    Alert alert = new Alert(AlertType.INFORMATION);
+    alert.setHeaderText(null);
+    alert.setContentText("PDF generated successfully at " + locationPath);
+    alert.showAndWait();
+}
+
+
+
 
 }

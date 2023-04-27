@@ -17,5 +17,6 @@
             <Font name="System Bold Italic" size="12.0" />
          </font>
       </TextField>
+      <Button layoutX="22.0" layoutY="304.0" mnemonicParsing="false" onAction="#generatePDF" text="Generate PDF" />
    </children>
 </AnchorPane>
