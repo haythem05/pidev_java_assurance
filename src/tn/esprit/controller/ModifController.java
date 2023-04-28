@@ -55,7 +55,7 @@ public class ModifController implements Initializable {
     private TextField tf_description;
     @FXML
     private DatePicker date;
-    
+
     private String url_im;
     File selectedFile;
     @FXML
@@ -76,8 +76,8 @@ public class ModifController implements Initializable {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ModifController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        url_im=imagePath;
-    }    
+        url_im = imagePath;
+    }
 
     @FXML
     private void modifier(ActionEvent event) {
@@ -146,5 +146,5 @@ public class ModifController implements Initializable {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Afficher.fxml"));
         rootPane.getChildren().setAll(pane);
     }
-    
+
 }

@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import tn.esprit.entities.Sinistre;
@@ -57,18 +58,40 @@ public class AfficherController implements Initializable {
         ListView<Sinistre> liste = list; // assuming listView is a ListView<CoVoiturage>
 
         Sinistre s = liste.getSelectionModel().getSelectedItem(); // use getSelectedItem() to get the selected item, not getSelectedItems()*
-
+        
         id = s.getId();
         lieu = s.getLieu();
         degats = s.getDegats();
         description = s.getDescription();
         url_image = s.getFile();
         date_heure = s.getDate_heure();
-        
-        try {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Modif.fxml"));
-            rootPane.getChildren().setAll(pane);
 
+        try {
+            if (s.getStatut().equals("En cours de traitement")) {
+                Alert alerte = new Alert(Alert.AlertType.ERROR);
+                alerte.setTitle("Erreur de modification");
+                alerte.setHeaderText(null);
+                alerte.setContentText("Impossible de modifier ce sinistre car son traitement a déjà commencé.");
+                alerte.showAndWait();
+                return;
+            } else if (s.getStatut().equals("Traité")) {
+                Alert alerte = new Alert(Alert.AlertType.ERROR);
+                alerte.setTitle("Erreur de modification");
+                alerte.setHeaderText(null);
+                alerte.setContentText("Impossible de modifier ce sinistre car il a déjà été traité.");
+                alerte.showAndWait();
+                return;
+            } else if (s.getStatut().equals("Refusé")) {
+                Alert alerte = new Alert(Alert.AlertType.ERROR);
+                alerte.setTitle("Erreur de modification");
+                alerte.setHeaderText(null);
+                alerte.setContentText("Impossible de modifier ce sinistre car il a été refusé.");
+                alerte.showAndWait();
+                return;
+            } else if (s.getStatut().equals("En attente de traitement")) {
+                AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Modif.fxml"));
+                rootPane.getChildren().setAll(pane);
+            }
         } catch (IOException ex) {
             System.err.println(ex);
 
@@ -93,4 +116,3 @@ public class AfficherController implements Initializable {
     }
 
 }
-    

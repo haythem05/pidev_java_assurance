@@ -53,6 +53,7 @@ public class AfficherTController implements Initializable {
     private void ajouterT(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AjouterT.fxml"));
         rootPane.getChildren().setAll(pane);
+        
     }
 
     @FXML

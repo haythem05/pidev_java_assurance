@@ -16,7 +16,7 @@ import java.util.List;
 public class Sinistre {
     private int id; 
     private Timestamp date_heure;
-    private String lieu, degats, statut, description, file;
+    private String lieu, degats, statut="En attente de traitement", description, file;
     Type type;
 
     public Sinistre() {
