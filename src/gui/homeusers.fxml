@@ -27,7 +27,7 @@
       <Label layoutX="26.0" layoutY="273.0" text="Date de naissance:" />
       <Label layoutX="26.0" layoutY="329.0" text="Numero de telephone:" />
       <Label layoutX="26.0" layoutY="380.0" text="CIN:" />
-      <TableView fx:id="tvtype" layoutX="333.0" layoutY="74.0" prefHeight="532.0" prefWidth="610.0">
+      <TableView fx:id="tvtype" layoutX="333.0" layoutY="74.0" prefHeight="532.0" prefWidth="610.0" onMouseClicked="#handleTableClick">
         <columns>
           <TableColumn fx:id="nomTable" prefWidth="75.0" text="Nom" />
           <TableColumn fx:id="prenomTable" prefWidth="75.0" text="Prenom" />

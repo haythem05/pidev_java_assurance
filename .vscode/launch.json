@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "gui.Main",
+            "projectName": "pidev_java_assurance_e8fb8f1d"
+        },
+        {
+            "type": "java",
             "name": "PI1",
             "request": "launch",
             "mainClass": "pi1.PI1",

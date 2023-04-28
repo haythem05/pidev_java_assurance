@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -92,7 +93,7 @@ public class UserController implements Initializable {
     @FXML
     private void displayData() {
         ObservableList<Utilisateur> dataList = FXCollections.observableArrayList(utilisateurService.afficher());
-        cinTable.setCellValueFactory(new PropertyValueFactory<>("id"));
+        cinTable.setCellValueFactory(new PropertyValueFactory<>("cin"));
         nomTable.setCellValueFactory(new PropertyValueFactory<>("nom"));
         datedenaissanceTable.setCellValueFactory(new PropertyValueFactory<>("datedenaissance"));
         emailTable.setCellValueFactory(new PropertyValueFactory<>("Email"));
@@ -129,6 +130,21 @@ public class UserController implements Initializable {
         utilisateurService.modifier(utilisateur);
         // update the table view with the new data
         displayData();
+    }
+
+    @FXML
+    void handleTableClick(MouseEvent event) {
+        Utilisateur user = tvtype.getSelectionModel().getSelectedItem();
+        if (user != null) {
+            nomInput.setText(user.getNom());
+            prenomInput.setText(user.getPrenom());
+            emailInput.setText(user.getEmail());
+            cinInput.setText(Integer.toString(user.getCin()));
+            numtelInput.setText(Integer.toString(user.getNumtel()));
+            mdpInput.setText(user.getPassword());
+            LocalDate date = user.getDatedenaissance().toLocalDate();
+            dateInput.setValue(date);
+        }
     }
 
     @FXML
