@@ -7,8 +7,11 @@ package tn.esprit.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -70,8 +73,8 @@ public class AfficherBackController implements Initializable {
         List<Sinistre> liste = ss.getAllSinistres();
         list.getItems().setAll(liste);
     }
-    
-    public void updateListView(String search){
+
+    public void updateListView(String search) {
         List<Sinistre> liste = ss.searchSinistres(search);
         list.getItems().setAll(liste);
     }
@@ -94,6 +97,21 @@ public class AfficherBackController implements Initializable {
 
     @FXML
     private void stat(ActionEvent event) {
+    }
+
+    @FXML
+    private void sortButtonDESC(ActionEvent event) {
+        List<Sinistre> sinistres = list.getItems(); 
+        Collections.sort(sinistres, Comparator.comparing(Sinistre::getDate_heure).reversed()); 
+        list.setItems(FXCollections.observableArrayList(sinistres)); 
+
+    }
+
+    @FXML
+    private void sortButtonASC(ActionEvent event) {
+        List<Sinistre> sinistres = list.getItems(); 
+        Collections.sort(sinistres, Comparator.comparing(Sinistre::getDate_heure)); 
+        list.setItems(FXCollections.observableArrayList(sinistres));
     }
 
 }
