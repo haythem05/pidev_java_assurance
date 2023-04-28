@@ -5,6 +5,14 @@
  */
 package tn.assurance.controller;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Comparator;
@@ -14,7 +22,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import tn.assurance.models.Categorie;
 import tn.assurance.models.Habitation;
@@ -36,6 +48,10 @@ public class AfficherhabitationController implements Initializable {
 static public int id,idclient,nbpieceimmobilier;
 static public float     capitalmobilier,capitalimmobilier,devis;
  Categorie  type_Id;
+    @FXML
+    private Button btQR;
+    @FXML
+    private ImageView imageqr;
 
 
 
@@ -118,6 +134,47 @@ public List<Habitation> getHabitationsSortedDescDevis() {
     private void sortDesc(ActionEvent event) {
          listView.getItems().clear();
     listView.getItems().addAll(getHabitationsSortedDescDevis());
+    }
+    
+    
+    @FXML
+private void QrCode(ActionEvent event) throws WriterException, IOException {
+        
+        Habitation selectedPiece = listView.getSelectionModel().getSelectedItem();
+        if (selectedPiece != null) {
+           String qrText = "nombre de place : " + String.valueOf(selectedPiece.getCapitalimmobilier());
+            createQR(qrText);
+        } else {
+            alert("Please select a row.");
+        }
+    }
+    private void createQR(String qrText) throws WriterException, IOException {
+        try {
+            String path = System.getProperty("user.home") + File.separatorChar + "Desktop" + File.separatorChar + "qr_code.png";
+            BitMatrix matrix = new MultiFormatWriter().encode(qrText, BarcodeFormat.QR_CODE, 200, 200);
+            MatrixToImageWriter.writeToFile(matrix, path.substring(path.lastIndexOf('.') + 1), new File(path));
+            alert("QR Code Created");
+            setQRImage(path);
+            //hl.setVisible(false);
+        } catch (IOException | WriterException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setQRImage(String path) {
+        try {
+            FileInputStream stream = new FileInputStream(path);
+            Image image = new Image(stream) {};
+            imageqr.setImage(image);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void alert(String msg) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText(msg);
+        alert.showAndWait();
     }
     
 }
