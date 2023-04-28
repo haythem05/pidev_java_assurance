@@ -5,6 +5,8 @@
  */
 package tn.assurance.controller;
 
+import javafx.collections.transformation.FilteredList;
+
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -23,9 +25,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -59,14 +65,31 @@ public class AfficherContratController implements Initializable {
  static  public  Date datedebut, datefin, datecirculation;
  static  public  String avantages, marque, modele;
     Categorie type_Id;
+
+
+
+
     @FXML
     private TextField searchField;
 private contratS contratService;
+    @FXML
+    private TextField minPrixField;
+    @FXML
+    private TextField maxPrixField;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+// Add listeners to minPrixField and maxPrixField
+
+    minPrixField.textProperty().addListener((observable, oldValue, newValue) -> {
+        updateListViewF();
+    });
+    maxPrixField.textProperty().addListener((observable, oldValue, newValue) -> {
+        updateListViewF();
+    });
+
 
         ListView list2 = listView;
         Contrat c = new Contrat();
@@ -208,6 +231,49 @@ document.add(logo);
     alert.setContentText("PDF generated successfully at " + locationPath);
     alert.showAndWait();
 }
+
+
+//FILTRE 
+
+public List<Contrat> getContratsByPrix(float minPrix, float maxPrix) {
+    contratS cS= new contratS();
+    List<Contrat> allContrats = cS.getAllContrats();
+    List<Contrat> filteredContrats = new ArrayList<>();
+
+    for (Contrat contrat : allContrats) {
+        if (contrat.getPrix() >= minPrix && contrat.getPrix() <= maxPrix) {
+            filteredContrats.add(contrat);
+        }
+    }
+
+    return filteredContrats;
+}
+
+private void updateListViewF() {
+    List<Contrat> contrats = contratService.getAllContrats();
+    float minPrice = 0;
+    float maxPrice = Float.MAX_VALUE;
+
+    // Check if minPrixField and maxPrixField have values, then update minPrice and maxPrice
+    if (!minPrixField.getText().isEmpty()) {
+        minPrice = Float.parseFloat(minPrixField.getText());
+    }
+    if (!maxPrixField.getText().isEmpty()) {
+        maxPrice = Float.parseFloat(maxPrixField.getText());
+    }
+
+    // Filter the contracts based on price
+    ObservableList<Contrat> filteredList = FXCollections.observableArrayList();
+    for (Contrat contrat : contrats) {
+        if (contrat.getPrix() >= minPrice && contrat.getPrix() <= maxPrice) {
+            filteredList.add(contrat);
+        }
+    }
+    listView.setItems(filteredList);
+}
+
+
+
 
 
 

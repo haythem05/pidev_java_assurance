@@ -11,12 +11,14 @@
       <ListView fx:id="listView" layoutX="100.0" layoutY="39.0" prefHeight="200.0" prefWidth="343.0" />
       <Button layoutX="274.0" layoutY="304.0" mnemonicParsing="false" onAction="#modifier" text="modifier" />
       <Button layoutX="148.0" layoutY="304.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
-      <Button layoutX="391.0" layoutY="304.0" mnemonicParsing="false" onAction="#supprimer" text="supprimer" />
+      <Button layoutX="265.0" layoutY="257.0" mnemonicParsing="false" onAction="#supprimer" text="supprimer" />
       <TextField fx:id="searchField" layoutX="426.0" layoutY="257.0" promptText="Rechercher">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>
       </TextField>
       <Button layoutX="22.0" layoutY="304.0" mnemonicParsing="false" onAction="#generatePDF" text="Generate PDF" />
+      <TextField fx:id="minPrixField" layoutX="368.0" layoutY="304.0" promptText="Min Prix" />
+      <TextField fx:id="maxPrixField" layoutX="387.0" layoutY="344.0" promptText="Max Prix" />
    </children>
 </AnchorPane>
