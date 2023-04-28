@@ -26,11 +26,11 @@ public class main extends Application {
     public void start(Stage primaryStage) {
         try {
              //Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/ajouterCategorieBackfxml.fxml")); 
-     //Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/affichercategorie.fxml"));  
-           // Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/ajouterHabitationFront.fxml"));  
+      //Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/affichercategorie.fxml"));  
+           Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/ajouterHabitationFront.fxml"));  
          
-       // Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/afficherhabitation.fxml"));  
-Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/afficherContrat.fxml"));  
+        // Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/afficherhabitation.fxml"));  
+//Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/afficherContrat.fxml"));  
   
            
         

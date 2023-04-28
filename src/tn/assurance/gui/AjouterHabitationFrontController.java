@@ -7,8 +7,12 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import org.controlsfx.control.Notifications;
 import tn.assurance.models.Categorie;
 import tn.assurance.models.Habitation;
 import tn.assurance.services.categorieS;
@@ -66,6 +70,15 @@ public class AjouterHabitationFrontController implements Initializable {
         Habitation habitation = new Habitation(idclient, nbpieceimmobilier, capitalimmobilier, capitalmobilier, type_id);
 habitationS hS= new  habitationS();
 hS.ajouterHabitation(habitation, type_id);
+  Image img = new Image("file:///C:/xampp/htdocs/logo.png");
+               Notifications n = Notifications.create()
+        .title("DevSquad")
+        .text("Habitation  ajouteé !")
+        .graphic(new ImageView(img))
+        .position(Pos.BOTTOM_RIGHT);
+    
+    n.darkStyle();
+    n.showInformation();
 
 
     }

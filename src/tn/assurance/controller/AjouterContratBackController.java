@@ -6,6 +6,7 @@
 package tn.assurance.controller;
 
 import java.net.URL;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -14,9 +15,13 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import org.controlsfx.control.Notifications;
 import tn.assurance.models.Categorie;
 import tn.assurance.models.Contrat;
 import tn.assurance.services.categorieS;
@@ -100,7 +105,17 @@ type_Id=typeidc.getValue();
                 Contrat c = new Contrat( idclient,  nbplace,  valeurcatalogue,    datedebut,  datefin,  datecirculation,  avantages,  marque,  modele,  type_Id);
                 contratS cs=new contratS();
                 cs.ajouterContrat(c, type_Id);
-                
+
+    Image img = new Image("file:///C:/xampp/htdocs/logo.png");
+                Notifications n = Notifications.create()
+                        
+                    .title("DevSquad")
+                    .text("contrat automobile ajouteé !")
+                    .graphic(new ImageView(img))
+                    .position(Pos.BOTTOM_RIGHT);
+                     n.darkStyle();
+                    
+            n.showInformation();
        
 
     }

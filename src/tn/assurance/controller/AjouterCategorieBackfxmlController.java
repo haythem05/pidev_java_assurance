@@ -18,6 +18,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -33,6 +34,7 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -107,7 +109,10 @@ public class AjouterCategorieBackfxmlController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Veuillez remplir tous les champs obligatoires.");
             alert.showAndWait();
+            
+            
         return;
+        
     }
 
     if (nom.matches(".*\\d.*")) {
@@ -131,7 +136,16 @@ public class AjouterCategorieBackfxmlController implements Initializable {
         categorieS cS = new categorieS();
 
         cS.ajouterCategorie(ca);
-        
+          Image img = new Image("file:///C:/xampp/htdocs/logo.png");
+               Notifications n = Notifications.create()
+        .title("DevSquad")
+        .text("Categorie ajouteé !")
+        .graphic(new ImageView(img))
+        .position(Pos.BOTTOM_RIGHT);
+    
+    n.darkStyle();
+    n.showInformation();
+       
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/affichercategorie.fxml"));  
         
             rootPane.getChildren().setAll(pane);
