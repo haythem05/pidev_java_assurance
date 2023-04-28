@@ -33,7 +33,7 @@ public class Main extends Application {
 
             /*String css = this.getClass().getResource("/edu/webuild/gui/style.css").toExternalForm();
             scene.getStylesheets().add(css);*/
-            primaryStage.setTitle("Webuild");
+            primaryStage.setTitle("SecurAssur");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {
