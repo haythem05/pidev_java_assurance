@@ -5,6 +5,11 @@
  */
 package tn.assurance.controller;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import javafx.collections.transformation.FilteredList;
 
 import com.itextpdf.text.BadElementException;
@@ -21,6 +26,8 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -38,11 +45,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import tn.assurance.models.Categorie;
 import tn.assurance.models.Contrat;
+import tn.assurance.models.Habitation;
 import tn.assurance.models.PDFGenerator;
 import tn.assurance.services.contratS;
 
@@ -76,6 +86,10 @@ private contratS contratService;
     private TextField minPrixField;
     @FXML
     private TextField maxPrixField;
+    @FXML
+    private ImageView imageqr;
+    @FXML
+    private Button btQR;
     /**
      * Initializes the controller class.
      */
@@ -271,6 +285,45 @@ private void updateListViewF() {
     }
     listView.setItems(filteredList);
 }
+@FXML
+private void QrCode(ActionEvent event) throws WriterException, IOException {
+        
+        Contrat  selectedPiece = listView.getSelectionModel().getSelectedItem();
+        if (selectedPiece != null) {
+           String qrText = "  fiche technique   " + selectedPiece.getMarque() + selectedPiece.getModele() ;
+            createQR(qrText);
+        } else {
+            alert("Please select a row.");
+        }
+    }
+    private void createQR(String qrText) throws WriterException, IOException {
+        try {
+            String path = System.getProperty("user.home") + File.separatorChar + "Desktop" + File.separatorChar + "qr_code.png";
+            BitMatrix matrix = new MultiFormatWriter().encode(qrText, BarcodeFormat.QR_CODE, 200, 200);
+            MatrixToImageWriter.writeToFile(matrix, path.substring(path.lastIndexOf('.') + 1), new File(path));
+            alert("QR Code Created");
+            setQRImage(path);
+            //hl.setVisible(false);
+        } catch (IOException | WriterException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setQRImage(String path) {
+        try {
+            FileInputStream stream = new FileInputStream(path);
+            javafx.scene.image.Image image = new javafx.scene.image.Image(stream) {};
+            imageqr.setImage(image);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void alert(String msg) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText(msg);
+        alert.showAndWait();
+    }
 
 
 

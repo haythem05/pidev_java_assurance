@@ -48,10 +48,6 @@ public class AfficherhabitationController implements Initializable {
 static public int id,idclient,nbpieceimmobilier;
 static public float     capitalmobilier,capitalimmobilier,devis;
  Categorie  type_Id;
-    @FXML
-    private Button btQR;
-    @FXML
-    private ImageView imageqr;
 
 
 
@@ -137,44 +133,6 @@ public List<Habitation> getHabitationsSortedDescDevis() {
     }
     
     
-    @FXML
-private void QrCode(ActionEvent event) throws WriterException, IOException {
-        
-        Habitation selectedPiece = listView.getSelectionModel().getSelectedItem();
-        if (selectedPiece != null) {
-           String qrText = "nombre de place : " + String.valueOf(selectedPiece.getCapitalimmobilier());
-            createQR(qrText);
-        } else {
-            alert("Please select a row.");
-        }
-    }
-    private void createQR(String qrText) throws WriterException, IOException {
-        try {
-            String path = System.getProperty("user.home") + File.separatorChar + "Desktop" + File.separatorChar + "qr_code.png";
-            BitMatrix matrix = new MultiFormatWriter().encode(qrText, BarcodeFormat.QR_CODE, 200, 200);
-            MatrixToImageWriter.writeToFile(matrix, path.substring(path.lastIndexOf('.') + 1), new File(path));
-            alert("QR Code Created");
-            setQRImage(path);
-            //hl.setVisible(false);
-        } catch (IOException | WriterException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void setQRImage(String path) {
-        try {
-            FileInputStream stream = new FileInputStream(path);
-            Image image = new Image(stream) {};
-            imageqr.setImage(image);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void alert(String msg) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText(msg);
-        alert.showAndWait();
-    }
+    
     
 }
