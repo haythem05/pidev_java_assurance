@@ -126,7 +126,16 @@ public class main {
         //ts.ajouterType(t6);
         Sinistre s7 = new Sinistre(date6, "Boumhal", "ggg", "En attente de traitement", "ggg", t6);
         //ss.ajouterSinistre(s7, t6);
-        System.out.println(ss.afficher());
+        //System.out.println(ss.afficher());
         
+        Type t7 = new Type("test");
+        //ts.ajouterType(t7);
+        Sinistre s8 = new Sinistre(date6, "Boumhal", "ggg", "En attente de traitement", "ggg", t7);
+        //ss.ajouterSinistre(s8, t7);
+        //System.out.println(ss.afficher());
+        
+        s8.setStatut("En cours de traitement");
+        //ss.traiter(s8, 121);
+        System.out.println(ss.afficher());
     }
 }

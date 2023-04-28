@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -35,10 +36,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.util.StringConverter;
+import javax.mail.MessagingException;
 import tn.esprit.entities.Sinistre;
 import tn.esprit.entities.Type;
+import tn.esprit.services.Email;
 import tn.esprit.services.Emailsender;
-import tn.esprit.services.SinistreService;  
+import static tn.esprit.services.Sendmail.sendMail;
+import tn.esprit.services.SinistreService;
 import tn.esprit.services.TypeService;
 
 /**
@@ -79,7 +84,23 @@ public class AjouterController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         types = new TypeService().afficher();
+        //list_types.getItems().addAll(types);
+        
+        List<String> typeNames = new ArrayList<>();
+        types.forEach(type -> typeNames.add(type.getNom()));
         list_types.getItems().addAll(types);
+
+        list_types.setConverter(new StringConverter<Type>() {
+            @Override
+            public String toString(Type type) {
+                return type.getNom();
+            }
+
+            @Override
+            public Type fromString(String nom) {
+                return null;
+            }
+            });
 
         imageV.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
@@ -142,8 +163,8 @@ public class AjouterController implements Initializable {
             System.out.println("image ajoutée");
 
             try {
-            // Copy the selected file to the destination file
-            Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                // Copy the selected file to the destination file
+                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 System.err.println(e);
             }
@@ -152,7 +173,7 @@ public class AjouterController implements Initializable {
     }
 
     @FXML
-    private void ajouter(ActionEvent event) {
+    private void ajouter(ActionEvent event) throws MessagingException {
         lieu = tf_lieu.getText();
         degats = tf_degats.getText();
         description = tf_description.getText();
@@ -160,7 +181,6 @@ public class AjouterController implements Initializable {
         date_heure = Timestamp.valueOf(d.atStartOfDay(ZoneId.systemDefault()).toLocalDateTime());
         type = list_types.getValue();
 
-        
         if (lieu.isEmpty() || degats.isEmpty() || description.isEmpty() || date_heure == null || type == null) {
             // Afficher un message d'erreur si un champ obligatoire est vide
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -189,9 +209,11 @@ public class AjouterController implements Initializable {
         Sinistre s = new Sinistre(date_heure, lieu, degats, statut, description, url_image, type);
         SinistreService ss = new SinistreService();
         ss.ajouterSinistre(s, type);
-        
-        Emailsender.sendEmail_add("nourhouda.bejaoui@esprit.tn", "'Merci pour votre confiance.\nNous avons bien reçu votre déclaration.\nPatientez quelques instants, votre sinistre est en attente de traitement.\n\nÀ bientôt.'");
-        
+
+        Emailsender.sendEmail_add("ines.bessaad@esprit.tn", "Merci pour votre confiance.\nNous avons bien reçu votre déclaration.\nPatientez quelques instants, votre sinistre est en attente de traitement.\n\nÀ bientôt.");
+        //Email e = new Email("freeelanci@gmail.com", "jjrnaazzdfwhwfar", "ines.bessaad@esprit.tn", "Etat réclamation", " bonjour, Votre réclamation a été traitée");
+        //e.sendEmail();
+        //sendMail("ines.bessaad02@gmail.com","Category","Nouvelle category ajouté.");
     }
 
     @FXML

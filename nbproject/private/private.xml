@@ -5,12 +5,9 @@
         <group>
             <file>file:/C:/Users/HD/Desktop/Esprit/PiDev/src/tn/esprit/controller/AjouterController.java</file>
             <file>file:/C:/Users/HD/Desktop/Esprit/PiDev/src/pidev/Main.java</file>
-            <file>file:/C:/Users/HD/Desktop/Esprit/PiDev/src/tn/esprit/controller/AfficherTController.java</file>
-            <file>file:/C:/Users/HD/Desktop/Esprit/PiDev/src/tn/esprit/services/Emailsender.java</file>
-            <file>file:/C:/Users/HD/Desktop/Esprit/PiDev/src/tn/esprit/controller/ModifierTController.java</file>
             <file>file:/C:/Users/HD/Desktop/Esprit/PiDev/src/tn/esprit/controller/AfficherController.java</file>
-            <file>file:/C:/Users/HD/Desktop/Esprit/PiDev/src/tn/esprit/services/SinistreService.java</file>
-            <file>file:/C:/Users/HD/Desktop/Esprit/PiDev/src/tn/esprit/entities/Sinistre.java</file>
+            <file>file:/C:/Users/HD/Desktop/Esprit/PiDev/src/tn/esprit/controller/TraiterController.java</file>
+            <file>file:/C:/Users/HD/Desktop/Esprit/PiDev/src/tn/esprit/controller/AfficherBackController.java</file>
         </group>
     </open-files>
 </project-private>

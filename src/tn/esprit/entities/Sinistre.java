@@ -90,9 +90,10 @@ public class Sinistre {
         this.description = description;
         this.type = type;
     }
-    
-    
-    
+
+    public Sinistre(String statut) {
+        this.statut = statut;
+    }
     
     public int getId() {
         return id;
@@ -160,7 +161,7 @@ public class Sinistre {
 
     @Override
     public String toString() {
-        return "Sinistre : Date : " + date_heure + " | Lieu : " + lieu + " | Degats : " + degats + " | Statut : " + statut + " | Description : " + description + " | Image : " + file + " | Type : " + type + " \n";
+        return "Sinistre : Type : " + type.getNom() + " | Date : " + date_heure + " | Lieu : " + lieu + " | Degats : " + degats + " | Statut : " + statut + " | Description : " + description + " | Image : " + file + " \n\n";
     }
 
     

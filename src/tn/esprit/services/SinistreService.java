@@ -25,14 +25,15 @@ import tn.esprit.tools.MaConnexion;
  *
  * @author HD
  */
-public class SinistreService implements Fonctions<Sinistre>{
+public class SinistreService implements Fonctions<Sinistre> {
+
     Connection cnx;
-    String sql="";
-    
-    public SinistreService(){
+    String sql = "";
+
+    public SinistreService() {
         cnx = MaConnexion.getInstance().getCnx();
     }
-    
+
     /*public void ajouter(Sinistre t) {
         sql = "insert into sinistre(date_heure, lieu, statut, degats, description, file) values (?,?,?,?,?,?)";
         try {
@@ -49,8 +50,7 @@ public class SinistreService implements Fonctions<Sinistre>{
             System.out.println(ex.getMessage());
         }
     }*/
-    
-    public void ajouterSinistre (Sinistre t, Type type) {
+    public void ajouterSinistre(Sinistre t, Type type) {
         sql = "insert into sinistre(date_heure, lieu, statut, degats, description, file, type_id) values (?,?,?,?,?,?,?)";
         try {
             PreparedStatement ste = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -75,25 +75,25 @@ public class SinistreService implements Fonctions<Sinistre>{
     @Override
     public List<Sinistre> afficher() {
         List<Sinistre> sinistres = new ArrayList<>();
-        sql="select s.*, t.nom from sinistre s inner join type t on s.type_id = t.id";
+        sql = "select s.*, t.nom from sinistre s inner join type t on s.type_id = t.id";
         try {
             Statement ste = cnx.createStatement();
             ResultSet rs = ste.executeQuery(sql);
-            while (rs.next()){
-            Sinistre s = new Sinistre();
-            s.setId(rs.getInt(1));
-            Type t = new Type();
-            t.setId(rs.getInt(2));
-            t.setNom(rs.getString("nom"));
-            s.setType(t);
-            s.setDate_heure(rs.getTimestamp(3));
-            s.setLieu(rs.getString(4));
-            s.setStatut(rs.getString(5));
-            s.setDegats(rs.getString(6));
-            s.setDescription(rs.getString(7));
-            s.setFile(rs.getString(8));
-            
-            sinistres.add(s);
+            while (rs.next()) {
+                Sinistre s = new Sinistre();
+                s.setId(rs.getInt(1));
+                Type t = new Type();
+                t.setId(rs.getInt(2));
+                t.setNom(rs.getString("nom"));
+                s.setType(t);
+                s.setDate_heure(rs.getTimestamp(3));
+                s.setLieu(rs.getString(4));
+                s.setStatut(rs.getString(5));
+                s.setDegats(rs.getString(6));
+                s.setDescription(rs.getString(7));
+                s.setFile(rs.getString(8));
+
+                sinistres.add(s);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -103,7 +103,7 @@ public class SinistreService implements Fonctions<Sinistre>{
 
     @Override
     public void supprimer(int id) {
-        sql="delete from sinistre where id= " + id;
+        sql = "delete from sinistre where id= " + id;
         try {
             Statement ste = cnx.createStatement();
             ste.executeUpdate(sql);
@@ -115,7 +115,7 @@ public class SinistreService implements Fonctions<Sinistre>{
 
     @Override
     public void modifier(Sinistre t, int id) {
-        sql="update sinistre set date_heure = ' " + t.getDate_heure() + " ', lieu = ' " + t.getLieu() + " ', statut = ' " + t.getStatut() + " ', degats = ' " + t.getDegats()+ " ', description = ' " + t.getDescription() + " ', type_id = '" + t.getType().getId() + " ' where id= " + id;
+        sql = "update sinistre set date_heure = ' " + t.getDate_heure() + " ', lieu = ' " + t.getLieu() + " ', statut = ' " + t.getStatut() + " ', degats = ' " + t.getDegats() + " ', description = ' " + t.getDescription() + " ', type_id = '" + t.getType().getId() + " ' where id= " + id;
         try {
             Statement ste = cnx.createStatement();
             ste.executeUpdate(sql);
@@ -124,9 +124,9 @@ public class SinistreService implements Fonctions<Sinistre>{
             System.out.println(ex.getMessage());
         }
     }
-    
+
     public void modifiersanst(Sinistre t, int id) {
-        sql="update sinistre set date_heure = ' " + t.getDate_heure() + " ', lieu = ' " + t.getLieu() + " ', statut = ' " + t.getStatut() + " ', degats = ' " + t.getDegats()+ " ', description = ' " + t.getDescription() + " ' where id= " + id;
+        sql = "update sinistre set date_heure = ' " + t.getDate_heure() + " ', lieu = ' " + t.getLieu() + " ', statut = ' " + t.getStatut() + " ', degats = ' " + t.getDegats() + " ', description = ' " + t.getDescription() + " ' where id= " + id;
         try {
             Statement ste = cnx.createStatement();
             ste.executeUpdate(sql);
@@ -134,5 +134,55 @@ public class SinistreService implements Fonctions<Sinistre>{
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public void traiter(Sinistre t, int id, String statu) {
+        sql = "update sinistre set statut = ' " + statu + " ' where id= " + id;
+        try {
+            Statement ste = cnx.createStatement();
+            ste.executeUpdate(sql);
+            System.out.println("Sinistre traité avec succès.");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public List<Sinistre> searchSinistres(String search) {
+        List<Sinistre> sinistres = getAllSinistres();
+        List<Sinistre> results = new ArrayList<>();
+        for (Sinistre s : sinistres) {
+            if (s.getType().getNom().toLowerCase().contains(search.toLowerCase())) {
+                results.add(s);
+            }
+        }
+        return results;
+    }
+
+    public List<Sinistre> getAllSinistres() {
+        Connection conn = MaConnexion.getInstance().getCnx();
+        List<Sinistre> sinistres = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement("select s.*, t.nom from sinistre s inner join type t on s.type_id = t.id");
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Sinistre s = new Sinistre();
+                s.setId(rs.getInt(1));
+                Type t = new Type();
+                t.setId(rs.getInt(2));
+                t.setNom(rs.getString("nom"));
+                s.setType(t);
+                s.setDate_heure(rs.getTimestamp(3));
+                s.setLieu(rs.getString(4));
+                s.setStatut(rs.getString(5));
+                s.setDegats(rs.getString(6));
+                s.setDescription(rs.getString(7));
+                s.setFile(rs.getString(8));
+
+                sinistres.add(s);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return sinistres;
     }
 }
