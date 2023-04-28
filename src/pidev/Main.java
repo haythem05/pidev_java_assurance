@@ -28,6 +28,7 @@ public class Main extends Application {
             //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Afficher.fxml"));
             Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherBack.fxml"));
             //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherT.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Statistiques.fxml"));
 
             Scene scene = new Scene(root);
 

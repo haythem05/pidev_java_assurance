@@ -107,7 +107,7 @@ public class AfficherBackController implements Initializable {
 
     @FXML
     private void stat(ActionEvent event) throws IOException, SQLException {
-        try {
+        /*try {
             // Fermez la fenêtre actuelle
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.close();
@@ -123,7 +123,7 @@ public class AfficherBackController implements Initializable {
             // Obtenez le contrôleur de l'écran des statistiques
             StatController controller = loader.getController();
 
-            // Générez les statistiques de réclamation
+            // Générez les statistiques des sinistres
             Map<String, Integer> stats = controller.generateClaimStatistics();
 
             // Affichez les statistiques dans le graphique circulaire
@@ -142,6 +142,20 @@ public class AfficherBackController implements Initializable {
             alert.setContentText(ex.getMessage());
             alert.showAndWait();
             System.err.println(ex);
+        }*/
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Statistiques.fxml"));
+        Parent root = loader.load();
+        StatistiquesSController controller = loader.getController();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.showAndWait();
+        if (controller.tabType.isSelected()) {
+            Map<String, Integer> statst = controller.generateTypeStatistics();
+        } else if (controller.tabStatut.isSelected()) {
+            Map<String, Integer> statss = controller.generateClaimStatistics();
         }
     }
 

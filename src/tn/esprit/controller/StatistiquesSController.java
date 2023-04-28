@@ -5,33 +5,33 @@
  */
 package tn.esprit.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.chart.PieChart;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart.Data;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tn.esprit.tools.MaConnexion;
 
@@ -40,15 +40,26 @@ import tn.esprit.tools.MaConnexion;
  *
  * @author HD
  */
-public class StatController implements Initializable {
+public class StatistiquesSController implements Initializable {
 
     @FXML
-    private AnchorPane AnchorPane;
+    private AnchorPane paneType;
     @FXML
-    private PieChart piechart;
+    private PieChart chartType;
+    @FXML
+    private AnchorPane paneStatut;
+    @FXML
+    private PieChart chartStatut;
+    @FXML
+    Tab tabType;
+    @FXML
+    Tab tabStatut;
+    private ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
+    private ObservableList<PieChart.Data> dataT = FXCollections.observableArrayList();
     @FXML
     private Button retour;
-    private ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
+    @FXML
+    private TabPane tabPane;
 
     /**
      * Initializes the controller class.
@@ -58,17 +69,36 @@ public class StatController implements Initializable {
         try {
             // Générer les statistiques des sinistres
             Map<String, Integer> stats = generateClaimStatistics();
+            Map<String, Integer> statsT = generateTypeStatistics();
 
             // Afficher les statistiques dans le graphique circulaire
             displayStatistics(stats);
+            displayStatisticsType(statsT);
         } catch (SQLException ex) {
-            Logger.getLogger(StatController.class.getName()).log(Level.SEVERE, null, ex);
-            Alert alert = new Alert(AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur SQL");
             alert.setHeaderText("Une erreur s'est produite lors de la génération des statistiques");
             alert.setContentText(ex.getMessage());
             alert.showAndWait();
         }
+        chartType.setData(dataT);
+
+        chartStatut.setData(data);
+
+        // Ajouter un listener pour détecter le changement d'onglet
+        tabType.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                // L'utilisateur a sélectionné l'onglet Type
+                chartType.setData(dataT);
+            }
+        });
+
+        tabStatut.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                // L'utilisateur a sélectionné l'onglet Statut
+                chartStatut.setData(data);
+            }
+        });
     }
 
     public Map<String, Integer> generateClaimStatistics() throws SQLException {
@@ -117,13 +147,75 @@ public class StatController implements Initializable {
             PieChart.Data slice = new PieChart.Data(statut, count);
             data.add(slice);
         });
-        piechart.setData(data);
+        chartStatut.setData(data);
+    }
+
+    public Map<String, Integer> generateTypeStatistics() throws SQLException {
+        Map<String, Integer> statsT = new HashMap<>();
+
+        try {
+            String query = "SELECT t.nom, COUNT(*) as nbr "
+                    + "FROM sinistre s "
+                    + "JOIN type t ON s.type_id = t.id "
+                    + "GROUP BY t.nom";
+            Statement st = MaConnexion.getInstance().getCnx().createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                String type = rs.getString("nom");
+                int count = rs.getInt("nbr");
+                statsT.put(type, count);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StatController.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        }
+
+        return statsT;
+    }
+
+    public void displayStatisticsType(Map<String, Integer> statsT) {
+        dataT.clear();
+        statsT.forEach((type, count) -> {
+            PieChart.Data slice = new PieChart.Data(type, count);
+            dataT.add(slice);
+        });
+        chartType.setData(dataT);
     }
 
     @FXML
-    private void retour(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherBack.fxml"));
-        AnchorPane.getChildren().setAll(pane);
+    private void stat_type(Event event) {
+
     }
 
+    @FXML
+    private void stat_statut(Event event) {
+
+    }
+
+    @FXML
+    private void retourT(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherBack.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Masquer tous les onglets de la TabPane
+        tabPane.getTabs().clear();
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void retourS(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherBack.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Masquer tous les onglets de la TabPane
+        tabPane.getTabs().clear();
+
+        stage.setScene(scene);
+        stage.show();
+    }
 }
