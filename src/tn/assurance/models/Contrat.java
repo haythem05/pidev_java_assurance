@@ -61,7 +61,7 @@ public class Contrat {
     
 @Override
 public String toString() {
-    return "Contrat{" + "id=" + id + ", idclient=" + idclient + ", nbplace=" + nbplace + ", valeurcatalogue=" + valeurcatalogue + ", prix=" + prix + ", datedebut=" + datedebut + ", datefin=" + datefin + ", datecirculation=" + datecirculation + ", avantages=" + avantages + ", marque=" + marque + ", modele=" +
+    return  "id=" + id +"  |  "+ " idclient=" + idclient +"  |  "+ " nbplace=" + nbplace +"  |  "+ " valeurcatalogue=" + valeurcatalogue +"  |  "+ " prix=" + prix +"  |  "+ " datedebut=" + datedebut +"  |  "+ " datefin=" + datefin +"  |  "+ "datecirculation=" + datecirculation +"  |  "+ " avantages=" + avantages +"  |  "+ " marque=" + marque +"  |  "+ " modele=" +
             modele +  "}\n";
 }
 

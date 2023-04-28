@@ -45,7 +45,7 @@ public class Habitation {
     
     @Override
     public String toString() {
-        return "Habitation{" + "id=" + id + ", idclient=" + idclient + ", nbpieceimmobilier=" + nbpieceimmobilier + ", capitalimmobilier=" + capitalimmobilier + ", capitalmobilier=" + capitalmobilier + ", devis=" + devis + ", type_Id=" + type_Id.getId() + ", nom=" + type_Id.getNom() +  "}\n";
+        return  "ID=" + id +"  |  "+ " IdClient=" + idclient + "  |  "+" NbPieceImmobilier=" + nbpieceimmobilier + "  |  "+" CapitalImmobilier=" + capitalimmobilier +"  |  "+ " CapitaImobilier=" + capitalmobilier +"  |  "+ " Devis=" + devis + "  |  " + " Categorie=" + type_Id.getNom() +  "}\n";
     }
 
     public Categorie getType_Id() {

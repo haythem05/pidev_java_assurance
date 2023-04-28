@@ -68,7 +68,7 @@ public class Categorie {
 
     @Override
     public String toString() {
-        return "Categorie{" + " nom=" + nom + ", description=" + description + ", categorieimage=" + categorieimage +  "}\n";
+        return  " Nom=" + nom + "  |  "+ "Description=" + description + "  |  "+ " Categorie Image=" + categorieimage +  "}\n";
     }
     
 }
