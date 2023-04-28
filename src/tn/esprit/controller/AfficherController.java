@@ -67,28 +67,28 @@ public class AfficherController implements Initializable {
         date_heure = s.getDate_heure();
 
         try {
-            if (s.getStatut().equals("En cours de traitement")) {
+            if (s.getStatut().equals("En cours de traitement")||s.getStatut().equals(" En cours de traitement")||s.getStatut().equals("  En cours de traitement")) {
                 Alert alerte = new Alert(Alert.AlertType.ERROR);
                 alerte.setTitle("Erreur de modification");
                 alerte.setHeaderText(null);
                 alerte.setContentText("Impossible de modifier ce sinistre car son traitement a déjà commencé.");
                 alerte.showAndWait();
                 return;
-            } else if (s.getStatut().equals("Traité")) {
+            } else if (s.getStatut().equals("Traité")||s.getStatut().equals(" Traité")||s.getStatut().equals("  Traité")) {
                 Alert alerte = new Alert(Alert.AlertType.ERROR);
                 alerte.setTitle("Erreur de modification");
                 alerte.setHeaderText(null);
                 alerte.setContentText("Impossible de modifier ce sinistre car il a déjà été traité.");
                 alerte.showAndWait();
                 return;
-            } else if (s.getStatut().equals("Refusé")) {
+            } else if (s.getStatut().equals("Refusé")||s.getStatut().equals(" Refusé")||s.getStatut().equals("  Refusé")) {
                 Alert alerte = new Alert(Alert.AlertType.ERROR);
                 alerte.setTitle("Erreur de modification");
                 alerte.setHeaderText(null);
                 alerte.setContentText("Impossible de modifier ce sinistre car il a été refusé.");
                 alerte.showAndWait();
                 return;
-            } else if (s.getStatut().equals("En attente de traitement")) {
+            } else if (s.getStatut().equals("En attente de traitement")||s.getStatut().equals(" En attente de traitement")||s.getStatut().equals("  En attente de traitement")) {
                 AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Modif.fxml"));
                 rootPane.getChildren().setAll(pane);
             }

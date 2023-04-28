@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.activation.DataSource;
 import tn.esprit.entities.Sinistre;
 import tn.esprit.entities.Type;
 import tn.esprit.tools.MaConnexion;
@@ -185,4 +186,6 @@ public class SinistreService implements Fonctions<Sinistre> {
         }
         return sinistres;
     }
+
+
 }

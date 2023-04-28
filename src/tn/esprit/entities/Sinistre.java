@@ -161,7 +161,7 @@ public class Sinistre {
 
     @Override
     public String toString() {
-        return "Sinistre : Type : " + type.getNom() + " | Date : " + date_heure + " | Lieu : " + lieu + " | Degats : " + degats + " | Statut : " + statut + " | Description : " + description + " | Image : " + file + " \n\n";
+        return "Sinistre : Type : " +type.getNom()+ " | Date : " +date_heure+ " | Lieu : " +lieu+ " | Degats : " +degats+ " | Statut : " +statut+ " | Description : " +description+ " | Image : " +file+ " \n\n";
     }
 
     

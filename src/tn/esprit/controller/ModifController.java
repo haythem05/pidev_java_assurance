@@ -88,17 +88,36 @@ public class ModifController implements Initializable {
             String lieu = tf_lieu.getText();
             String degats = tf_degats.getText();
             String description = tf_description.getText();
-            
+
+            if (lieu.isEmpty() || degats.isEmpty() || description.isEmpty() || date_heure == null) {
+                // Afficher un message d'erreur si un champ obligatoire est vide
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur de saisie");
+                alert.setHeaderText(null);
+                alert.setContentText("Veuillez remplir tous les champs obligatoires.");
+                alert.showAndWait();
+                return;
+            }
+
+            LocalDate now = LocalDate.now();
+            if (d.isAfter(now)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Erreur de saisie");
+                alert.setContentText("La date sélectionnée ne peut pas dépasser la date actuelle.");
+                alert.showAndWait();
+                return;
+            }
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Modification réussie");
             alert.setHeaderText(null);
             alert.setContentText("Le sinistre a été modifié avec succès dans la base de données.");
             alert.showAndWait();
-            
+
             Sinistre s = new Sinistre(date_heure, lieu, degats, description, url_im);
             SinistreService ss = new SinistreService();
             ss.modifiersanst(s, id);
-            
+
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Afficher.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
