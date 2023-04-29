@@ -36,6 +36,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.controlsfx.control.Notifications;
 import tn.esprit.entities.Sinistre;
 import tn.esprit.services.SinistreService;
 import tn.esprit.tools.MaConnexion;
@@ -69,6 +70,7 @@ public class AfficherBackController implements Initializable {
 
     @FXML
     private Label labelNbSinistresEnAttente;
+    private Notifications notification;
 
     /**
      * Initializes the controller class.
@@ -87,7 +89,6 @@ public class AfficherBackController implements Initializable {
         tf_recherche.textProperty().addListener((observable, oldValue, newValue) -> {
             updateListView(newValue);
         });
-
     }
 
     public void updateListView() {
@@ -118,42 +119,6 @@ public class AfficherBackController implements Initializable {
 
     @FXML
     private void stat(ActionEvent event) throws IOException, SQLException {
-        /*try {
-            // Fermez la fenêtre actuelle
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
-            // Chargez le fichier FXML pour l'écran des statistiques
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Stat.fxml"));
-            Parent root = loader.load();
-
-            // Créez une nouvelle fenêtre pour afficher les statistiques
-            Stage stage = new Stage();
-            stage.setTitle("Statistiques des sinistres");
-            stage.setScene(new Scene(root));
-
-            // Obtenez le contrôleur de l'écran des statistiques
-            StatController controller = loader.getController();
-
-            // Générez les statistiques des sinistres
-            Map<String, Integer> stats = controller.generateClaimStatistics();
-
-            // Affichez les statistiques dans le graphique circulaire
-            controller.displayStatistics(stats);
-
-            // Affichez la nouvelle fenêtre
-            stage.show();
-        } 
-        catch (IOException e) {
-            e.printStackTrace();
-        } 
-        catch (SQLException ex) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Erreur SQL");
-            alert.setHeaderText("Une erreur s'est produite lors de la génération des statistiques");
-            alert.setContentText(ex.getMessage());
-            alert.showAndWait();
-            System.err.println(ex);
-        }*/
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Statistiques.fxml"));

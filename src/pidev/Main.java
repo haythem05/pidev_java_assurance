@@ -25,11 +25,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Afficher.fxml"));
-            Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherBack.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Afficher.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherBack.fxml"));
             //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherT.fxml"));
 
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root,800,550);
 
             /*String css = this.getClass().getResource("/edu/webuild/gui/style.css").toExternalForm();
             scene.getStylesheets().add(css);*/

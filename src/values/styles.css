@@ -1,0 +1,27 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+.profile-layout{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 0 0 50 50;
+}
+.white-backgroung{
+    -fx-background-color: #fff;
+}
+.text-field {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color:  #70B8D9;
+    -fx-border-width: 2;
+    -fx-prompt-text-fill:  #70B8D9;
+    -fx-text-inner-color:  #70B8D9;
+}
+.button-rounded {
+  -fx-background-radius: 15 15 15 15; /* la valeur est en pixels, elle peut être ajustée */
+  -fx-border-radius: 15 15 15 15; /* même valeur que -fx-background-radius */
+}
