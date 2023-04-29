@@ -25,3 +25,52 @@
   -fx-background-radius: 15 15 15 15; /* la valeur est en pixels, elle peut être ajustée */
   -fx-border-radius: 15 15 15 15; /* même valeur que -fx-background-radius */
 }
+.list-cell {
+    -fx-text-fill: #333333;
+    -fx-font-size: 12px;
+    -fx-background-color: #DCDCDC;
+    -fx-border-color: #DCDCDC;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+}
+
+.list-cell:selected {
+    -fx-background-color: #D3D3D3;
+    -fx-border-color: #D3D3D3;
+}
+
+.list-view {
+    -fx-background-color: #F8F8F8;
+    -fx-border-color: #CCCCCC;
+    -fx-border-radius: 5px;
+}
+.text-fieldform {
+    -fx-background-color: transparent;
+    -fx-padding: 5px;
+    -fx-border-color: black;
+    -fx-background-radius: 15 15 15 15; /* la valeur est en pixels, elle peut être ajustée */
+  -fx-border-radius: 15 15 15 15;
+}
+
+.date-picker {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+    -fx-padding: 5px;
+}
+
+.date-picker > .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.date-picker > .arrow-button > .arrow {
+    -fx-background-color: black;
+}
+.image-view-with-border {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+}
+
+
+
