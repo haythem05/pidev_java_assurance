@@ -6,12 +6,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="tn.esprit.gui.ModifierReponseController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.ModifierReponseController">
    <children>
       <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -26,8 +27,22 @@
                      </effect>
                   </Text>
                   <TextArea fx:id="fxnoteM" layoutX="198.0" layoutY="238.0" opacity="0.51" prefHeight="39.0" prefWidth="238.0" />
-                  <Button fx:id="modifierRep" layoutX="728.0" layoutY="562.0" mnemonicParsing="false" onAction="#modifierRep" prefHeight="46.0" prefWidth="150.0" text="Modifier" />
-                  <Button fx:id="retourRep" layoutX="14.0" layoutY="622.0" mnemonicParsing="false" onAction="#retourRep" prefHeight="38.0" prefWidth="143.0" text="Retour à la liste" />
+                  <Button fx:id="modifierRep" layoutX="728.0" layoutY="562.0" mnemonicParsing="false" onAction="#modifierRep" prefHeight="46.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Modifier">
+                     <graphic>
+                        <ImageView fitHeight="63.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/6325975-removebg-preview.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="retourRep" layoutX="14.0" layoutY="622.0" mnemonicParsing="false" onAction="#retourRep" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: transparent;" text="Retour">
+                     <graphic>
+                        <ImageView fitHeight="61.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/retour-removebg-preview.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <Label layoutX="14.0" layoutY="189.0" prefHeight="22.0" prefWidth="109.0" text="id_user" />
                   <TextArea fx:id="fxid_userM" layoutX="198.0" layoutY="181.0" opacity="0.51" prefHeight="39.0" prefWidth="238.0" />
                   <ButtonBar layoutX="145.0" layoutY="522.0" prefHeight="40.0" prefWidth="200.0" />

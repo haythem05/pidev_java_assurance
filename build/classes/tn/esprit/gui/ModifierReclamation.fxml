@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -23,8 +24,22 @@
                </effect>
             </Text>
             <TextArea fx:id="fxprenom_dM" layoutX="198.0" layoutY="238.0" opacity="0.51" prefHeight="39.0" prefWidth="238.0" />
-            <Button fx:id="modifierRec" layoutX="728.0" layoutY="562.0" mnemonicParsing="false" onAction="#modifierRec" prefHeight="46.0" prefWidth="150.0" text="Modifier" />
-            <Button fx:id="retourM" layoutX="14.0" layoutY="622.0" mnemonicParsing="false" onAction="#retourM" prefHeight="38.0" prefWidth="143.0" text="retour" />
+            <Button fx:id="modifierRec" layoutX="728.0" layoutY="562.0" mnemonicParsing="false" onAction="#modifierRec" prefHeight="46.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="Modifier">
+               <graphic>
+                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/6325975-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="retourM" layoutX="14.0" layoutY="622.0" mnemonicParsing="false" onAction="#retourM" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: transparent;" text="Retour">
+               <graphic>
+                  <ImageView fitHeight="59.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/retour-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Label layoutX="14.0" layoutY="132.0" prefHeight="7.0" prefWidth="157.0" text="Reference " />
             <Label layoutX="14.0" layoutY="189.0" prefHeight="22.0" prefWidth="109.0" text="Nom demandeur" />
             <TextArea fx:id="fxnom_dM" layoutX="198.0" layoutY="181.0" opacity="0.51" prefHeight="39.0" prefWidth="238.0" />
@@ -35,12 +50,18 @@
             <TextArea fx:id="fxcinM" layoutX="198.0" layoutY="303.0" opacity="0.51" prefHeight="39.0" prefWidth="238.0" />
             <TextArea fx:id="fxcommentaireM" layoutX="198.0" layoutY="421.0" opacity="0.51" prefHeight="39.0" prefWidth="238.0" />
             <TextArea fx:id="fxtelM" layoutX="198.0" layoutY="480.0" opacity="0.51" prefHeight="39.0" prefWidth="238.0" />
-            <ButtonBar layoutX="145.0" layoutY="522.0" prefHeight="40.0" prefWidth="200.0" />
+            <ButtonBar layoutX="198.0" layoutY="538.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+               <buttons>
+                  <ImageView fx:id="imageV" fitHeight="115.0" fitWidth="180.0" onMouseClicked="#addImage" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/drag-drop.gif" />
+                     </image>
+                  </ImageView>
+               </buttons></ButtonBar>
             <Label layoutX="14.0" layoutY="372.0" prefHeight="22.0" prefWidth="109.0" text="E-mail" />
             <TextArea fx:id="fxemailM" layoutX="198.0" layoutY="364.0" opacity="0.51" prefHeight="39.0" prefWidth="238.0" />
             <Label layoutX="14.0" layoutY="246.0" prefHeight="22.0" prefWidth="109.0" text="Prenom demandeur" />
             <Label fx:id="fxreferenceM" layoutX="199.0" layoutY="117.0" prefHeight="46.0" prefWidth="238.0" style="-fx-background-color: #FFFFFF;" />
-            <ImageView fx:id="imageV" fitHeight="115.0" fitWidth="180.0" layoutX="211.0" layoutY="528.0" onMouseClicked="#addImage" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </children>

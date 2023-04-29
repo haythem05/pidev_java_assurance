@@ -14,15 +14,16 @@
         <group>
             <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/ReclamationsController.java</file>
             <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/entities/Reclamation.java</file>
-            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/AfficherReclamationController.java</file>
-            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/AfficherReclamation.fxml</file>
-            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/Reclamations.fxml</file>
             <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/ModifierReclamationController.java</file>
             <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/AjouterReclamationController.java</file>
-            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/pidevj3a40/PidevJ3A40.java</file>
             <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/ChatBotController.java</file>
             <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/services/ChatBotConstants.java</file>
             <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/services/ReclamationService.java</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/AjouterReponse.fxml</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/AfficherReclamationController.java</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/Reclamations.fxml</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/pidevj3a40/PidevJ3A40.java</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/ModifierReponse.fxml</file>
             <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/ChatBot.fxml</file>
         </group>
     </open-files>

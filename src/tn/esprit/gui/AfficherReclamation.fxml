@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -16,7 +17,14 @@
    <children>
       <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="671.0" prefWidth="1164.0">
          <children>
-            <VBox prefHeight="671.0" prefWidth="211.0" style="-fx-background-color: #720000;" />
+            <VBox prefHeight="671.0" prefWidth="211.0" style="-fx-background-color: transparent;">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logo_java.png" />
+                     </image>
+                  </ImageView>
+               </children></VBox>
             <StackPane layoutX="215.0" layoutY="28.0">
                <children>
                   <Pane fx:id="paneReclamation">
@@ -32,13 +40,49 @@
                   </Pane>
                   <Pane fx:id="paneReclamations" layoutX="10.0" layoutY="10.0" prefHeight="616.0" prefWidth="3188.0">
                      <children>
-                        <Button fx:id="Créer" layoutX="504.0" layoutY="93.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF;" text="Créer " />
-                        <Button fx:id="ModifierR" layoutX="607.0" layoutY="93.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF;" text="Modifier" />
-                        <Button fx:id="Supprimer" layoutX="727.0" layoutY="93.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-background-color: #FFFFFF;" text="Supprimer" />
-                        <ListView fx:id="lvReclamation" layoutY="132.0" onMouseClicked="#functionTest" prefHeight="484.0" prefWidth="1285.0" />
-                        <Button fx:id="refresh" layoutX="412.0" layoutY="93.0" mnemonicParsing="false" onAction="#refresh" style="-fx-background-color: #FFFFFF;" text="Refresh" />
+                        <Button fx:id="Créer" layoutX="504.0" layoutY="93.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Créer ">
+                           <graphic>
+                              <ImageView fitHeight="41.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/images-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="ModifierR" layoutX="607.0" layoutY="93.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Modifier">
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/6325975-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="Supprimer" layoutX="725.0" layoutY="95.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-background-color: transparent;" text="Supprimer">
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/Supprimer-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <ListView fx:id="lvReclamation" layoutX="-24.0" layoutY="135.0" onMouseClicked="#functionTest" prefHeight="484.0" prefWidth="1285.0" />
+                        <Button fx:id="refresh" layoutX="259.0" layoutY="91.0" mnemonicParsing="false" onAction="#refresh" style="-fx-background-color: transparent;" text="Actualiser">
+                           <graphic>
+                              <ImageView fitHeight="47.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/Refresh-removebg-preview.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                         <ImageView fx:id="image" fitHeight="261.0" fitWidth="302.0" layoutX="1318.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button fx:id="btnChatbot" layoutX="174.0" layoutY="93.0" mnemonicParsing="false" onAction="#openChatbotWindow" style="-fx-background-color: #FFFFFF;" text="Chatbot" />
+                        <Button fx:id="btnChatbot" layoutX="92.0" layoutY="86.0" mnemonicParsing="false" onAction="#openChatbotWindow" prefHeight="55.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Chatbot">
+                           <graphic>
+                              <ImageView fitHeight="33.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/4616271.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
                   </Pane>
                </children>

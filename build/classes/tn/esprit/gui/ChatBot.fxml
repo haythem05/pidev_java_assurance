@@ -4,13 +4,15 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="724.0" prefWidth="1231.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.ChatBotController">
     <children>
-        <Label fx:id="lblTitle" layoutX="251.0" layoutY="23.0" text="SecurAssur ChatBot" textFill="#720000">
+        <Label fx:id="lblTitle" layoutX="251.0" layoutY="23.0" text="SecurAssur ChatBot" textFill="#0d0d0d">
             <font>
                 <Font name="Candara Bold Italic" size="40.0" />
             </font>
@@ -19,16 +21,19 @@
             <VBox fx:id="messageContainer" prefHeight="509.0" prefWidth="970.0" spacing="10.0" />
         </ScrollPane>
         <TextField fx:id="txtInput" layoutX="14.0" layoutY="608.0" prefHeight="59.0" prefWidth="642.0" />
-        <Button fx:id="btnSend" layoutX="680.0" layoutY="625.0" mnemonicParsing="false" text="Envoyer" textFill="WHITE">
+        <Button fx:id="btnSend" layoutX="600.0" layoutY="580.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="226.0" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="12.0" />
             </font>
 
-            <style>
-                -fx-background-color: black;
-            </style>
+            <style>-fx-background-color: transparent;</style>
+         <graphic>
+            <ImageView fitHeight="34.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/envoyer-removebg-preview.png" />
+               </image>
+            </ImageView>
+         </graphic>
         </Button>
     </children>
 </AnchorPane>
-
-

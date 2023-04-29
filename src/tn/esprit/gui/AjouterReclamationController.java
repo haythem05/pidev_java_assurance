@@ -522,17 +522,18 @@ successAlert.setContentText("La réclamation a été ajoutée avec succès.");
 successAlert.showAndWait();
 }
 
+
 //// Envoyer un SMS avec Twilio
-//String ACCOUNT_SID = "AC8d0ef4234781bddf96867d3ec05586cb";
-//String AUTH_TOKEN = "4f05938ff4b3f5376ec2276918e0d119";
-//String TWILIO_NUMBER = "+16813346926";
-//String message = "Votre réclamation sous le nom de " + r.getNom_d() + " " + r.getPrenom_d() + " a été ajoutée avec la référence : " + reference;
-//PhoneNumber toNumber = new PhoneNumber(r.getTel());
-//PhoneNumber fromNumber = new PhoneNumber(TWILIO_NUMBER);
-//
-//Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-//Message twilioMessage = Message.creator(toNumber, fromNumber, message).create();
-//System.out.println("SMS envoyé avec succès !");
+String ACCOUNT_SID = "AC8d0ef4234781bddf96867d3ec05586cb";
+String AUTH_TOKEN = "4f05938ff4b3f5376ec2276918e0d119";
+String TWILIO_NUMBER = "+16813346926";
+String message = "Votre réclamation sous le nom de " + r.getNom_d() + " " + r.getPrenom_d() + " a été ajoutée avec la référence : " + reference;
+PhoneNumber toNumber = new PhoneNumber(r.getTel());
+PhoneNumber fromNumber = new PhoneNumber(TWILIO_NUMBER);
+
+Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+Message twilioMessage = Message.creator(toNumber, fromNumber, message).create();
+System.out.println("SMS envoyé avec succès !");
 //Emailsender.sendEmail_add("adam.messaoudi@esprit.tn", "Merci pour votre confiance.\nNous avons bien reçu votre réclamation.\nPatientez quelques instants, elle est en cours de traitement.\n\nÀ bientôt.");
 
    }
