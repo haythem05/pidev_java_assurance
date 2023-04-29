@@ -24,6 +24,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -38,6 +39,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 import javax.mail.MessagingException;
+import org.controlsfx.control.Notifications;
 import tn.esprit.entities.Sinistre;
 import tn.esprit.entities.Type;
 import tn.esprit.services.Email;
@@ -85,7 +87,7 @@ public class AjouterController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         types = new TypeService().afficher();
         //list_types.getItems().addAll(types);
-        
+
         List<String> typeNames = new ArrayList<>();
         types.forEach(type -> typeNames.add(type.getNom()));
         list_types.getItems().addAll(types);
@@ -100,7 +102,7 @@ public class AjouterController implements Initializable {
             public Type fromString(String nom) {
                 return null;
             }
-            });
+        });
 
         imageV.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
@@ -214,6 +216,15 @@ public class AjouterController implements Initializable {
         //Email e = new Email("freeelanci@gmail.com", "jjrnaazzdfwhwfar", "ines.bessaad@esprit.tn", "Etat réclamation", " bonjour, Votre réclamation a été traitée");
         //e.sendEmail();
         //sendMail("ines.bessaad02@gmail.com","Category","Nouvelle category ajouté.");
+
+        //Image img = new Image("file:///C:/xampp/htdocs/logo.png");
+        Notifications n = Notifications.create()
+                .title("SecurAssur")
+                .text("Nouveau sinisitre ajouté !")
+                .position(Pos.BOTTOM_RIGHT);
+
+        n.darkStyle();
+        n.showInformation();
     }
 
     @FXML

@@ -187,5 +187,15 @@ public class SinistreService implements Fonctions<Sinistre> {
         return sinistres;
     }
 
+    public int countSinistresEnAttente() throws SQLException {
+        sql = "SELECT COUNT(*) FROM sinistre WHERE statut = 'En attente de traitement'";
+        PreparedStatement ste = cnx.prepareStatement(sql);
+        ResultSet rs = ste.executeQuery();
+        int count = 0;
+        if (rs.next()) {
+            count = rs.getInt(1);
+        }
+        return count;
+    }
 
 }
