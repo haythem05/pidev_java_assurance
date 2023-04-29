@@ -15,18 +15,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import static tn.esprit.controller.AfficherController.date_heure;
-import static tn.esprit.controller.AfficherController.degats;
-import static tn.esprit.controller.AfficherController.description;
-import static tn.esprit.controller.AfficherController.id;
-import static tn.esprit.controller.AfficherController.lieu;
-import static tn.esprit.controller.AfficherController.url_image;
+import javafx.stage.Stage;
 import tn.esprit.entities.Sinistre;
 import tn.esprit.services.SinistreService;
 
@@ -37,11 +35,7 @@ import tn.esprit.services.SinistreService;
  */
 public class AffichageFrontController implements Initializable {
 
-    @FXML
     private ListView<Sinistre> list;
-    @FXML
-    private BorderPane rootPane;
-    @FXML
     private VBox vboxutil;
     File selectedFile;
     static public String lieu, degats, description, url_image;
@@ -61,18 +55,24 @@ public class AffichageFrontController implements Initializable {
             Sinistre s = liste.get(i);
             list2.getItems().add(s);
         }
-    }    
-
-    @FXML
-    private void ajouter(ActionEvent event) {
     }
 
-    @FXML
+    private void ajouter(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Ajout.fxml"));
+        Parent root = loader.load();
+
+        // Get the current stage and set the new scene
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     private void modifier(ActionEvent event) {
         ListView<Sinistre> liste = list; // assuming listView is a ListView<CoVoiturage>
 
         Sinistre s = liste.getSelectionModel().getSelectedItem(); // use getSelectedItem() to get the selected item, not getSelectedItems()*
-        
+
         id = s.getId();
         lieu = s.getLieu();
         degats = s.getDegats();
@@ -81,30 +81,36 @@ public class AffichageFrontController implements Initializable {
         date_heure = s.getDate_heure();
 
         try {
-            if (s.getStatut().equals("En cours de traitement")||s.getStatut().equals(" En cours de traitement")||s.getStatut().equals("  En cours de traitement")) {
+            if (s.getStatut().equals("En cours de traitement") || s.getStatut().equals(" En cours de traitement") || s.getStatut().equals("  En cours de traitement")) {
                 Alert alerte = new Alert(Alert.AlertType.ERROR);
                 alerte.setTitle("Erreur de modification");
                 alerte.setHeaderText(null);
                 alerte.setContentText("Impossible de modifier ce sinistre car son traitement a déjà commencé.");
                 alerte.showAndWait();
                 return;
-            } else if (s.getStatut().equals("Traité")||s.getStatut().equals(" Traité")||s.getStatut().equals("  Traité")) {
+            } else if (s.getStatut().equals("Traité") || s.getStatut().equals(" Traité") || s.getStatut().equals("  Traité")) {
                 Alert alerte = new Alert(Alert.AlertType.ERROR);
                 alerte.setTitle("Erreur de modification");
                 alerte.setHeaderText(null);
                 alerte.setContentText("Impossible de modifier ce sinistre car il a déjà été traité.");
                 alerte.showAndWait();
                 return;
-            } else if (s.getStatut().equals("Refusé")||s.getStatut().equals(" Refusé")||s.getStatut().equals("  Refusé")) {
+            } else if (s.getStatut().equals("Refusé") || s.getStatut().equals(" Refusé") || s.getStatut().equals("  Refusé")) {
                 Alert alerte = new Alert(Alert.AlertType.ERROR);
                 alerte.setTitle("Erreur de modification");
                 alerte.setHeaderText(null);
                 alerte.setContentText("Impossible de modifier ce sinistre car il a été refusé.");
                 alerte.showAndWait();
                 return;
-            } else if (s.getStatut().equals("En attente de traitement")||s.getStatut().equals(" En attente de traitement")||s.getStatut().equals("  En attente de traitement")) {
-                AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Modification.fxml"));
-                vboxutil.getChildren().setAll(pane);
+            } else if (s.getStatut().equals("En attente de traitement") || s.getStatut().equals(" En attente de traitement") || s.getStatut().equals("  En attente de traitement")) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Modification.fxml"));
+                Parent root = loader.load();
+
+                // Get the current stage and set the new scene
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
             }
         } catch (IOException ex) {
             System.err.println(ex);
@@ -112,15 +118,14 @@ public class AffichageFrontController implements Initializable {
         }
     }
 
-    @FXML
     private void supprimer(ActionEvent event) {
-        ListView<Sinistre> list_supp = list; 
+        ListView<Sinistre> list_supp = list;
         SinistreService ss = new SinistreService();
         int selectedID = list_supp.getSelectionModel().getSelectedIndex();
         Sinistre s = list_supp.getSelectionModel().getSelectedItem();
 
-        ss.supprimer(s.getId()); 
+        ss.supprimer(s.getId());
         list_supp.getItems().remove(selectedID);
     }
-    
+
 }

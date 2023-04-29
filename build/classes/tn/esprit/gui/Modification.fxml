@@ -10,10 +10,10 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="500.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="tn.esprit.controller.ModificationController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="tn.esprit.controller.ModificationController">
    <children>
       <Button layoutX="62.0" layoutY="407.0" mnemonicParsing="false" onAction="#modifier" prefHeight="32.0" prefWidth="82.0" style="-fx-background-color: #F9A885;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Modifier" />
-      <Label layoutX="26.0" layoutY="138.0" text="Date">
+      <Label layoutX="26.0" layoutY="134.0" text="Date">
          <font>
             <Font name="Corbel" size="14.0" />
          </font>

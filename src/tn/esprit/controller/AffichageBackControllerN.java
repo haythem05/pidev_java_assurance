@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author HD
  */
-public class AffichageBackController implements Initializable {
+public class AffichageBackControllerN implements Initializable {
 
     /**
      * Initializes the controller class.

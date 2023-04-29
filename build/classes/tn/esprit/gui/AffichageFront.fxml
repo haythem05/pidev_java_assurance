@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.AffichageFrontController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.AffichageFrontController">
    <left>
       <VBox prefHeight="200.0" prefWidth="180.0" styleClass="white-backgroung" stylesheets="@../../../values/styles.css" BorderPane.alignment="CENTER">
          <children>
@@ -98,7 +98,7 @@
       </VBox>
    </left>
    <center>
-      <VBox fx:id="vboxutil" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="white-backgroung" stylesheets="@../../../values/styles.css">
                <children>
@@ -122,20 +122,16 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="white-backgroung" stylesheets="@../../../values/styles.css">
                <children>
-                  <Button mnemonicParsing="false" onAction="#ajouter" prefHeight="40.0" prefWidth="88.0" style="-fx-background-color: #54D39D;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Ajouter" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="88.0" style="-fx-background-color: #54D39D;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Ajouter" />
                   <Pane prefHeight="100.0" prefWidth="101.0" />
-                  <Button mnemonicParsing="false" onAction="#modifier" prefHeight="40.0" prefWidth="88.0" style="-fx-background-color: #F9A885;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Modifier" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="88.0" style="-fx-background-color: #F9A885;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Modifier" />
                   <Pane prefHeight="100.0" prefWidth="101.0" />
-                  <Button mnemonicParsing="false" onAction="#supprimer" prefHeight="40.0" prefWidth="88.0" style="-fx-background-color: #E37A7A;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Supprimer" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="88.0" style="-fx-background-color: #E37A7A;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Supprimer" />
                </children>
             </HBox>
             <HBox prefHeight="300.0" prefWidth="607.0">
                <children>
-                  <ListView fx:id="list" prefHeight="300.0" prefWidth="607.0" stylesheets="@../../../values/styles.css">
-                     <styleClass>
-                        <String fx:value="list-cell" />
-                        <String fx:value="list-view" />
-                     </styleClass></ListView>
+                  <ListView prefHeight="300.0" prefWidth="607.0" />
                </children>
             </HBox>
          </children>

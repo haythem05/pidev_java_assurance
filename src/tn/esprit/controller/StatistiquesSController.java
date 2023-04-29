@@ -51,9 +51,9 @@ public class StatistiquesSController implements Initializable {
     @FXML
     private PieChart chartStatut;
     @FXML
-    Tab tabType;
+    public Tab tabType;
     @FXML
-    Tab tabStatut;
+    public Tab tabStatut;
     private ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
     private ObservableList<PieChart.Data> dataT = FXCollections.observableArrayList();
     @FXML
@@ -195,7 +195,7 @@ public class StatistiquesSController implements Initializable {
 
     @FXML
     private void retourT(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherBack.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AffichageBack.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
@@ -208,7 +208,7 @@ public class StatistiquesSController implements Initializable {
 
     @FXML
     private void retourS(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherBack.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AffichageBack.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
