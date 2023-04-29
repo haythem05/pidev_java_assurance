@@ -33,8 +33,19 @@ public class Contrat {
         this.type_Id = type_Id;
     }
 
-    
-    
+    public Contrat(int idclient, int nbplace, float valeurcatalogue, Date datedebut, Date datefin, Date datecirculation, String avantages, String marque, String modele) {
+        this.idclient = idclient;
+        this.nbplace = nbplace;
+        this.valeurcatalogue = valeurcatalogue;
+        this.datedebut = datedebut;
+        this.datefin = datefin;
+        this.datecirculation = datecirculation;
+        this.avantages = avantages;
+        this.marque = marque;
+        this.modele = modele;
+    }
+
+
     public Contrat(int idclient, int nbplace, float valeurcatalogue, Date datedebut, Date datefin, Date datecirculation, String avantages, String marque, String modele, Categorie type_Id) {
         this.idclient = idclient;
         this.nbplace = nbplace;

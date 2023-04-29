@@ -11,11 +11,11 @@
 <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="838.0" prefWidth="1376.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.assurance.controller.AfficherhabitationController">
    <children>
       <ListView fx:id="listView" layoutX="191.0" prefHeight="571.0" prefWidth="1134.0" />
-      <Button layoutX="582.0" layoutY="615.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-background-color: #606060;" text="supprimer" />
-      <Button layoutX="471.0" layoutY="615.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: #606060;" text="Modifier" />
-      <Button layoutX="366.0" layoutY="615.0" mnemonicParsing="false" onAction="#ajouter" style="-fx-background-color: #606060;" text="Ajouter" />
-      <RadioButton layoutX="700.0" layoutY="606.0" mnemonicParsing="false" onAction="#sortAsc" text="Tri ASC" />
-      <RadioButton layoutX="699.0" layoutY="641.0" mnemonicParsing="false" onAction="#sortDesc" text="tri Desc" />
+      <Button layoutX="777.0" layoutY="616.0" mnemonicParsing="false" onAction="#home" prefHeight="38.0" prefWidth="88.0" style="-fx-background-color: #606060;" text="Retour" />
+      <Button layoutX="364.0" layoutY="620.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: #606060;" text="Modifier" />
+      <Button layoutX="266.0" layoutY="620.0" mnemonicParsing="false" onAction="#ajouter" style="-fx-background-color: #606060;" text="Ajouter" />
+      <RadioButton layoutX="608.0" layoutY="611.0" mnemonicParsing="false" onAction="#sortAsc" text="Tri ASC" />
+      <RadioButton layoutX="608.0" layoutY="650.0" mnemonicParsing="false" onAction="#sortDesc" text="tri Desc" />
       <VBox prefHeight="838.0" prefWidth="191.0" style="-fx-background-color: #606060;">
          <children>
             <ImageView fx:id="imageV" fitHeight="150.0" fitWidth="186.0" pickOnBounds="true" preserveRatio="true">
@@ -25,5 +25,6 @@
             </ImageView>
          </children>
       </VBox>
+      <Button layoutX="457.0" layoutY="620.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-background-color: #606060;" text="supprimer" />
    </children>
 </AnchorPane>

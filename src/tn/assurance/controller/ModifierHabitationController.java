@@ -7,9 +7,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import tn.assurance.models.Habitation;
 import tn.assurance.services.habitationS;
 
@@ -38,7 +42,7 @@ public class ModifierHabitationController implements Initializable {
         nbpieceh.setText(Integer.toString(AfficherhabitationController.nbpieceimmobilier));
         capitalmobilierh.setText(Float.toString(AfficherhabitationController.capitalmobilier));
         capitalimmobilierh.setText(Float.toString(AfficherhabitationController.capitalimmobilier));
-        devish.setText(Float.toString(AfficherhabitationController.devis));
+ 
     }
 
    @FXML
@@ -56,5 +60,18 @@ private void modifier(ActionEvent event) throws IOException {
     
     AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/afficherhabitation.fxml"));
     rootPane.getChildren().setAll(pane);
+}
+
+     @FXML
+private void retour(ActionEvent event) throws IOException {
+    // Load the affichercategorie.fxml file
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/assurance/gui/afficherhabitation.fxml"));
+    Parent root = loader.load();
+
+    // Get the current stage and set the new scene
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
 }
 }

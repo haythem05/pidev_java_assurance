@@ -33,5 +33,6 @@
                </image></ImageView>
          </children>
       </VBox>
+      <Button layoutX="629.0" layoutY="652.0" mnemonicParsing="false" onAction="#home" prefHeight="30.0" prefWidth="76.0" style="-fx-background-color: #606060;" text="Retour" />
    </children>
 </AnchorPane>

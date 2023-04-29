@@ -38,5 +38,6 @@
             <ImageView fx:id="imageV" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </VBox>
+      <Button layoutX="731.0" layoutY="323.0" mnemonicParsing="false" onAction="#retour" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #606060;" text="Retour" />
    </children>
 </AnchorPane>

@@ -12,8 +12,8 @@
 <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="638.0" prefWidth="1438.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.assurance.controller.AfficherContratController">
    <children>
       <ListView fx:id="listView" layoutX="182.0" prefHeight="612.0" prefWidth="1257.0" />
-      <Button layoutX="293.0" layoutY="647.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: #606060;" text="Modifier" />
       <Button layoutX="212.0" layoutY="646.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="30.0" prefWidth="64.0" style="-fx-background-color: #606060;" text="Ajouter" />
+      <Button layoutX="293.0" layoutY="647.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: #606060;" text="Modifier" />
       <Button layoutX="373.0" layoutY="647.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-background-color: #606060;" text="Supprimer" />
       <TextField fx:id="searchField" layoutX="921.0" layoutY="643.0" prefHeight="37.0" prefWidth="182.0" promptText="Recherche par Marque">
          <font>
@@ -34,5 +34,6 @@
             </ImageView>
          </children>
       </VBox>
+      <Button layoutX="220.0" layoutY="696.0" mnemonicParsing="false" onAction="#home" prefHeight="30.0" prefWidth="64.0" style="-fx-background-color: #606060;" text="Retour" />
    </children>
 </AnchorPane>

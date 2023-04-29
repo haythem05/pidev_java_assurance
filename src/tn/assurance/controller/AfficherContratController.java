@@ -42,6 +42,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -49,6 +52,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import tn.assurance.models.Categorie;
 import tn.assurance.models.Contrat;
 import tn.assurance.models.Habitation;
@@ -325,6 +329,19 @@ private void QrCode(ActionEvent event) throws WriterException, IOException {
         alert.setContentText(msg);
         alert.showAndWait();
     }
+
+    @FXML
+    private void home(ActionEvent event) throws IOException {
+    // Load the affichercategorie.fxml file
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/assurance/gui/Home.fxml"));
+    Parent root = loader.load();
+
+    // Get the current stage and set the new scene
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+}
 
 
 
