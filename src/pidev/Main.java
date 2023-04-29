@@ -28,8 +28,8 @@ public class Main extends Application {
             //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Afficher.fxml"));
             //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherBack.fxml"));
             //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherT.fxml"));
-            Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AffichageFront.fxml"));
-            //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AffichageBack.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AffichageFront.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AffichageBack.fxml"));
 
             Scene scene = new Scene(root,800,550);
 

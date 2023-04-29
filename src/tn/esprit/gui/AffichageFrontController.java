@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -19,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -36,7 +38,6 @@ import tn.esprit.services.SinistreService;
 public class AffichageFrontController implements Initializable {
 
     private ListView<Sinistre> list;
-    private VBox vboxutil;
     File selectedFile;
     static public String lieu, degats, description, url_image;
     static public Timestamp date_heure;
