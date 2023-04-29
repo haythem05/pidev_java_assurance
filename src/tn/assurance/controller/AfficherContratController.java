@@ -89,13 +89,15 @@ private contratS contratService;
     private ImageView imageqr;
     @FXML
     private Button btQR;
+    @FXML
+    private ImageView imageV;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 // Add listeners to minPrixField and maxPrixField
-
+  imageV.setImage(new javafx.scene.image.Image("file:C:\\Users\\haythem\\Documents\\NetBeansProjects\\Assurance\\build\\classes\\images\\logo.png"));
     minPrixField.textProperty().addListener((observable, oldValue, newValue) -> {
         updateListViewF();
     });

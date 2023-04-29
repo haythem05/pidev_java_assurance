@@ -5,31 +5,38 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.assurance.controller.AjouterContratBackController">
+<AnchorPane id="AnchorPane" prefHeight="686.0" prefWidth="991.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.assurance.controller.AjouterContratBackController">
    <children>
-      <Label layoutX="14.0" layoutY="28.0" text="id client :" />
-      <Label layoutX="6.0" layoutY="68.0" text="nombre de place :" />
-      <Label layoutX="14.0" layoutY="105.0" text="valeur catalogue  :" />
+      <Label layoutX="277.0" layoutY="37.0" text="ID Client :" />
+      <Label layoutX="244.0" layoutY="89.0" text="Nombre De Place :" />
+      <Label layoutX="242.0" layoutY="149.0" text="Valeur Catalogue  :" />
       <Label layoutX="59.0" layoutY="149.0" />
-      <Label layoutX="6.0" layoutY="210.0" text="avantages :" />
-      <Label layoutX="339.0" layoutY="28.0" text="date debut :" />
-      <Label layoutX="348.0" layoutY="77.0" text="date fin :" />
-      <Label layoutX="303.0" layoutY="132.0" text="date circulation :" />
-      <Label layoutX="303.0" layoutY="167.0" text="marque :" />
-      <Label layoutX="307.0" layoutY="202.0" text="model :" />
-      <ChoiceBox fx:id="typeidc" layoutX="188.0" layoutY="292.0" prefWidth="150.0" />
+      <Label layoutX="270.0" layoutY="222.0" text="Avantages :" />
+      <Label layoutX="588.0" layoutY="28.0" text="Date Debut :" />
+      <Label layoutX="606.0" layoutY="80.0" text="Date Fin :" />
+      <Label layoutX="559.0" layoutY="139.0" text="Date Circulation :" />
+      <Label layoutX="606.0" layoutY="193.0" text="Marque :" />
+      <Label layoutX="610.0" layoutY="253.0" text="Model :" />
+      <ChoiceBox fx:id="typeidc" layoutX="334.0" layoutY="292.0" prefWidth="150.0" />
       <Label layoutX="73.0" layoutY="140.0" />
-      <TextField fx:id="idclientc" layoutX="83.0" layoutY="25.0" />
-      <TextField fx:id="nbdeplacec" layoutX="121.0" layoutY="64.0" />
-      <TextField fx:id="valeurcataloguec" layoutX="140.0" layoutY="101.0" />
-      <TextField fx:id="avantagesc" layoutX="90.0" layoutY="211.0" />
-      <TextField fx:id="modelc" layoutX="388.0" layoutY="198.0" />
-      <TextField fx:id="marquec" layoutX="388.0" layoutY="163.0" />
-      <DatePicker fx:id="datedebutc" layoutX="412.0" layoutY="25.0" />
-      <DatePicker fx:id="datefinc" layoutX="409.0" layoutY="73.0" />
-      <DatePicker fx:id="datecirculationc" layoutX="412.0" layoutY="128.0" />
-      <Button layoutX="464.0" layoutY="320.0" mnemonicParsing="false" onAction="#valider" text="valider" />
+      <TextField fx:id="idclientc" layoutX="377.0" layoutY="25.0" />
+      <TextField fx:id="nbdeplacec" layoutX="377.0" layoutY="77.0" />
+      <TextField fx:id="valeurcataloguec" layoutX="377.0" layoutY="136.0" />
+      <TextField fx:id="avantagesc" layoutX="377.0" layoutY="206.0" />
+      <TextField fx:id="modelc" layoutX="681.0" layoutY="237.0" />
+      <TextField fx:id="marquec" layoutX="681.0" layoutY="185.0" />
+      <DatePicker fx:id="datedebutc" layoutX="681.0" layoutY="25.0" />
+      <DatePicker fx:id="datefinc" layoutX="681.0" layoutY="77.0" />
+      <DatePicker fx:id="datecirculationc" layoutX="681.0" layoutY="136.0" />
+      <Button layoutX="641.0" layoutY="320.0" mnemonicParsing="false" onAction="#valider" prefHeight="30.0" prefWidth="81.0" style="-fx-background-color: #606060;" text="Valider" />
+      <VBox layoutX="-1.0" prefHeight="686.0" prefWidth="186.0" style="-fx-background-color: #606060;">
+         <children>
+            <ImageView fx:id="imageV" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

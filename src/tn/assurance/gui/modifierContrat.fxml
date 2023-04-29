@@ -1,41 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="621.0" prefWidth="775.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.assurance.controller.ModifierContratController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="699.0" prefWidth="930.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.assurance.controller.ModifierContratController">
     <stylesheets>
         <URL value="@modifiercontrat.css" />
     </stylesheets>
    <children>
-      <Label layoutX="54.0" layoutY="50.0" text="Id Client :" />
+      <Label layoutX="286.0" layoutY="41.0" text="Id Client :" />
       <Label layoutX="52.0" layoutY="92.0" />
-      <Label layoutX="32.0" layoutY="143.0" text="Valeur Catalogue :" />
-      <Label layoutX="52.0" layoutY="192.0" text="Prix :" />
-      <Label layoutX="52.0" layoutY="258.0" text="Avantages :" />
-      <Label layoutX="329.0" layoutY="201.0" text="Marque :" />
+      <Label layoutX="234.0" layoutY="142.0" text="Valeur Catalogue :" />
+      <Label layoutX="314.0" layoutY="188.0" text="Prix :" />
+      <Label layoutX="259.0" layoutY="284.0" text="Avantages :" />
+      <Label layoutX="618.0" layoutY="204.0" text="Marque :" />
       <Label layoutX="389.0" layoutY="266.0" />
-      <Label layoutX="333.0" layoutY="257.0" text="Model :" />
-      <Label layoutX="322.0" layoutY="143.0" text="Date circulation :" />
-      <Label layoutX="333.0" layoutY="92.0" text="Date fin :" />
-      <Label layoutX="333.0" layoutY="41.0" text="Date Debut :" />
-      <Label layoutX="28.0" layoutY="92.0" text="Nombre de place :" />
-      <TextField fx:id="idclientc" layoutX="127.0" layoutY="37.0" />
-      <TextField fx:id="nbplacec" layoutX="151.0" layoutY="88.0" />
-      <TextField fx:id="valeurCataloguec" layoutX="152.0" layoutY="139.0" />
-      <TextField fx:id="prixc" layoutX="101.0" layoutY="188.0" />
-      <TextArea fx:id="avantagesc" layoutX="114.0" layoutY="229.0" prefHeight="114.0" prefWidth="200.0" />
-      <DatePicker fx:id="datedebutc" layoutX="417.0" layoutY="37.0" />
-      <DatePicker fx:id="dateFinc" layoutX="417.0" layoutY="88.0" />
-      <DatePicker fx:id="datecirculationC" layoutX="417.0" layoutY="139.0" />
-      <TextField fx:id="marquec" layoutX="400.0" layoutY="197.0" />
-      <TextField fx:id="modelc" layoutX="401.0" layoutY="254.0" />
-      <Button layoutX="468.0" layoutY="318.0" mnemonicParsing="false" onAction="#modifier" text="Valider" />
+      <Label layoutX="646.0" layoutY="266.0" text="Model :" />
+      <Label layoutX="568.0" layoutY="142.0" text="Date circulation :" />
+      <Label layoutX="605.0" layoutY="90.0" text="Date fin :" />
+      <Label layoutX="595.0" layoutY="41.0" text="Date Debut :" />
+      <Label layoutX="234.0" layoutY="98.0" text="Nombre de place :" />
+      <TextField fx:id="idclientc" layoutX="375.0" layoutY="37.0" />
+      <TextField fx:id="nbplacec" layoutX="375.0" layoutY="95.0" />
+      <TextField fx:id="valeurCataloguec" layoutX="375.0" layoutY="139.0" />
+      <TextField fx:id="prixc" layoutX="375.0" layoutY="184.0" />
+      <TextArea fx:id="avantagesc" layoutX="351.0" layoutY="266.0" prefHeight="114.0" prefWidth="200.0" />
+      <DatePicker fx:id="datedebutc" layoutX="706.0" layoutY="37.0" />
+      <DatePicker fx:id="dateFinc" layoutX="706.0" layoutY="87.0" />
+      <DatePicker fx:id="datecirculationC" layoutX="706.0" layoutY="139.0" />
+      <TextField fx:id="marquec" layoutX="706.0" layoutY="197.0" />
+      <TextField fx:id="modelc" layoutX="706.0" layoutY="254.0" />
+      <Button layoutX="690.0" layoutY="334.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: #606060;" text="Valider" />
+      <VBox layoutX="-1.0" prefHeight="699.0" prefWidth="200.0" style="-fx-background-color: #606060;">
+         <children>
+            <ImageView fx:id="imageV" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

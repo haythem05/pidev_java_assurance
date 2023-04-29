@@ -26,7 +26,7 @@ public class main extends Application {
     public void start(Stage primaryStage) {
         try {
      
-   //Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/affichercategorie.fxml"));  
+  // Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/affichercategorie.fxml"));  
    
          
         // Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/afficherhabitation.fxml"));  

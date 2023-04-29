@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import tn.assurance.models.Habitation;
 import tn.assurance.services.habitationS;
@@ -24,8 +25,9 @@ public class ModifierHabitationController implements Initializable {
     private TextField capitalimmobilierh;
     @FXML
     private TextField capitalmobilierh;
-    @FXML
     private TextField devish;
+    @FXML
+    private ImageView imageV;
 
     /**
      * Initializes the controller class.

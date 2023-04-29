@@ -5,29 +5,36 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.assurance.gui.AjouterHabitationFrontController">
+<AnchorPane id="AnchorPane" prefHeight="774.0" prefWidth="1069.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.assurance.gui.AjouterHabitationFrontController">
     <stylesheets>
         <URL value="@ajouterhabitationfront.css" />
     </stylesheets>
    <children>
-      <Label layoutX="230.0" layoutY="27.0" text="Ajouter Habitation " textFill="#ef0606">
+      <Label layoutX="410.0" layoutY="23.0" text="Ajouter Habitation " textFill="#ef0606">
          <font>
             <Font name="Arial Narrow Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="62.0" layoutY="79.0" text="Id client" />
-      <Label layoutX="62.0" layoutY="125.0" text="nb piece immobilier" />
-      <Label layoutX="62.0" layoutY="170.0" text="capital immobilier" />
-      <Label layoutX="62.0" layoutY="222.0" text="capital mobilier" />
-      <Label layoutX="62.0" layoutY="280.0" text="Type" />
-      <TextField fx:id="idclienth" layoutX="221.0" layoutY="75.0" />
-      <TextField fx:id="nbpieceimmobilierh" layoutX="222.0" layoutY="121.0" />
-      <TextField fx:id="capitalimmobilierh" layoutX="223.0" layoutY="175.0" />
-      <TextField fx:id="capitalmobilierh" layoutX="223.0" layoutY="227.0" />
-      <ChoiceBox fx:id="type_Idh" layoutX="203.0" layoutY="285.0" prefWidth="150.0" />
-      <Button layoutX="429.0" layoutY="240.0" mnemonicParsing="false" onAction="#validerh" text="valider" />
+      <Label layoutX="340.0" layoutY="88.0" text="ID Client" />
+      <Label layoutX="287.0" layoutY="134.0" text="Nb Piece Immobilier" />
+      <Label layoutX="287.0" layoutY="183.0" text="Capital Immobilier" />
+      <Label layoutX="299.0" layoutY="235.0" text="Capital Mobilier" />
+      <Label layoutX="340.0" layoutY="289.0" text="Type" />
+      <TextField fx:id="idclienth" layoutX="405.0" layoutY="84.0" />
+      <TextField fx:id="nbpieceimmobilierh" layoutX="405.0" layoutY="130.0" />
+      <TextField fx:id="capitalimmobilierh" layoutX="405.0" layoutY="179.0" />
+      <TextField fx:id="capitalmobilierh" layoutX="405.0" layoutY="231.0" />
+      <ChoiceBox fx:id="type_Idh" layoutX="392.0" layoutY="285.0" prefWidth="150.0" />
+      <Button layoutX="441.0" layoutY="342.0" mnemonicParsing="false" onAction="#validerh" style="-fx-background-color: #606060;" text="Valider" />
+      <VBox layoutX="-1.0" layoutY="-1.0" prefHeight="774.0" prefWidth="193.0" style="-fx-background-color: #606060;">
+         <children>
+            <ImageView fx:id="imageV" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

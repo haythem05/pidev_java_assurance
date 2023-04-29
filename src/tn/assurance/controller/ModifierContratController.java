@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import tn.assurance.models.Categorie;
 import tn.assurance.models.Contrat;
@@ -54,6 +55,8 @@ public class ModifierContratController implements Initializable {
     private TextField marquec;
     @FXML
     private TextField modelc;
+    @FXML
+    private ImageView imageV;
 
     /**
      * Initializes the controller class.
@@ -61,7 +64,7 @@ public class ModifierContratController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-  
+  imageV.setImage(new javafx.scene.image.Image("file:C:\\Users\\haythem\\Documents\\NetBeansProjects\\Assurance\\build\\classes\\images\\logo.png"));
         idclientc.setText(Integer.toString(AfficherContratController.idclient));
         nbplacec.setText(Integer.toString(AfficherContratController.nbplace));
         valeurCataloguec.setText(Float.toString(AfficherContratController.valeurcatalogue));

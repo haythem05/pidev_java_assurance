@@ -48,6 +48,8 @@ public class AfficherhabitationController implements Initializable {
 static public int id,idclient,nbpieceimmobilier;
 static public float     capitalmobilier,capitalimmobilier,devis;
  Categorie  type_Id;
+    @FXML
+    private ImageView imageV;
 
 
 
@@ -56,7 +58,7 @@ static public float     capitalmobilier,capitalimmobilier,devis;
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+          imageV.setImage(new javafx.scene.image.Image("file:C:\\Users\\haythem\\Documents\\NetBeansProjects\\Assurance\\build\\classes\\images\\logo.png"));
         ListView list2 = listView;
            Habitation h= new Habitation();
            habitationS hs = new habitationS();

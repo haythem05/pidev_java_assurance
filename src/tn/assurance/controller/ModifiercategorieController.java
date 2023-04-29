@@ -44,13 +44,15 @@ public class ModifiercategorieController implements Initializable {
     
     File  selectedFile;
     String url_im;
+    @FXML
+    private ImageView imageV;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+          imageV.setImage(new javafx.scene.image.Image("file:C:\\Users\\haythem\\Documents\\NetBeansProjects\\Assurance\\build\\classes\\images\\logo.png"));
         nomc.setText(String.valueOf(affichercategorieController.nom));
         descriptionc.setText(String.valueOf(affichercategorieController.description));
         

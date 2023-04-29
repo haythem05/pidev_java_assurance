@@ -19,14 +19,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-//
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
@@ -51,10 +46,12 @@ public class AjouterCategorieBackfxmlController implements Initializable {
     File  selectedFile;
     
     @FXML
-    private ImageView imageV;
+        private ImageView imageV;
     public String url_image;
     @FXML
     private AnchorPane rootPane;
+    @FXML
+    private ImageView imageVV;
 
     /**
      * Initializes the controller class.
@@ -93,7 +90,7 @@ public class AjouterCategorieBackfxmlController implements Initializable {
             }
         });
 
-        imageV.setImage(new Image("file:C:\\Users\\haythem\\Documents\\NetBeansProjects\\Assurance\\build\\classes\\images\\drag-drop.gif"));
+        imageVV.setImage(new Image("file:C:\\Users\\haythem\\Documents\\NetBeansProjects\\Assurance\\build\\classes\\images\\logo.png"));
 
     }
 

@@ -44,6 +44,8 @@ public class AjouterHabitationFrontController implements Initializable {
     private Categorie type_id;
 
     private List<Categorie> categories;
+    @FXML
+    private ImageView imageV;
 
     /**
      * Initializes the controller class.

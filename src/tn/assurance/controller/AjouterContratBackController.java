@@ -9,23 +9,29 @@ import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.Notifications;
 import tn.assurance.models.Categorie;
 import tn.assurance.models.Contrat;
 import tn.assurance.services.categorieS;
 import tn.assurance.services.contratS;
+import java.time.LocalDate;
+import java.sql.Date;
+import java.time.LocalDate;
+
 
 /**
  * FXML Controller class
@@ -64,6 +70,9 @@ public class AjouterContratBackController implements Initializable {
     private Categorie type_id;
 
     private List<Categorie> categories;
+    @FXML
+    private ImageView imageV;
+   
 
     /**
      * Initializes the controller class.
@@ -72,52 +81,102 @@ public class AjouterContratBackController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         categories = new categorieS().afficherCategorie();
         typeidc.getItems().addAll(categories);
-        
+          imageV.setImage(new javafx.scene.image.Image("file:C:\\Users\\haythem\\Documents\\NetBeansProjects\\Assurance\\build\\classes\\images\\logo.png"));
+
     }
 
-    @FXML
-    private void valider(ActionEvent event) {
+@FXML
+private void valider(ActionEvent event) {
+    // Get input values
+    try {
         idclient = Integer.parseInt(idclientc.getText());
         nbplace = Integer.parseInt(nbdeplacec.getText());
         valeurcatalogue = Float.parseFloat(valeurcataloguec.getText());
-    
-
-LocalDate d = datedebutc.getValue();
-datedebut = java.sql.Date.valueOf(d);
-
-LocalDate d3= datecirculationc.getValue();
-datecirculation = java.sql.Date.valueOf(d3);
-
-LocalDate d2 = datefinc.getValue();
-datefin = java.sql.Date.valueOf(d2);
-type_Id=typeidc.getValue();
-
-                            avantages = avantagesc.getText();
-                            marque = marquec.getText();
-                            modele = modelc.getText();
-                        
-                            
-
-
- 
-    
-    
-                Contrat c = new Contrat( idclient,  nbplace,  valeurcatalogue,    datedebut,  datefin,  datecirculation,  avantages,  marque,  modele,  type_Id);
-                contratS cs=new contratS();
-                cs.ajouterContrat(c, type_Id);
-
-    Image img = new Image("file:///C:/xampp/htdocs/logo.png");
-                Notifications n = Notifications.create()
-                        
-                    .title("DevSquad")
-                    .text("contrat automobile ajouteé !")
-                    .graphic(new ImageView(img))
-                    .position(Pos.BOTTOM_RIGHT);
-                     n.darkStyle();
-                    
-            n.showInformation();
-       
-
+    } catch (NumberFormatException e) {
+        showAlert("Erreur: Veuillez vérifier les valeurs  saisies.");
+        return;
     }
+
+    LocalDate d = datedebutc.getValue();
+    datedebut = java.sql.Date.valueOf(d);
+
+    LocalDate d3= datecirculationc.getValue();
+    datecirculation = java.sql.Date.valueOf(d3);
+
+    LocalDate d2 = datefinc.getValue();
+    datefin = java.sql.Date.valueOf(d2);
+    type_Id=typeidc.getValue();
+
+    avantages = avantagesc.getText();
+    marque = marquec.getText();
+    modele = modelc.getText();
+
+    // Check if input values meet the required criteria
+    if (nbplace < 2 || nbplace > 8) {
+        showAlert("Nombre de places doit être entre 2 et 8");
+        return;
+    }
+    if (valeurcatalogue < 15000 || valeurcatalogue > 2500000) {
+        showAlert("Valeur catalogue doit être entre 15000 et 2500000");
+        return;
+    }
+if (datedebut.toLocalDate().isBefore(LocalDate.now())) {
+    showAlert("Date de début doit être égale à aujourd'hui ou ultérieure");
+    return;
+}
+if (datecirculation.toLocalDate().isAfter(LocalDate.now())) {
+    showAlert("Date de circulation doit être antérieure ou égale à aujourd'hui");
+    return;
+}
+if (datefin.toLocalDate().isBefore(datedebut.toLocalDate().plusDays(1))) {
+    showAlert("Date de fin doit être supérieure à la date de début d'au moins un jour");
+    return;
+}
+if (datefin.toLocalDate().isAfter(datedebut.toLocalDate().plusYears(1))) {
+    showAlert("Date de fin doit être inférieure à la date de début d'un an au maximum");
+    return;
+}
+    if (type_Id == null) {
+        showAlert("Type de contrat ne doit pas être vide");
+        return;
+    }
+    if (avantages.isEmpty()) {
+        showAlert("Avantages ne doivent pas être vides");
+        return;
+    }
+    if (marque.isEmpty()) {
+        showAlert("Marque ne doit pas être vide");
+        return;
+    }
+    if (modele.isEmpty()) {
+        showAlert("Modèle ne doit pas être vide");
+        return;
+    }
+
+    // Create and add the contract to the database
+    Contrat c = new Contrat(idclient, nbplace, valeurcatalogue, datedebut, datefin, datecirculation, avantages, marque, modele, type_Id);
+    contratS cs = new contratS();
+    cs.ajouterContrat(c, type_Id);
+
+    // Show success notification
+    Image img = new Image("file:///C:/xampp/htdocs/logo.png");
+    Notifications n = Notifications.create()
+        .title("DevSquad")
+        .text("Contrat automobile ajouté !")
+        .graphic(new ImageView(img))
+        .position(Pos.BOTTOM_RIGHT);
+    n.darkStyle();
+    n.showInformation();
+}
+
+
+private void showAlert(String message) {
+    Alert alert = new Alert(AlertType.ERROR);
+    alert.setTitle("Erreur de saisie");
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+    alert.showAndWait();
+}
+
 
 }

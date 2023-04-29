@@ -16,6 +16,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import tn.assurance.models.Categorie;
 import tn.assurance.services.categorieS;
@@ -34,6 +36,8 @@ public class affichercategorieController implements Initializable {
       static public int id;
     @FXML
     private ListView<Categorie> listView;
+    @FXML
+    private ImageView imageV;
       
       
 
@@ -52,6 +56,7 @@ public class affichercategorieController implements Initializable {
            {
                Categorie c1 = liste.get(i);
                list2.getItems().add(c1);
+                    imageV.setImage(new Image("file:C:\\Users\\haythem\\Documents\\NetBeansProjects\\Assurance\\build\\classes\\images\\logo.png"));
     }    
     }
     
