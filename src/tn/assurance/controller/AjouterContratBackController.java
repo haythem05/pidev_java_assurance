@@ -99,7 +99,7 @@ private void valider(ActionEvent event) {
         nbplace = Integer.parseInt(nbdeplacec.getText());
         valeurcatalogue = Float.parseFloat(valeurcataloguec.getText());
     } catch (NumberFormatException e) {
-        showAlert("Erreur: Veuillez vérifier les valeurs  saisies.");
+        showAlert("Erreur:   les champs sont vides.");
         return;
     }
 

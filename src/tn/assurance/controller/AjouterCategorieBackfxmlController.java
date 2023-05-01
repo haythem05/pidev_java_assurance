@@ -175,7 +175,7 @@ FileChooser fc = new FileChooser();
             imageV.setImage(image1);
 
             // Create a new file in the destination directory
-            File destinationFile = new File("C:\\xampp\\htdocs\\imagesAssurance\\" + selectedFile.getName());
+            File destinationFile = new File("C:\\xampp\\htdocs\\PiDev44\\public\\uploads\\images\\categorie\\" + selectedFile.getName());
             // url_image = "C:\\xampp\\htdocs\\image_trippie_cov\\" + file.getName();
             url_image = selectedFile.getName();
 
