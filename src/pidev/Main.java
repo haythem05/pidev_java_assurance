@@ -29,9 +29,10 @@ public class Main extends Application {
             //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherBack.fxml"));
             //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherT.fxml"));
             //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AffichageFront.fxml"));
-            Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AffichageBack.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AffichageBack.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Front.fxml"));
 
-            Scene scene = new Scene(root,800,550);
+            Scene scene = new Scene(root,1200,610);
 
             /*String css = this.getClass().getResource("/edu/webuild/gui/style.css").toExternalForm();
             scene.getStylesheets().add(css);*/

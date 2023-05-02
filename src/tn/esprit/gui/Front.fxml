@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="1200.0" styleClass="white-backgroung" stylesheets="@../../../values/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.FrontController">
+   <children>
+      <VBox layoutX="386.0" prefHeight="611.0" prefWidth="813.0" style="-fx-background-color: #f2f2f6;">
+         <children>
+            <HBox prefHeight="24.0" prefWidth="813.0" />
+            <HBox prefHeight="88.0" prefWidth="813.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="88.0" prefWidth="355.0" styleClass="free-delivery-card" stylesheets="@../../../values/styles.css">
+                     <children>
+                        <Label onMouseClicked="#ajouter" prefHeight="88.0" prefWidth="259.0" text="Ajouter un nouveau sinistre" textFill="#878787">
+                           <font>
+                              <Font name="Cambria Bold" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ImageView fitHeight="56.0" fitWidth="70.0" onMouseClicked="#ajouter" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gg.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </HBox>
+                  <Pane prefHeight="88.0" prefWidth="133.0" />
+                  <VBox prefHeight="110.0" prefWidth="278.0">
+                     <children>
+                        <Pane prefHeight="22.0" prefWidth="268.0" />
+                        <TextField fx:id="tf_recherche" prefHeight="46.0" prefWidth="268.0" styleClass="search-box" stylesheets="@../../../values/styles.css" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="110.0" prefWidth="49.0">
+                     <children>
+                        <Pane prefHeight="211.0" prefWidth="66.0" />
+                        <ImageView fitHeight="41.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@searchh.png" />
+                           </image>
+                        </ImageView>
+                        <Pane prefHeight="202.0" prefWidth="66.0" />
+                     </children>
+                  </VBox>
+               </children></HBox>
+            <ScrollPane fx:id="scroll" prefHeight="496.0" prefWidth="803.0" style="-fx-background-color: #f2f2f6;">
+               <content>
+                  <GridPane fx:id="grid">
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </content>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </ScrollPane>
+         </children>
+      </VBox>
+      <VBox layoutX="-1.0" layoutY="-1.0" prefHeight="611.0" prefWidth="387.0" styleClass="right-bar" stylesheets="@../../../values/styles.css">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="125.0" prefWidth="408.0" text="SecurAssur" textFill="#878787">
+                     <font>
+                        <Font name="Cambria Bold" size="40.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="24.0" prefWidth="387.0" />
+            <VBox alignment="CENTER" prefHeight="548.0" prefWidth="359.0" style="-fx-background-color: #ECE3C9;" styleClass="chosen-fruit-card" stylesheets="@../../../values/styles.css">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="80.0" prefWidth="366.0" text="Détails" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="27.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <VBox prefHeight="437.0" prefWidth="385.0">
+                     <children>
+                        <VBox prefHeight="405.0" prefWidth="347.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="347.0">
+                                 <children>
+                                    <Label text="Type :">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Pane prefHeight="37.0" prefWidth="30.0" />
+                                    <Label fx:id="typelabe" prefHeight="37.0" prefWidth="239.0" text="Label" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="20.0" top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="347.0">
+                                 <children>
+                                    <Label text="Date et heure :">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Pane prefHeight="37.0" prefWidth="30.0" />
+                                    <Label fx:id="datelabel" text="Label" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="347.0">
+                                 <children>
+                                    <Label text="Lieu : ">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Pane prefHeight="37.0" prefWidth="30.0" />
+                                    <Label fx:id="lieulabel" text="Label" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="347.0">
+                                 <children>
+                                    <Label text="Description :">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Pane prefHeight="37.0" prefWidth="30.0" />
+                                    <Label fx:id="desclabel" text="Label" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="347.0">
+                                 <children>
+                                    <Label text="Dégâts : ">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Pane prefHeight="37.0" prefWidth="30.0" />
+                                    <Label fx:id="degatslabel" text="Label" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="347.0">
+                                 <children>
+                                    <Label text="Statut : ">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Pane prefHeight="37.0" prefWidth="30.0" />
+                                    <Label fx:id="statutlabel" text="Label" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="161.0" prefWidth="347.0">
+                                 <children>
+                                    <ImageView fx:id="imaged" fitHeight="152.0" fitWidth="334.0" pickOnBounds="true" preserveRatio="true">
+                                       <HBox.margin>
+                                          <Insets left="7.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children></VBox>
+                  <VBox prefHeight="107.0" prefWidth="385.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#modifier" prefHeight="46.0" prefWidth="122.0" styleClass="add-btnblanc" stylesheets="@../../../values/styles.css" text="Modifier" textFill="#878787">
+                                 <font>
+                                    <Font name="Cambria Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Pane prefHeight="73.0" prefWidth="68.0" />
+                              <Button mnemonicParsing="false" onAction="#supprimer" prefHeight="46.0" prefWidth="122.0" styleClass="add-btnblanc" stylesheets="@../../../values/styles.css" text="Supprimer" textFill="#878787">
+                                 <font>
+                                    <Font name="Cambria Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

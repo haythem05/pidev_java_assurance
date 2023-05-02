@@ -197,5 +197,34 @@ public class SinistreService implements Fonctions<Sinistre> {
         }
         return count;
     }
+    
+    public List<Sinistre> rechSin(int id) {
+        List<Sinistre> list = new ArrayList<>();
+        try {
+            String req = "select s.*, t.nom from sinistre s inner join type t on s.type_id = t.id WHERE s.id= " + id;
+            Statement st = cnx.createStatement();
+            ResultSet RS = st.executeQuery(req);
+            while (RS.next()) {
+                Sinistre r = new Sinistre();
+                r.setId(RS.getInt("id"));
+                Type t = new Type();
+                t.setId(RS.getInt(2));
+                t.setNom(RS.getString("nom"));
+                r.setType(t);
+                r.setDescription(RS.getString("description"));
+                r.setLieu(RS.getString("lieu"));
+                r.setFile(RS.getString("file"));
+                r.setDate_heure(RS.getTimestamp("date_heure"));
+                r.setStatut(RS.getString("statut"));
+                r.setDegats(RS.getString("degats"));
+
+                list.add(r);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+
+        return list;
+    }
 
 }

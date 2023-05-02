@@ -86,7 +86,7 @@
                   </HBox>
                </children>
             </VBox>
-            <ListView fx:id="list" prefHeight="344.0" prefWidth="607.0" />
+            <ListView fx:id="list" prefHeight="337.0" prefWidth="689.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="white-backgroung" stylesheets="@../../../values/styles.css">
                <children>
                   <Pane prefHeight="93.0" prefWidth="29.0" />

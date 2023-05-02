@@ -61,8 +61,6 @@ public class AffichageFrontController implements Initializable {
     private void ajouter(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Ajout.fxml"));
         Parent root = loader.load();
-
-        // Get the current stage and set the new scene
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
