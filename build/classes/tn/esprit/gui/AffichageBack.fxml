@@ -45,9 +45,9 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="177.0" stylesheets="@../../../values/styles.css" text="Sinistres" />
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="177.0" style="-fx-background-color: #70a7d9;" stylesheets="@../../../values/styles.css" text="Sinistres" />
                   <Pane prefHeight="35.0" prefWidth="173.0" />
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="178.0" text="Types de sinistres" />
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="178.0" style="-fx-background-color: #70a7d9;" text="Types de sinistres" />
                </children>
             </VBox>
          </children>

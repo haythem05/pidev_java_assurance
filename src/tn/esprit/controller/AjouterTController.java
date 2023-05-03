@@ -66,7 +66,7 @@ public class AjouterTController implements Initializable {
 
     @FXML
     private void retour(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherT.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/TypeBack.fxml"));
         rootPane.getChildren().setAll(pane);
     }
     

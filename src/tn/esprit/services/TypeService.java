@@ -106,4 +106,33 @@ public class TypeService implements Fonctions<Type>{
         return list;
     }
     
+    public List<Type> getAllTypes() {
+        Connection conn = MaConnexion.getInstance().getCnx();
+        List<Type> types = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement("select * from type where id = id");
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Type t = new Type();
+                t.setId(rs.getInt(2));
+                t.setNom(rs.getString("nom"));
+
+                types.add(t);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return types;
+    }
+    
+    public List<Type> searchTypes(String search) {
+        List<Type> types = getAllTypes();
+        List<Type> results = new ArrayList<>();
+        for (Type t : types) {
+            if (t.getNom().toLowerCase().contains(search.toLowerCase())) {
+                results.add(t);
+            }
+        }
+        return results;
+    }
 }

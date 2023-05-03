@@ -31,12 +31,11 @@ public class Main extends Application {
             //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AffichageFront.fxml"));
             //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AffichageBack.fxml"));
             //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Front.fxml"));
-            Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Back.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Back.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/TypeBack.fxml"));
 
             Scene scene = new Scene(root,1200,610);
 
-            /*String css = this.getClass().getResource("/edu/webuild/gui/style.css").toExternalForm();
-            scene.getStylesheets().add(css);*/
             primaryStage.setTitle("SecurAssur");
             primaryStage.setScene(scene);
             primaryStage.show();

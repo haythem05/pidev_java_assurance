@@ -39,20 +39,20 @@ public class ModifierTController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        tf_nom.setText(String.valueOf(AfficherTController.nom));
+        tf_nom.setText(String.valueOf(TypeBackController.typ.getNom()));
     }    
 
     @FXML
     private void modifierT(ActionEvent event) {
         try {
-            int id = AfficherTController.id;
+            int id = TypeBackController.id;
             String nom = tf_nom.getText();
             
             Type t = new Type(nom);
             TypeService ts = new TypeService();
             ts.modifier(t, id);
             
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherT.fxml"));
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/TypeBack.fxml"));
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
             System.err.println(ex);
@@ -61,7 +61,7 @@ public class ModifierTController implements Initializable {
 
     @FXML
     private void retour(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AfficherT.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/TypeBack.fxml"));
         rootPane.getChildren().setAll(pane);
     }
     

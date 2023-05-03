@@ -69,18 +69,6 @@ public class BackController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*ListView list2 = list;
-        Sinistre r = new Sinistre();
-        ss = new SinistreService();
-        List<Sinistre> liste = ss.afficher();
-        for (int i = 0; i < liste.size(); i++) {
-            Sinistre s = liste.get(i);
-            list2.getItems().add(s);
-        }
-        updateListView();
-        tf_recherche.textProperty().addListener((observable, oldValue, newValue) -> {
-            updateListView(newValue);
-        });*/
         ss = new SinistreService();
         List<Sinistre> liste = ss.afficher();
 
@@ -130,11 +118,11 @@ public class BackController implements Initializable {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Traitement.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
 
         } catch (IOException ex) {
             System.err.println(ex);
