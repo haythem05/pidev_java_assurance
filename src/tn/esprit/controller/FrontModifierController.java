@@ -5,13 +5,10 @@
  */
 package tn.esprit.controller;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -30,12 +27,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import tn.esprit.entities.Sinistre;
-import tn.esprit.entities.Type;
 import tn.esprit.services.SinistreService;
 
 /**
@@ -43,47 +37,52 @@ import tn.esprit.services.SinistreService;
  *
  * @author HD
  */
-public class ModifController implements Initializable {
+public class FrontModifierController implements Initializable {
 
     @FXML
-    private ImageView imageV;
+    private DatePicker date;
     @FXML
     private TextField tf_lieu;
     @FXML
-    private TextField tf_degats;
-    @FXML
     private TextField tf_description;
     @FXML
-    private DatePicker date;
-
-    private String url_im;
-    File selectedFile;
+    private TextField tf_degats;
     @FXML
-    private AnchorPane rootPane;
+    private ImageView imageV;
+    private String url_im;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        tf_lieu.setText(String.valueOf(AfficherController.lieu));
-        tf_degats.setText(String.valueOf(AfficherController.degats));
-        tf_description.setText(String.valueOf(AfficherController.description));
-        date.setPromptText(AfficherController.date_heure.toString());
-        String imagePath = "C:\\Users\\HD\\Desktop\\Installations\\XAMPP\\htdocs\\imagePi\\" + AfficherController.url_image;
-        //imageV.setImage(new Image("C:\\Users\\HD\\Desktop\\Esprit\\PiDev\\src\\tn\\esprit\\images\\drag-drop.gif"));
+        date.setPromptText(ItemController.date);
+        tf_lieu.setText(String.valueOf(ItemController.lieu));
+        tf_description.setText(String.valueOf(ItemController.description));
+        tf_degats.setText(String.valueOf(ItemController.degats));
+        String imagePath = "C:\\Users\\HD\\Desktop\\Installations\\XAMPP\\htdocs\\imagePi\\" + ItemController.url_image;
         try {
             imageV.setImage(new Image(new FileInputStream(imagePath)));
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(ModifController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrontModifierController.class.getName()).log(Level.SEVERE, null, ex);
         }
         url_im = imagePath;
     }
 
     @FXML
+    private void retour(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Front.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
     private void modifier(ActionEvent event) {
         try {
-            int id = AfficherController.id;
+            int id = ItemController.s.getId();
             LocalDate d = date.getValue();
             Timestamp date_heure = Timestamp.valueOf(d.atStartOfDay(ZoneId.systemDefault()).toLocalDateTime());
             String lieu = tf_lieu.getText();
@@ -121,53 +120,15 @@ public class ModifController implements Initializable {
             SinistreService ss = new SinistreService();
             ss.modifiersanst(s, id);
 
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Afficher.fxml"));
-            rootPane.getChildren().setAll(pane);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Front.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException ex) {
             System.err.println(ex);
         }
-    }
-
-    @FXML
-    private void setimage(MouseEvent event) {
-        
-        FileChooser fc = new FileChooser();
-        fc.setInitialDirectory(new File(System.getProperty("user.home") + "\\Desktop"));
-        fc.setTitle("Veuillez choisir l'image");
-        fc.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image", "*.jpg", "*.png"),
-                new FileChooser.ExtensionFilter("PNG", "*.png"),
-                new FileChooser.ExtensionFilter("JPG", "*.jpg")
-        );
-        selectedFile = fc.showOpenDialog(null);
-
-        if (selectedFile != null) {
-
-            // Load the selected image into the image view
-            Image image1 = new Image(selectedFile.toURI().toString());
-
-            //url_image = file.toURI().toString();
-            System.out.println(selectedFile.toURI().toString());
-            imageV.setImage(image1);
-
-            // Create a new file in the destination directory
-            File destinationFile = new File("C:\\Users\\HD\\Desktop\\Installations\\XAMPP\\htdocs\\imagePi\\" + selectedFile.getName());
-            url_im = selectedFile.getName();
-
-            try {
-                // Copy the selected file to the destination file
-                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
-                System.err.println(e);
-            }
-            
-        }
-    }
-
-    @FXML
-    private void retour(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Afficher.fxml"));
-        rootPane.getChildren().setAll(pane);
     }
 
 }

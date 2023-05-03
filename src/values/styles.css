@@ -135,4 +135,9 @@
     -fx-prompt-text-fill:  #D3D3D3;
     -fx-text-inner-color:  #D3D3D3;
 }
+.separatorf {
+  border-top: 2px solid black;
+  font-weight: bold;
+}
+
 

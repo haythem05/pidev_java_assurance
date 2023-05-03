@@ -25,6 +25,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -37,6 +40,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javax.mail.MessagingException;
 import org.controlsfx.control.Notifications;
@@ -175,7 +179,7 @@ public class AjouterController implements Initializable {
     }
 
     @FXML
-    private void ajouter(ActionEvent event) throws MessagingException {
+    private void ajouter(ActionEvent event) throws MessagingException, IOException {
         lieu = tf_lieu.getText();
         degats = tf_degats.getText();
         description = tf_description.getText();
@@ -225,6 +229,14 @@ public class AjouterController implements Initializable {
 
         n.darkStyle();
         n.showInformation();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Afficher.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
     }
 
     @FXML

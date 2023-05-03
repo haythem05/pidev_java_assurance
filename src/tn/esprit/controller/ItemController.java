@@ -48,6 +48,9 @@ public class ItemController implements Initializable {
     static Sinistre s = new Sinistre();
     static public String nomt;
     static public String date;
+    static public String lieu, degats, description, url_image;
+    static public Timestamp date_heure;
+    //static public int id;
     
     
     public void setData(int id, Timestamp date_heure, String lieu, String statut, String description, String degats, String file, Type type, MyListener myListener) {
@@ -99,6 +102,10 @@ public class ItemController implements Initializable {
         s.setType(L.get(0).getType());
         nomt= s.getType().getNom();
         date=s.getDate_heure().toString();
+        lieu=s.getLieu();
+        degats=s.getDegats();
+        description=s.getDescription();
+        url_image=s.getFile();
     }
     
     public interface MyListener {

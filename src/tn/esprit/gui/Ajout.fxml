@@ -10,47 +10,61 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="tn.esprit.controller.AjoutController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="610.0" prefWidth="1200.0" styleClass="right-bar" stylesheets="@../../../values/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.AjoutController">
    <children>
-      <Label layoutX="211.0" layoutY="39.0" text="Ajouter un nouveau sinistre" textFill="#54d39d">
+      <Label layoutX="444.0" layoutY="41.0" text="Ajouter un nouveau sinistre" textFill="#878787">
          <font>
-            <Font name="Corbel Bold" size="20.0" />
+            <Font name="Cambria Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="121.0" text="Date" />
-      <Label layoutX="38.0" layoutY="180.0" text="Type" />
-      <Label layoutX="40.0" layoutY="246.0" text="Lieu" />
-      <Label layoutX="36.0" layoutY="306.0" text="Description" />
-      <Label layoutX="38.0" layoutY="368.0" text="Dégâts" />
-      <Label layoutX="372.0" layoutY="141.0" text="Attachez une image de votre sinistre">
+      <Label layoutX="149.0" layoutY="129.0" text="Date">
          <font>
-            <Font name="Corbel" size="14.0" />
+            <Font name="Cambria" size="17.0" />
+         </font></Label>
+      <Label layoutX="149.0" layoutY="209.0" text="Type">
+         <font>
+            <Font name="Cambria" size="17.0" />
+         </font></Label>
+      <Label layoutX="149.0" layoutY="282.0" text="Lieu">
+         <font>
+            <Font name="Cambria" size="17.0" />
+         </font></Label>
+      <Label layoutX="149.0" layoutY="358.0" text="Description">
+         <font>
+            <Font name="Cambria" size="17.0" />
+         </font></Label>
+      <Label layoutX="149.0" layoutY="442.0" text="Dégâts">
+         <font>
+            <Font name="Cambria" size="17.0" />
+         </font></Label>
+      <Label layoutX="702.0" layoutY="146.0" text="Attachez une image de votre sinistre">
+         <font>
+            <Font name="Cambria" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="118.0" layoutY="439.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: #54D39D;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Ajouter" />
-      <Button layoutX="321.0" layoutY="439.0" mnemonicParsing="false" onAction="#retour" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: #70B8D9;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Retour" />
-      <TextField fx:id="tf_lieu" layoutX="130.0" layoutY="235.0" prefHeight="37.0" prefWidth="191.0" stylesheets="@../../../values/styles.css">
+      <Button layoutX="444.0" layoutY="545.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="32.0" prefWidth="85.0" styleClass="add-btnblanc" stylesheets="@../../../values/styles.css" text="Ajouter" />
+      <Button layoutX="816.0" layoutY="545.0" mnemonicParsing="false" onAction="#retour" prefHeight="32.0" prefWidth="85.0" styleClass="add-btnblanc" stylesheets="@../../../values/styles.css" text="Retour" />
+      <TextField fx:id="tf_lieu" layoutX="308.0" layoutY="273.0" prefHeight="37.0" prefWidth="191.0" stylesheets="@../../../values/styles.css">
          <styleClass>
             <String fx:value="text-fieldform" />
             <String fx:value="date-picker" />
          </styleClass>
       </TextField>
-      <TextField fx:id="tf_description" layoutX="129.0" layoutY="297.0" prefHeight="37.0" prefWidth="191.0" stylesheets="@../../../values/styles.css">
+      <TextField fx:id="tf_description" layoutX="308.0" layoutY="349.0" prefHeight="37.0" prefWidth="191.0" stylesheets="@../../../values/styles.css">
          <styleClass>
             <String fx:value="text-fieldform" />
             <String fx:value="date-picker" />
          </styleClass>
       </TextField>
-      <TextField fx:id="tf_degats" layoutX="130.0" layoutY="359.0" prefHeight="37.0" prefWidth="191.0" stylesheets="@../../../values/styles.css">
+      <TextField fx:id="tf_degats" layoutX="308.0" layoutY="433.0" prefHeight="37.0" prefWidth="191.0" stylesheets="@../../../values/styles.css">
          <styleClass>
             <String fx:value="text-fieldform" />
             <String fx:value="date-picker" />
          </styleClass>
       </TextField>
-      <DatePicker fx:id="date" layoutX="130.0" layoutY="109.0" styleClass="text-fieldform" stylesheets="@../../../values/styles.css" />
-      <ImageView fx:id="imageV" fitHeight="150.0" fitWidth="200.0" layoutX="377.0" layoutY="171.0" onMouseClicked="#add_image" pickOnBounds="true" preserveRatio="true" />
-      <ChoiceBox fx:id="list_types" layoutX="129.0" layoutY="170.0" prefHeight="37.0" prefWidth="191.0" stylesheets="@../../../values/styles.css">
+      <DatePicker fx:id="date" layoutX="308.0" layoutY="120.0" styleClass="text-fieldform" stylesheets="@../../../values/styles.css" />
+      <ImageView fx:id="imageV" fitHeight="209.0" fitWidth="343.0" layoutX="670.0" layoutY="186.0" onMouseClicked="#add_image" pickOnBounds="true" preserveRatio="true" />
+      <ChoiceBox fx:id="list_types" layoutX="308.0" layoutY="200.0" prefHeight="37.0" prefWidth="191.0" stylesheets="@../../../values/styles.css">
          <styleClass>
             <String fx:value="text-fieldform" />
             <String fx:value="date-picker" />

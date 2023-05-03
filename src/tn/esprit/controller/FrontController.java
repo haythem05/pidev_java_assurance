@@ -22,6 +22,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -35,6 +36,12 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import tn.esprit.controller.ItemController.MyListener;
 import tn.esprit.entities.Sinistre;
+import static tn.esprit.controller.ItemController.date_heure;
+import static tn.esprit.controller.ItemController.degats;
+import static tn.esprit.controller.ItemController.description;
+//import static tn.esprit.controller.ItemController.id;
+import static tn.esprit.controller.ItemController.lieu;
+import static tn.esprit.controller.ItemController.url_image;
 import tn.esprit.services.SinistreService;
 
 /**
@@ -75,6 +82,7 @@ public class FrontController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         sinDataList.addAll(ss.afficher());
+        System.out.println("Statut initial: " + ItemController.s.getStatut());
         if (sinDataList.size() > 0) {
             setChosenSin(sinDataList.get(0));
             myListener = new MyListener() {
@@ -117,18 +125,18 @@ public class FrontController implements Initializable {
     }
 
     private void setChosenSin(Sinistre se) {
-            typelabe.setText(ItemController.nomt);
-            datelabel.setText(ItemController.date);
-            lieulabel.setText(ItemController.s.getLieu());
-            desclabel.setText(ItemController.s.getDescription());
-            degatslabel.setText(ItemController.s.getDegats());
-            statutlabel.setText(ItemController.s.getStatut());
-            String imagePath = "C:\\Users\\HD\\Desktop\\Installations\\XAMPP\\htdocs\\imagePi\\" + ItemController.s.getFile();
-            try {
-                imaged.setImage(new Image(new FileInputStream(imagePath)));
-            } catch (FileNotFoundException e) {
-                System.err.println("Error loading image: " + e.getMessage());
-            }
+        typelabe.setText(ItemController.nomt);
+        datelabel.setText(ItemController.date);
+        lieulabel.setText(ItemController.s.getLieu());
+        desclabel.setText(ItemController.s.getDescription());
+        degatslabel.setText(ItemController.s.getDegats());
+        statutlabel.setText(ItemController.s.getStatut());
+        String imagePath = "C:\\Users\\HD\\Desktop\\Installations\\XAMPP\\htdocs\\imagePi\\" + ItemController.s.getFile();
+        try {
+            imaged.setImage(new Image(new FileInputStream(imagePath)));
+        } catch (FileNotFoundException e) {
+            System.err.println("Error loading image: " + e.getMessage());
+        }
     }
 
     @FXML
@@ -142,7 +150,37 @@ public class FrontController implements Initializable {
     }
 
     @FXML
-    private void modifier(ActionEvent event) {
+    private void modifier(ActionEvent event) throws IOException {
+        if (ItemController.s.getStatut().equals("En cours de traitement") || ItemController.s.getStatut().equals(" En cours de traitement") || ItemController.s.getStatut().equals("  En cours de traitement")) {
+            Alert alerte = new Alert(Alert.AlertType.ERROR);
+            alerte.setTitle("Erreur de modification");
+            alerte.setHeaderText(null);
+            alerte.setContentText("Impossible de modifier ce sinistre car son traitement a déjà commencé.");
+            alerte.showAndWait();
+            return;
+        } else if (ItemController.s.getStatut().equals("Traité") || ItemController.s.getStatut().equals(" Traité") || ItemController.s.getStatut().equals("  Traité")) {
+            Alert alerte = new Alert(Alert.AlertType.ERROR);
+            alerte.setTitle("Erreur de modification");
+            alerte.setHeaderText(null);
+            alerte.setContentText("Impossible de modifier ce sinistre car il a déjà été traité.");
+            alerte.showAndWait();
+            return;
+        } else if (ItemController.s.getStatut().equals("Refusé") || ItemController.s.getStatut().equals(" Refusé") || ItemController.s.getStatut().equals("  Refusé")) {
+            Alert alerte = new Alert(Alert.AlertType.ERROR);
+            alerte.setTitle("Erreur de modification");
+            alerte.setHeaderText(null);
+            alerte.setContentText("Impossible de modifier ce sinistre car il a été refusé.");
+            alerte.showAndWait();
+            return;
+        } else if (ItemController.s.getStatut().equals("En attente de traitement") || ItemController.s.getStatut().equals(" En attente de traitement") || ItemController.s.getStatut().equals("  En attente de traitement")) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/FrontModifier.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+
     }
 
     @FXML

@@ -188,7 +188,7 @@ public class AjoutController implements Initializable {
 
     @FXML
     private void retour(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/AffichageFront.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Front.fxml"));
         Parent root = loader.load();
 
         // Get the current stage and set the new scene
