@@ -65,6 +65,7 @@ import javafx.util.Callback;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.function.Predicate;
 import javafx.scene.image.ImageView;
 import tn.esprit.services.ReponseService;
 import tn.esprit.entities.Reponse;
@@ -91,6 +92,8 @@ public class ReponseController implements Initializable {
     private Pane paneReponses;
      @FXML
     private Button reclamation;
+    @FXML
+    private TextField tfrecherche;
     
     public Connection cnx;
     public Statement stm;
@@ -123,8 +126,12 @@ public void initialize(URL url, ResourceBundle rb) {
     reclamation.setOnAction((ActionEvent event) -> {
             reclamation();
         });
+     
 
-
+ //recherche
+             tfrecherche.textProperty().addListener((observable, oldValue, newValue) -> {
+        rechercherReponses(newValue);
+    });
     // Appel de la méthode ShowListe() pour afficher la liste des réclamations
     ShowListe();
 }
@@ -272,6 +279,25 @@ ShowListe();
             Logger.getLogger(ReclamationsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+  public void rechercherReponses(String recherche) {
+    ObservableList<Reponse> list = getReponseList();
+
+ if (recherche != null && !recherche.isEmpty()) {
+    Predicate<Reponse> predicate = reponse -> {
+        Reclamation reclamation = reponse.getReclamation();
+        return reclamation != null && reclamation.getReference().contains(recherche);
+    };
+
+    list = list.filtered(predicate);
+}
+
+lvReponse.setItems(list);
+
+
+
+
+ 
+}
 }
 
 

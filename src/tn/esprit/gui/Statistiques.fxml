@@ -5,10 +5,11 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="814.0" prefWidth="1167.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.StatistiquesController">
    <children>
-      <PieChart fx:id="piechart" layoutX="243.0" layoutY="143.0" prefHeight="528.0" prefWidth="681.0" />
+      <PieChart fx:id="piechart" layoutX="243.0" layoutY="143.0" prefHeight="528.0" prefWidth="681.0" styleClass="right-bar" stylesheets="@../values/styles.css" />
       <Button fx:id="retour" layoutX="1002.0" layoutY="37.0" mnemonicParsing="false" onAction="#retour" style="-fx-background-color: transparent;" text="Retour">
          <graphic>
             <ImageView fitHeight="63.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
@@ -16,6 +17,9 @@
                   <Image url="@../images/retour-removebg-preview.png" />
                </image>
             </ImageView>
-         </graphic></Button>
+         </graphic>
+         <font>
+            <Font name="Cambria" size="14.0" />
+         </font></Button>
    </children>
 </AnchorPane>

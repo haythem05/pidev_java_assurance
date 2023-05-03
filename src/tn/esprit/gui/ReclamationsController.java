@@ -101,6 +101,8 @@ public class ReclamationsController implements Initializable {
     private Pane paneReclamations;
      @FXML
     private TextField recherche;
+      @FXML
+    private Button reponsebtn;
     
     public Connection cnx;
     public Statement stm;
@@ -156,7 +158,9 @@ trid.setOnAction(event -> {
 handleStatButton.setOnAction((ActionEvent event) -> {
     handleStatButton(event);
 });
-
+ reponsebtn.setOnAction((ActionEvent event) -> {
+            reponsebtn();
+        });
 
         // Appel de la méthode ShowListe() pour afficher la liste des réclamations
         ShowListe();
@@ -434,6 +438,18 @@ public void rechercherReclamations(String recherche) {
 
     lvReclamation.setItems(list);
 }
+ @FXML
+  private void reponsebtn() {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("Reponse.fxml"));
+            Scene c = new Scene(root);
+            Stage stage = (Stage) reponsebtn.getScene().getWindow();
+            stage.setScene(c);
+        } catch (IOException ex) {
+            Logger.getLogger(ReclamationsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }
 

@@ -19,7 +19,7 @@ public class Main {
         ReclamationService rs = new ReclamationService();
         // Chemin d'accès du fichier
         String filePath = "C:/Users/MSI/Desktop/français.png";
-        int MAX_FILE_SIZE = 1024 * 1024; // 1 Mo
+        int MAX_FILE_SIZE = 1200* 610; // 1 Mo
 
         // Lecture du contenu du fichier
         File file = new File(filePath);
