@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="480.0" spacing="10.0" styleClass="right-bar" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.SigInController">
+   <children>
+      <Label text="Login" textFill="#878787">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="20.0" />
+         </VBox.margin>
+      </Label>
+      <HBox fx:id="hboxEmail" alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+         <children>
+            <TextField fx:id="tfEmail" promptText="Email" style="-fx-background-color: #ffffff;" HBox.hgrow="ALWAYS">
+               <styleClass>
+                  <String fx:value="date-picker" />
+                  <String fx:value="text-fieldform" />
+               </styleClass></TextField>
+         </children>
+         <VBox.margin>
+            <Insets left="15.0" right="15.0" top="15.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox fx:id="hboxReset" alignment="CENTER_LEFT" layoutX="25.0" layoutY="165.0" prefHeight="40.0" prefWidth="200.0" visible="false">
+         <children>
+            <TextField fx:id="tfReset" promptText="Code" styleClass="tf_box" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <HBox fx:id="hboxPassword" alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+         <children>
+            <PasswordField fx:id="tfPassword" prefHeight="25.0" prefWidth="449.0" promptText="Password" style="-fx-background-color: #ffffff;">
+               <styleClass>
+                  <String fx:value="date-picker" />
+                  <String fx:value="text-fieldform" />
+               </styleClass></PasswordField>
+         </children>
+         <VBox.margin>
+            <Insets left="15.0" right="15.0" top="20.0" />
+         </VBox.margin>
+      </HBox>
+      <Button fx:id="btnSignIn" mnemonicParsing="false" onAction="#fnSignIn" prefHeight="38.0" prefWidth="456.0" styleClass="add-btnblanc" text="Sign In" textFill="#030303" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets left="15.0" right="15.0" top="20.0" />
+         </VBox.margin>
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnForgetPassword" layoutX="25.0" layoutY="314.0" mnemonicParsing="false" onAction="#fnForgetPassword" prefHeight="38.0" prefWidth="456.0" styleClass="add-btnblanc" text="Forget Password ?">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnReset" layoutX="25.0" layoutY="330.0" mnemonicParsing="false" onAction="#fnResetGo" prefHeight="38.0" prefWidth="456.0" styleClass="add-btnblanc" text="Reset">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+   </children>
+</VBox>

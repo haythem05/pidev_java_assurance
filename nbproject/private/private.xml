@@ -3,11 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ranim/Documents/NetBeansProjects/PI1/src/entities/Utilisateur.java</file>
-            <file>file:/C:/Users/Ranim/Documents/NetBeansProjects/PI1/src/entities/Client.java</file>
-            <file>file:/C:/Users/Ranim/Documents/NetBeansProjects/PI1/src/gui/LoginController.java</file>
-            <file>file:/C:/Users/Ranim/Documents/NetBeansProjects/PI1/src/entities/Admin.java</file>
-            <file>file:/C:/Users/Ranim/Documents/NetBeansProjects/PI1/src/services/UtilisateurService.java</file>
+            <file>file:/C:/Users/Ranim/Downloads/JavaPiUser/src/javapiuser/JavaPiUser.java</file>
+            <file>file:/C:/Users/Ranim/Downloads/JavaPiUser/src/tn/esprit/gui/SigInController.java</file>
+            <file>file:/C:/Users/Ranim/Downloads/JavaPiUser/src/tn/esprit/gui/styles.css</file>
+            <file>file:/C:/Users/Ranim/Downloads/JavaPiUser/src/tn/esprit/tools/Datasource.java</file>
+            <file>file:/C:/Users/Ranim/Downloads/JavaPiUser/src/tn/esprit/gui/HomeAdminController.java</file>
+            <file>file:/C:/Users/Ranim/Downloads/JavaPiUser/src/tn/esprit/gui/Home.fxml</file>
+            <file>file:/C:/Users/Ranim/Downloads/JavaPiUser/src/tn/esprit/gui/Main.fxml</file>
+            <file>file:/C:/Users/Ranim/Downloads/JavaPiUser/src/tn/esprit/entities/User.java</file>
+            <file>file:/C:/Users/Ranim/Downloads/JavaPiUser/src/tn/esprit/services/UserService.java</file>
+            <file>file:/C:/Users/Ranim/Downloads/JavaPiUser/src/tn/esprit/gui/MainController.java</file>
+            <file>file:/C:/Users/Ranim/Downloads/JavaPiUser/src/tn/esprit/entities/Session.java</file>
         </group>
     </open-files>
 </project-private>

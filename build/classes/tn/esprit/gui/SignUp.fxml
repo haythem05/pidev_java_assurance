@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="480.0" styleClass="right-bar" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.SignUpController">
+   <children>
+      <Label text="Sign Up" textFill="#878787">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="20.0" />
+         </VBox.margin>
+      </Label>
+      <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="589.0">
+         <children>
+            <TextField fx:id="tfNom" promptText="Nom" style="-fx-background-color: #ffffff;" stylesheets="@styles.css" HBox.hgrow="ALWAYS">
+               <styleClass>
+                  <String fx:value="text-fieldform" />
+                  <String fx:value="date-picker" />
+               </styleClass></TextField>
+            <Label fx:id="lbPath" visible="false" />
+         </children>
+         <VBox.margin>
+            <Insets left="15.0" right="15.0" top="20.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="169.0" prefHeight="44.0" prefWidth="402.0">
+         <children>
+            <TextField fx:id="tfPrenom" promptText="Prenom" style="-fx-background-color: #ffffff;" stylesheets="@styles.css" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets left="16.0" right="16.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="text-fieldform" />
+                  <String fx:value="date-picker" />
+               </styleClass></TextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="709.0">
+         <children>
+            <TextField fx:id="tfEmail" prefHeight="26.0" prefWidth="513.0" promptText="Email" style="-fx-background-color: #ffffff;" stylesheets="@styles.css" HBox.hgrow="ALWAYS">
+               <styleClass>
+                  <String fx:value="text-fieldform" />
+                  <String fx:value="date-picker" />
+               </styleClass></TextField>
+         </children>
+         <VBox.margin>
+            <Insets left="15.0" right="15.0" top="15.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="735.0">
+         <children>
+            <PasswordField fx:id="tfPassword" prefHeight="26.0" prefWidth="468.0" promptText="Password" style="-fx-background-color: #ffffff;" stylesheets="@styles.css">
+               <styleClass>
+                  <String fx:value="date-picker" />
+                  <String fx:value="text-fieldform" />
+               </styleClass></PasswordField>
+         </children>
+         <VBox.margin>
+            <Insets left="15.0" right="15.0" top="20.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="376.0">
+         <children>
+            <TextField fx:id="tfTel" prefHeight="26.0" prefWidth="411.0" promptText="Numero Tel" style="-fx-background-color: #ffffff;" stylesheets="@styles.css" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets left="16.0" right="16.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="text-fieldform" />
+                  <String fx:value="date-picker" />
+               </styleClass></TextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="324.0" prefHeight="40.0" prefWidth="200.0">
+         <children>
+            <TextField fx:id="tfCin" promptText="CIN" style="-fx-background-color: #ffffff;" stylesheets="@styles.css" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets left="16.0" right="16.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="text-fieldform" />
+                  <String fx:value="date-picker" />
+               </styleClass></TextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="304.0" prefHeight="40.0" prefWidth="200.0">
+         <children>
+            <DatePicker fx:id="tfDate" prefHeight="25.0" prefWidth="497.0" promptText="Date de Naissance" stylesheets="@styles.css">
+               <HBox.margin>
+                  <Insets left="16.0" right="16.0" />
+               </HBox.margin>
+               <styleClass>
+                  <String fx:value="date-picker" />
+                  <String fx:value="text-fieldform" />
+               </styleClass></DatePicker>
+         </children>
+      </HBox>
+      <Button mnemonicParsing="false" onAction="#fnSignUp" prefHeight="38.0" prefWidth="456.0" styleClass="add-btnblanc" stylesheets="@styles.css" text="Sign Up">
+         <font>
+            <Font name="Cambria" size="17.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="15.0" right="15.0" top="20.0" />
+         </VBox.margin>
+      </Button>
+   </children>
+</VBox>
