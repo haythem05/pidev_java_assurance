@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.StatistiquesSController">
+   <children>
+      <TabPane fx:id="tabPane" layoutX="1.0" layoutY="1.0" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabType" onSelectionChanged="#stat_type" text="Statistiques selon le type">
+            <content>
+              <AnchorPane fx:id="paneType" minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="623.0">
+                     <children>
+                        <PieChart fx:id="chartType" layoutX="14.0" layoutY="1.0" prefHeight="367.0" prefWidth="500.0" />
+                        <Button fx:id="retour" layoutX="534.0" layoutY="331.0" mnemonicParsing="false" onAction="#retourT" text="Retour" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tabStatut" onSelectionChanged="#stat_statut" text="Statistiques selon le statut">
+            <content>
+              <AnchorPane fx:id="paneStatut" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <PieChart fx:id="chartStatut" layoutX="14.0" layoutY="1.0" prefHeight="367.0" prefWidth="500.0" />
+                        <Button layoutX="534.0" layoutY="325.0" mnemonicParsing="false" onAction="#retourS" text="Retour" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

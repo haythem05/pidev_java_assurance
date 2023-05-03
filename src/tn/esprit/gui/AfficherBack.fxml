@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.AfficherBackController">
+   <children>
+      <ListView fx:id="list" layoutX="31.0" layoutY="78.0" prefHeight="269.0" prefWidth="542.0" />
+      <Label layoutX="244.0" layoutY="5.0" text="Liste des sinistres" textFill="#b10909">
+         <font>
+            <Font name="Javanese Text" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="traiter" layoutX="60.0" layoutY="357.0" mnemonicParsing="false" onAction="#traiter" prefHeight="25.0" prefWidth="94.0" text="Traiter" />
+      <Button fx:id="stat" layoutX="183.0" layoutY="357.0" mnemonicParsing="false" onAction="#stat" text="Génerer statistiques" />
+      <Button fx:id="tri_d" layoutX="457.0" layoutY="357.0" mnemonicParsing="false" onAction="#sortButtonDESC" text="Tri descendant" />
+      <Button fx:id="tri_a" layoutX="337.0" layoutY="357.0" mnemonicParsing="false" onAction="#sortButtonASC" prefHeight="25.0" prefWidth="94.0" text="Tri ascendant" />
+      <TextField fx:id="tf_recherche" layoutX="181.0" layoutY="48.0" />
+      <Label layoutX="49.0" layoutY="52.0" text="Rechercher un sinistre" />
+      <VBox layoutX="556.0" layoutY="4.0" prefHeight="43.0" prefWidth="39.0">
+         <children>
+            <ImageView fitHeight="37.0" fitWidth="43.0" onMouseClicked="#shownb" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@cloche.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <Label fx:id="labelNbSinistresEnAttente" contentDisplay="CENTER" layoutX="569.0" layoutY="43.0" prefHeight="17.0" prefWidth="17.0" textAlignment="CENTER" />
+   </children>
+</AnchorPane>

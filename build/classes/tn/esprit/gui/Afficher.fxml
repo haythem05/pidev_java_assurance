@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.AfficherController">
+   <children>
+      <ListView fx:id="list" layoutX="220.0" layoutY="73.0" prefHeight="333.0" prefWidth="574.0" />
+      <Button layoutX="471.0" layoutY="430.0" mnemonicParsing="false" onAction="#modifier" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #F9A885;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Modifier" />
+      <Button layoutX="655.0" layoutY="432.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-background-color: #E37A7A;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Supprimer" />
+      <Button layoutX="285.0" layoutY="432.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: #54D39D;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Ajouter" />
+      <Label layoutX="393.0" layoutY="27.0" text="Liste des sinistres" textAlignment="CENTER" textFill="#070707">
+         <font>
+            <Font name="Corbel Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="9.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@logo_final-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" layoutX="9.0" layoutY="191.0" prefHeight="281.0" prefWidth="193.0" style="-fx-background-color: #70B8D9;" stylesheets="@../../../values/styles.css">
+         <children>
+            <Label alignment="CENTER" text="BIENVENUE" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Corbel Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Nos informations" underline="true">
+               <font>
+                  <Font name="Corbel" size="15.0" />
+               </font>
+            </Label>
+            <Label text="Site Web">
+               <font>
+                  <Font name="Corbel Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="www.securassur.tn" textFill="#8f8f8f">
+               <font>
+                  <Font name="Corbel" size="13.0" />
+               </font>
+            </Label>
+            <Label text="Adresse mail">
+               <font>
+                  <Font name="Corbel Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="securassurance@gmail.com" textFill="#8f8f8f">
+               <font>
+                  <Font name="Corbel" size="13.0" />
+               </font>
+            </Label>
+            <Label text="Numéro de téléphone">
+               <font>
+                  <Font name="Corbel Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="+216 58 434 230" textFill="#8f8f8f">
+               <font>
+                  <Font name="Corbel" size="13.0" />
+               </font>
+            </Label>
+         </children>
+         <styleClass>
+            <String fx:value="white-backgroung" />
+            <String fx:value="button-rounded" />
+         </styleClass>
+      </VBox>
+   </children>
+</AnchorPane>

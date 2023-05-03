@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.AffichageFrontController">
+   <left>
+      <VBox prefHeight="200.0" prefWidth="180.0" styleClass="white-backgroung" stylesheets="@../../../values/styles.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" stylesheets="@../../../values/styles.css">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@logo_final-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <styleClass>
+                  <String fx:value="profile-layout" />
+                  <String fx:value="white-backgroung" />
+               </styleClass>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="281.0" prefWidth="193.0" style="-fx-background-color: #70B8D9;" stylesheets="@../../../values/styles.css">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+               <children>
+                  <Label alignment="CENTER" text="BIENVENUE" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Corbel Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Nos informations" underline="true">
+                     <font>
+                        <Font name="Corbel" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label text="Site Web">
+                     <font>
+                        <Font name="Corbel Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="www.securassur.tn" textFill="#8f8f8f">
+                     <font>
+                        <Font name="Corbel" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="Adresse mail">
+                     <font>
+                        <Font name="Corbel Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="securassurance@gmail.com" textFill="#8f8f8f">
+                     <font>
+                        <Font name="Corbel" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="Numéro de téléphone">
+                     <font>
+                        <Font name="Corbel Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="+216 58 434 230" textFill="#8f8f8f">
+                     <font>
+                        <Font name="Corbel" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+               <styleClass>
+                  <String fx:value="white-backgroung" />
+                  <String fx:value="button-rounded" />
+               </styleClass>
+            </VBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="white-backgroung" stylesheets="@../../../values/styles.css">
+               <children>
+                  <Label text="Liste des sinistres">
+                     <font>
+                        <Font name="Corbel Bold" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Pane prefHeight="100.0" prefWidth="237.0" />
+                  <TextField styleClass="text-field" stylesheets="@../../../values/styles.css" />
+                  <Pane prefHeight="100.0" prefWidth="11.0" />
+                  <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@recherche.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="white-backgroung" stylesheets="@../../../values/styles.css">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="88.0" style="-fx-background-color: #54D39D;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Ajouter" />
+                  <Pane prefHeight="100.0" prefWidth="101.0" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="88.0" style="-fx-background-color: #F9A885;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Modifier" />
+                  <Pane prefHeight="100.0" prefWidth="101.0" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="88.0" style="-fx-background-color: #E37A7A;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Supprimer" />
+               </children>
+            </HBox>
+            <HBox prefHeight="300.0" prefWidth="607.0">
+               <children>
+                  <ListView prefHeight="300.0" prefWidth="607.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
