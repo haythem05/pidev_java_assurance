@@ -11,6 +11,24 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/controller/StatistiquesController.java</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/Statistiques.fxml</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/controller/AjouterReponseController.java</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/ModifierReclamation.fxml</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/AjouterReponse.fxml</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/controller/ModifierReponseController.java</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/controller/ReclamationsController.java</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/controller/ModifierReclamationController.java</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/Reponse.fxml</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/AfficherReclamation.fxml</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/Reclamations.fxml</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/controller/ChatBotController.java</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/pidevj3a40/PidevJ3A40.java</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/controller/ReponseController.java</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/ModifierReponse.fxml</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/ChatBot.fxml</file>
+            <file>file:/C:/Users/MSI/Desktop/PidevJ3A40/src/tn/esprit/gui/AjouterReclamation.fxml</file>
+        </group>
     </open-files>
 </project-private>

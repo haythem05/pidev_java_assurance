@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tn.esprit.gui;
+package tn.esprit.controller;
 
 import java.util.UUID;
 import java.io.File;
@@ -164,7 +164,7 @@ if (id_user.isEmpty() && note.isEmpty()) {
 
     public void redirectToList() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Reponse.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Reponse.fxml"));
             Scene scene = new Scene(root);
             Stage stage = (Stage) retour.getScene().getWindow();
             stage.setScene(scene);

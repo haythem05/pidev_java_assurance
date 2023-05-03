@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tn.esprit.gui;
+package tn.esprit.controller;
 
+import tn.esprit.controller.AjouterReclamationController;
 import pidevj3a40.PidevJ3A40;
 import java.io.IOException;
 import java.net.URL;
@@ -120,7 +121,7 @@ data.add(slice);
 
   public void redirectToList() {
     try {
-        Parent root = FXMLLoader.load(getClass().getResource("Reclamations.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Reclamations.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage) retour.getScene().getWindow();
         stage.setScene(scene);

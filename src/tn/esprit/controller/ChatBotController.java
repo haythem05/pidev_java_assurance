@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tn.esprit.gui;
+package tn.esprit.controller;
 
 import tn.esprit.services.ChatBotConstants;
 import java.net.URL;

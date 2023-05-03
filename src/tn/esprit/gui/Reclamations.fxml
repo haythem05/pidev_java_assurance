@@ -12,10 +12,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="671.0" prefWidth="1164.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.ReclamationsController">
+<AnchorPane id="AnchorPane" prefHeight="671.0" prefWidth="1164.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.ReclamationsController">
    <children>
-      <VBox prefHeight="671.0" prefWidth="211.0" style="-fx-background-color: trasparent;" />
-      <VBox alignment="CENTER" layoutX="11.0" layoutY="10.0" prefHeight="633.0" prefWidth="1942.0" style="-fx-background-color: #ECE3C9;" styleClass="chosen-fruit-card" stylesheets="@../../../../../../Downloads/wetransfer_pidev_2023-05-03_1346/PiDev/src/values/styles.css">
+      <VBox prefHeight="671.0" prefWidth="211.0" style="-fx-background-color: transparent;" />
+      <VBox alignment="CENTER" layoutX="11.0" layoutY="10.0" prefHeight="633.0" prefWidth="1942.0" style="-fx-background-color: #ECE3C9;" styleClass="chosen-fruit-card" stylesheets="@../values/styles.css">
          <children>
             <Pane fx:id="paneReclamations1" prefHeight="636.0" prefWidth="220.0">
                <children>
@@ -55,7 +55,7 @@
                         <Font name="Cambria" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="refresh" layoutX="-8.0" layoutY="341.0" mnemonicParsing="false" onAction="#refresh" prefHeight="72.0" prefWidth="193.0" style="-fx-background-color: trasnparent;" text="   Actualiser">
+                  <Button fx:id="refresh" layoutX="-8.0" layoutY="341.0" mnemonicParsing="false" onAction="#refresh" prefHeight="72.0" prefWidth="193.0" style="-fx-background-color: transparent;" text="   Actualiser">
                      <graphic>
                         <ImageView fitHeight="55.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                            <image>

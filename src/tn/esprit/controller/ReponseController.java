@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tn.esprit.gui;
+package tn.esprit.controller;
 
+import tn.esprit.controller.ReclamationsController;
+import tn.esprit.controller.ModifierReponseController;
+import tn.esprit.controller.AjouterReponseController;
 import tn.esprit.entities.Reclamation;
 import java.io.IOException;
 import java.net.URL;
@@ -139,7 +142,7 @@ public void initialize(URL url, ResourceBundle rb) {
 private void GoToCréer() {
     Parent root;
     try {
-        root = FXMLLoader.load(getClass().getResource("AjouterReponse.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AjouterReponse.fxml"));
         Scene c = new Scene(root);
         Stage stage = (Stage) Créer.getScene().getWindow();
         stage.setScene(c);
@@ -160,7 +163,7 @@ private void GoToModifierR() {
     this.idSelected = selectedReponse.getId();
 
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifierReponse.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/ModifierReponse.fxml"));
         Parent root = loader.load();
 
         ModifierReponseController controller = loader.getController();
@@ -271,7 +274,7 @@ ShowListe();
   private void reclamation() {
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("Reclamations.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Reclamations.fxml"));
             Scene c = new Scene(root);
             Stage stage = (Stage) reclamation.getScene().getWindow();
             stage.setScene(c);

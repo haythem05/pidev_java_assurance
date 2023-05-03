@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="724.0" prefWidth="1231.0" styleClass="right-bar" stylesheets="@../values/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.gui.ChatBotController">
+<AnchorPane id="AnchorPane" prefHeight="724.0" prefWidth="1231.0" styleClass="right-bar" stylesheets="@../values/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.ChatBotController">
     <children>
         <Label fx:id="lblTitle" layoutX="251.0" layoutY="23.0" text="SecurAssur ChatBot" textFill="#0d0d0d">
             <font>
