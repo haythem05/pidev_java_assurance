@@ -159,6 +159,14 @@ public class Sinistre {
         this.type = type;
     }
 
+    public String getTypeByName(){
+        return type.getNom();
+    }
+    
+    public void setTypeByName(String typeName){
+        this.type.setNom(typeName);
+    }
+    
     @Override
     public String toString() {
         return "Type : " +type.getNom()+ " | Date : " +date_heure+ " | Lieu : " +lieu+ " | Degats : " +degats+ " | Statut : " +statut+ " | Description : " +description+ " | Image : " +file+ " \n\n";

@@ -88,6 +88,9 @@ public class ModifController implements Initializable {
             String lieu = tf_lieu.getText();
             String degats = tf_degats.getText();
             String description = tf_description.getText();
+            SinistreService ss = new SinistreService();
+            //Sinistre si = ss.rechS(id);
+            //String statut = si.getStatut();
 
             if (lieu.isEmpty() || degats.isEmpty() || description.isEmpty() || date_heure == null) {
                 // Afficher un message d'erreur si un champ obligatoire est vide
@@ -114,9 +117,9 @@ public class ModifController implements Initializable {
             alert.setContentText("Le sinistre a été modifié avec succès dans la base de données.");
             alert.showAndWait();
 
-            Sinistre s = new Sinistre(date_heure, lieu, degats, description, url_im);
-            SinistreService ss = new SinistreService();
-            ss.modifiersanst(s, id);
+            //Sinistre s = new Sinistre(date_heure, lieu, degats, description, url_im);
+            Sinistre st = new Sinistre(date_heure, lieu, degats, description, url_im);
+            ss.modifiersanst(st, id);
 
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Afficher.fxml"));
             rootPane.getChildren().setAll(pane);

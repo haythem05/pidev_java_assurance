@@ -20,7 +20,7 @@
       <VBox layoutX="386.0" prefHeight="611.0" prefWidth="813.0" style="-fx-background-color: #f2f2f6;">
          <children>
             <HBox prefHeight="24.0" prefWidth="813.0" />
-            <HBox prefHeight="88.0" prefWidth="813.0">
+            <HBox prefHeight="65.0" prefWidth="813.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="88.0" prefWidth="355.0" styleClass="free-delivery-card" stylesheets="@../../../values/styles.css">
                      <children>
@@ -45,7 +45,7 @@
                   <Pane prefHeight="88.0" prefWidth="133.0" />
                   <VBox prefHeight="110.0" prefWidth="278.0">
                      <children>
-                        <Pane prefHeight="22.0" prefWidth="268.0" />
+                        <Pane prefHeight="10.0" prefWidth="273.0" />
                         <TextField fx:id="tf_recherche" prefHeight="46.0" prefWidth="268.0" styleClass="search-box" stylesheets="@../../../values/styles.css" />
                      </children>
                   </VBox>
@@ -112,7 +112,7 @@
                                        </font>
                                     </Label>
                                     <Pane prefHeight="37.0" prefWidth="30.0" />
-                                    <Label fx:id="typelabe" prefHeight="37.0" prefWidth="239.0" text="Label" />
+                                    <Label fx:id="typelabe" prefHeight="37.0" prefWidth="85.0" text="Label" />
                                  </children>
                                  <VBox.margin>
                                     <Insets left="20.0" top="20.0" />
@@ -126,7 +126,7 @@
                                        </font>
                                     </Label>
                                     <Pane prefHeight="37.0" prefWidth="30.0" />
-                                    <Label fx:id="datelabel" text="Label" />
+                                    <Label fx:id="datelabel" prefHeight="17.0" prefWidth="57.0" text="Label" />
                                  </children>
                                  <VBox.margin>
                                     <Insets left="20.0" />

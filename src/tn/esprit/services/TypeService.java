@@ -86,4 +86,24 @@ public class TypeService implements Fonctions<Type>{
         }
     }
     
+    public List<Type> rechType(int id) {
+        List<Type> list = new ArrayList<>();
+        try {
+            String req = "select * from type where id= " + id;
+            Statement st = cnx.createStatement();
+            ResultSet RS = st.executeQuery(req);
+            while (RS.next()) {
+                Type t = new Type();
+                t.setId(RS.getInt(2));
+                t.setNom(RS.getString("nom"));
+
+                list.add(t);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+
+        return list;
+    }
+    
 }

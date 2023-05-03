@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -20,7 +21,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import tn.esprit.entities.Type;
 import tn.esprit.entities.Sinistre;
-import tn.esprit.services.MyListener;
 import tn.esprit.services.SinistreService;
 
 /**
@@ -44,11 +44,13 @@ public class ItemController implements Initializable {
     private int id;
     private MyListener myListener;
     private Sinistre sin;
+    private Type typ;
     static Sinistre s = new Sinistre();
+    static public String nomt;
+    static public String date;
     
     
     public void setData(int id, Timestamp date_heure, String lieu, String statut, String description, String degats, String file, Type type, MyListener myListener) {
-
         this.id = id;
         this.myListener = myListener;
         type_sin.setText(type.getNom());
@@ -83,7 +85,6 @@ public class ItemController implements Initializable {
 
     @FXML
     private void Click(MouseEvent event) {
-        
         SinistreService sc = new SinistreService();
         List<Sinistre> L = new ArrayList<>();
         myListener.onClick(sin);
@@ -96,7 +97,8 @@ public class ItemController implements Initializable {
         s.setLieu(L.get(0).getLieu());
         s.setStatut(L.get(0).getStatut());
         s.setType(L.get(0).getType());
-        
+        nomt= s.getType().getNom();
+        date=s.getDate_heure().toString();
     }
     
     public interface MyListener {
