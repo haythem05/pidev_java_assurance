@@ -19,7 +19,6 @@
    <children>
       <VBox layoutX="386.0" prefHeight="611.0" prefWidth="813.0" style="-fx-background-color: #f2f2f6;">
          <children>
-            <HBox prefHeight="24.0" prefWidth="813.0" />
             <HBox prefHeight="60.0" prefWidth="813.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="49.0" prefWidth="349.0" styleClass="free-delivery-card" stylesheets="@../../../values/styles.css">
@@ -60,7 +59,17 @@
                         <Pane prefHeight="202.0" prefWidth="66.0" />
                      </children>
                   </VBox>
-               </children></HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="24.0" prefWidth="813.0">
+               <children>
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="811.0" style="-fx-background-color: #f2f2f6;" text="Séléctionnez sur un sinistre pour voir ses détails" textFill="#878787">
+                     <font>
+                        <Font name="Cambria" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <ScrollPane fx:id="scroll" prefHeight="496.0" prefWidth="803.0" style="-fx-background-color: #f2f2f6;">
                <content>
                   <GridPane fx:id="grid">

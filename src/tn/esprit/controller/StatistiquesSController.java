@@ -195,7 +195,7 @@ public class StatistiquesSController implements Initializable {
 
     @FXML
     private void retourT(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AffichageBack.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Back.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
@@ -208,7 +208,7 @@ public class StatistiquesSController implements Initializable {
 
     @FXML
     private void retourS(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/AffichageBack.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/tn/esprit/gui/Back.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 

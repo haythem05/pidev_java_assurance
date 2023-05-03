@@ -72,7 +72,7 @@ public class TraitementController implements Initializable {
                     break;
             }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/AffichageBack.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Back.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -86,7 +86,7 @@ public class TraitementController implements Initializable {
 
     @FXML
     private void retour(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/AffichageBack.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Back.fxml"));
         Parent root = loader.load();
 
         // Get the current stage and set the new scene

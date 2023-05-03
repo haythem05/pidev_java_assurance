@@ -78,11 +78,14 @@ public class FrontController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         sinDataList.addAll(ss.afficher());
-        System.out.println("Statut initial: " + ItemController.s.getStatut());
+        System.out.println("Statut initial: " + ItemController.statut);
         if (sinDataList.size() > 0) {
             setChosenSin(sinDataList.get(0));
             myListener = new MyListener() {
@@ -102,6 +105,7 @@ public class FrontController implements Initializable {
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 ItemController item = fxmlLoader.getController();
+                //statutlabel.setText(ItemController.statut);
                 item.setData(sinDataList.get(i).getId(), sinDataList.get(i).getDate_heure(), sinDataList.get(i).getLieu(), sinDataList.get(i).getStatut(), sinDataList.get(i).getDescription(), sinDataList.get(i).getDegats(), sinDataList.get(i).getFile(), sinDataList.get(i).getType(), myListener);
 
                 if (column == 2) {
@@ -121,9 +125,22 @@ public class FrontController implements Initializable {
             } catch (IOException e) {
                 System.out.println("problem");
             }
+            /*updateList();
+            tf_recherche.textProperty().addListener((observable, oldValue, newValue) -> {
+                updateList(newValue);
+            });*/
         }
     }
 
+    /*public void updateList() {
+        List<Sinistre> liste = ss.getAllSinistres();
+        list.getItems().setAll(liste);
+    }
+
+    public void updateList(String search) {
+        List<Sinistre> liste = ss.searchSinistres(search);
+        list.getItems().setAll(liste);
+    }*/
     private void setChosenSin(Sinistre se) {
         typelabe.setText(ItemController.nomt);
         datelabel.setText(ItemController.date);
@@ -184,7 +201,20 @@ public class FrontController implements Initializable {
     }
 
     @FXML
-    private void supprimer(ActionEvent event) {
+    private void supprimer(ActionEvent event) throws IOException {
+        ss.supprimer(ItemController.s.getId());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Suppression réussie");
+        alert.setHeaderText(null);
+        alert.setContentText("Le sinistre a été supprimé avec succès dans la base de données.");
+        alert.showAndWait();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Front.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
     }
 
 }

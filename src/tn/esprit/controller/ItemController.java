@@ -50,6 +50,7 @@ public class ItemController implements Initializable {
     static public String date;
     static public String lieu, degats, description, url_image;
     static public Timestamp date_heure;
+    static public String statut=" ";
     //static public int id;
     
     

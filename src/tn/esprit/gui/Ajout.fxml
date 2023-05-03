@@ -63,7 +63,7 @@
          </styleClass>
       </TextField>
       <DatePicker fx:id="date" layoutX="308.0" layoutY="120.0" styleClass="text-fieldform" stylesheets="@../../../values/styles.css" />
-      <ImageView fx:id="imageV" fitHeight="209.0" fitWidth="343.0" layoutX="670.0" layoutY="186.0" onMouseClicked="#add_image" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageV" fitHeight="209.0" fitWidth="343.0" layoutX="674.0" layoutY="186.0" onMouseClicked="#add_image" pickOnBounds="true" preserveRatio="true" />
       <ChoiceBox fx:id="list_types" layoutX="308.0" layoutY="200.0" prefHeight="37.0" prefWidth="191.0" stylesheets="@../../../values/styles.css">
          <styleClass>
             <String fx:value="text-fieldform" />

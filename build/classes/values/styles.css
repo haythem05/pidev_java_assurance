@@ -139,5 +139,9 @@
   border-top: 2px solid black;
   font-weight: bold;
 }
+.add-btngrissombre{
+    -fx-background-color:  #D3D3D3;
+    -fx-background-radius: 100;
+}
 
 

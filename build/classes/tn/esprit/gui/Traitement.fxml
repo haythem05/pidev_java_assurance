@@ -6,21 +6,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="tn.esprit.controller.TraitementController">
+<AnchorPane id="AnchorPane" prefHeight="610.0" prefWidth="1200.0" styleClass="right-bar" stylesheets="@../../../values/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.TraitementController">
    <children>
-      <Label layoutX="130.0" layoutY="35.0" text="Traitez le sinistre" textFill="#54d39d">
+      <Label layoutX="444.0" layoutY="41.0" text="Traitez le sinistre" textFill="#878787">
          <font>
-            <Font name="Corbel Bold" size="20.0" />
+            <Font name="Cambria Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="54.0" layoutY="164.0" text="Statut">
+      <Label layoutX="426.0" layoutY="302.0" text="Statut">
          <font>
-            <Font name="Corbel" size="14.0" />
+            <Font name="Cambria" size="17.0" />
          </font>
       </Label>
-      <Button layoutX="106.0" layoutY="284.0" mnemonicParsing="false" onAction="#traiter" prefHeight="37.0" prefWidth="87.0" style="-fx-background-color: #54D39D;" styleClass="button-rounded" stylesheets="@../../../values/styles.css" text="Soumettre" />
-      <Button layoutX="265.0" layoutY="284.0" mnemonicParsing="false" onAction="#retour" prefHeight="37.0" prefWidth="87.0" style="-fx-background-color: #70B8D9;" stylesheets="@../../../values/styles.css" text="Retour" />
-      <ChoiceBox fx:id="choixstatut" layoutX="131.0" layoutY="154.0" prefHeight="25.0" prefWidth="204.0" styleClass="text-fieldform" stylesheets="@../../../values/styles.css" />
+      <Button layoutX="413.0" layoutY="524.0" mnemonicParsing="false" onAction="#traiter" prefHeight="32.0" prefWidth="85.0" styleClass="add-btnblanc" stylesheets="@../../../values/styles.css" text="Mettre à jour" />
+      <Button layoutX="639.0" layoutY="524.0" mnemonicParsing="false" onAction="#retour" prefHeight="32.0" prefWidth="85.0" styleClass="add-btnblanc" stylesheets="@../../../values/styles.css" text="Retour" />
+      <ChoiceBox fx:id="choixstatut" layoutX="550.0" layoutY="293.0" prefHeight="25.0" prefWidth="204.0" styleClass="text-fieldform" stylesheets="@../../../values/styles.css" />
    </children>
 </AnchorPane>
