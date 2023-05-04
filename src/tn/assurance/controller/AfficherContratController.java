@@ -167,11 +167,6 @@ private contratS contratService;
         list_supp.getItems().remove(selectedID);
 
     }
-    
-    
-    
-
-
     private void updateListView() {
         List<Contrat> contrats = contratService.getAllContrats();
         listView.getItems().setAll(contrats);

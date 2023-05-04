@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="230.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.assurance.controller.ItemhabitationController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="111.0" prefWidth="400.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="262.0" text="Nombre de pièces immobiliers :">
+               <font>
+                  <Font name="Cambria Bold" size="14.0" />
+               </font>
+            </Label>
+            <Pane prefHeight="112.0" prefWidth="18.0" />
+            <Label fx:id="npilabel" prefHeight="67.0" prefWidth="136.0" text="Label" />
+            <VBox prefHeight="94.0" prefWidth="71.0">
+               <children>
+                  <ImageView fitHeight="48.0" fitWidth="54.0" onMouseClicked="#Click" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/click.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutY="111.0" prefHeight="120.0" prefWidth="400.0">
+         <children>
+            <Label text="Devis">
+               <font>
+                  <Font name="Cambria Bold" size="14.0" />
+               </font></Label>
+            <Pane prefHeight="120.0" prefWidth="48.0" />
+            <Label fx:id="devislabel" prefHeight="47.0" prefWidth="273.0" text="Label" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

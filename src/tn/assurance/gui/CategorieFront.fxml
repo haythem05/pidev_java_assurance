@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="610.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.assurance.controller.CategorieFrontController">
+   <children>
+      <VBox layoutX="396.0" layoutY="10.0" prefHeight="611.0" prefWidth="813.0" style="-fx-background-color: #f2f2f6;">
+         <children>
+            <HBox prefHeight="24.0" prefWidth="813.0">
+               <children>
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="811.0" style="-fx-background-color: #f2f2f6;" text="Séléctionnez sur une catégorie pour voir ses détails" textFill="#878787">
+                     <font>
+                        <Font name="Cambria" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <ScrollPane fx:id="scroll" prefHeight="522.0" prefWidth="803.0" style="-fx-background-color: #f2f2f6;">
+               <content>
+                  <GridPane fx:id="grid">
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </content>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </ScrollPane>
+            <HBox prefHeight="58.0" prefWidth="821.0">
+               <children>
+                  <Pane prefHeight="58.0" prefWidth="29.0" />
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="349.0" styleClass="free-delivery-card" stylesheets="@../../../../../../../Desktop/noussajava/src/values/styles.css">
+                     <children>
+                        <Label onMouseClicked="#ajouterC" prefHeight="50.0" prefWidth="286.0" text="Ajouter un contrat automobile" textFill="#878787">
+                           <font>
+                              <Font name="Cambria Bold" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ImageView fitHeight="47.0" fitWidth="45.0" onMouseClicked="#ajouterC" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/automobile.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="50.0" prefWidth="71.0" />
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="347.0" styleClass="free-delivery-card" stylesheets="@../../../../../../../Desktop/noussajava/src/values/styles.css">
+                     <children>
+                        <Label onMouseClicked="#ajouterH" prefHeight="50.0" prefWidth="277.0" text="Ajouter un contrat habitation" textFill="#878787">
+                           <font>
+                              <Font name="Cambria Bold" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ImageView fitHeight="39.0" fitWidth="37.0" onMouseClicked="#ajouterH" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/habitation.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children></HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="-1.0" layoutY="-1.0" prefHeight="621.0" prefWidth="397.0" styleClass="right-bar" stylesheets="@../../../../../../../Desktop/noussajava/src/values/styles.css">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="125.0" prefWidth="408.0" text="SecurAssur" textFill="#878787">
+                     <font>
+                        <Font name="Cambria Bold" size="40.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="24.0" prefWidth="387.0" />
+            <VBox alignment="CENTER" prefHeight="548.0" prefWidth="359.0" style="-fx-background-color: #ECE3C9;" styleClass="chosen-fruit-card" stylesheets="@../../../../../../../Desktop/noussajava/src/values/styles.css">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="80.0" prefWidth="366.0" text="Détails" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="27.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <VBox prefHeight="437.0" prefWidth="385.0">
+                     <children>
+                        <VBox prefHeight="430.0" prefWidth="358.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="347.0">
+                                 <children>
+                                    <Label text="Nom :">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Pane prefHeight="37.0" prefWidth="15.0" />
+                                    <Label fx:id="nomL" prefHeight="37.0" prefWidth="243.0" text="Label" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="20.0" top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="347.0">
+                                 <children>
+                                    <Label text="Description :">
+                                       <font>
+                                          <Font name="Cambria" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Pane prefHeight="37.0" prefWidth="15.0" />
+                                    <Label fx:id="desclabel" prefHeight="37.0" prefWidth="195.0" text="Label" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="88.0" prefWidth="358.0" />
+                              <ImageView fx:id="imaged" fitHeight="207.0" fitWidth="353.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="107.0" prefWidth="385.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Pane prefHeight="73.0" prefWidth="68.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -7,9 +7,14 @@ package tn.assurance.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+//import java.util.Date;
+//import java.sql.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +33,6 @@ import tn.assurance.models.Categorie;
 import tn.assurance.models.Contrat;
 import tn.assurance.services.categorieS;
 import tn.assurance.services.contratS;
-
 
 /**
  * FXML Controller class
@@ -59,86 +63,89 @@ public class ModifierContratController implements Initializable {
     private TextField marquec;
     @FXML
     private TextField modelc;
-    @FXML
-    private ImageView imageV;
+    private String url_im;
 
     /**
      * Initializes the controller class.
      */
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-  imageV.setImage(new javafx.scene.image.Image("file:C:\\Users\\haythem\\Documents\\NetBeansProjects\\Assurance\\build\\classes\\images\\logo.png"));
-        idclientc.setText(Integer.toString(AfficherContratController.idclient));
-        nbplacec.setText(Integer.toString(AfficherContratController.nbplace));
-        valeurCataloguec.setText(Float.toString(AfficherContratController.valeurcatalogue));
-
-        avantagesc.setText(AfficherContratController.avantages);
-        prixc.setText(Float.toString(AfficherContratController.prix));
-        marquec.setText(AfficherContratController.marque);
-        modelc.setText(AfficherContratController.modele);
-        
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    datedebutc.setValue(LocalDate.parse(dateFormat.format(AfficherContratController.datedebut)));
-    dateFinc.setValue(LocalDate.parse(dateFormat.format(AfficherContratController.datefin)));
-    datecirculationC.setValue(LocalDate.parse(dateFormat.format(AfficherContratController.datecirculation)));
-}    
-        
+        datedebutc.setPromptText(ItemcontratController.dated);
+        dateFinc.setPromptText(ItemcontratController.datef);
+        datecirculationC.setPromptText(ItemcontratController.datec);
+        idclientc.setText(Integer.toString(ItemcontratController.s.getIdclient()));
+        nbplacec.setText(Integer.toString(ItemcontratController.s.getNbplace()));
+        valeurCataloguec.setText(Float.toString(ItemcontratController.s.getValeurcatalogue()));
+        avantagesc.setText(ItemcontratController.s.getAvantages());
+        prixc.setText(Float.toString(ItemcontratController.s.getPrix()));
+        marquec.setText(ItemcontratController.s.getMarque());
+        modelc.setText(ItemcontratController.s.getModele());
+    }
 
     @FXML
-    private void modifier(ActionEvent event){
+    private void modifier(ActionEvent event) throws ParseException {
         try {
-            int id=AfficherContratController.id;
-            
-            int idclient =Integer.parseInt(idclientc.getText());
-            int nbplace=Integer.parseInt(nbplacec.getText());
-            
-            float valeurcatalogue=Integer.parseInt(nbplacec.getText());
-          
-                        
-            String avantages=avantagesc.getText();
-            float prix=Float.parseFloat(prixc.getText());
-            String modele=modelc.getText();
-                    String marque=marquec.getText();
-         LocalDate d = datedebutc.getValue();
-         
-        Date datedebut = java.sql.Date.valueOf(d);
- Date datecirculation = java.sql.Date.valueOf(d);
- Date datefin = java.sql.Date.valueOf(d);
+            /*int id = ItemController.s.getId();
+            LocalDate d = date.getValue();
+            Timestamp date_heure = Timestamp.valueOf(d.atStartOfDay(ZoneId.systemDefault()).toLocalDateTime());
+            String lieu = tf_lieu.getText();
+            String degats = tf_degats.getText();
+            String description = tf_description.getText();
+            Sinistre s = new Sinistre(date_heure, lieu, degats, description, url_im);
+            SinistreService ss = new SinistreService();
+            ss.modifiersanst(s, id);
 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/gui/Front.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();*/
+            int id = ItemcontratController.s.getId();
+            int idclient = Integer.parseInt(idclientc.getText());
+            int nbplace = Integer.parseInt(nbplacec.getText());
+            float valeurcatalogue = Integer.parseInt(nbplacec.getText());
+            String avantages = avantagesc.getText();
+            float prix = Float.parseFloat(prixc.getText());
+            String modele = modelc.getText();
+            String marque = marquec.getText();
+            //LocalDate d = datedebutc.getValue();
+            //Date datedebut = (Date) Date.from(d.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            LocalDate d = datedebutc.getValue();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date datedebut = null;
+            try {
+                datedebut = (Date) format.parse(d.toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-            
-            
-                 Contrat c = new Contrat( idclient,  nbplace,  valeurcatalogue,  datedebut,  datefin,  datecirculation,  avantages,  marque,  modele);
-                contratS cs=new contratS();
-  
-            
-            
-            
+            //Date datedebut = java.sql.Date.valueOf(d);
+            Date datecirculation = java.sql.Date.valueOf(d);
+            Date datefin = java.sql.Date.valueOf(d);
 
-  
-         cs.modifierContrat(c, id);
-         
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/afficherContrat.fxml"));  
-        
+            Contrat c = new Contrat(idclient, nbplace, valeurcatalogue, datedebut, datefin, datecirculation, avantages, marque, modele);
+            contratS cs = new contratS();
+            cs.modifierContrat(c, id);
+
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/ContratFront.fxml"));
+
             rootPane.getChildren().setAll(pane);
         } catch (IOException ex) {
             System.err.println(ex);
         }
     }
 
- 
-     @FXML
-private void retour(ActionEvent event) throws IOException {
-    // Load the affichercategorie.fxml file
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/assurance/gui/afficherContrat.fxml"));
-    Parent root = loader.load();
+    @FXML
+    private void retour(ActionEvent event) throws IOException {
+        // Load the affichercategorie.fxml file
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/assurance/gui/ContratFront.fxml"));
+        Parent root = loader.load();
 
-    // Get the current stage and set the new scene
-    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    Scene scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+        // Get the current stage and set the new scene
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
-}
-

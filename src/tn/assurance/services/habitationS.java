@@ -114,6 +114,32 @@ public List<Habitation> afficherHabitation() {
     return list;
 }
 
+public List<Habitation> rechHab(int id) {
+        List<Habitation> list = new ArrayList<>();
+        try {
+            String req = "SELECT c.* ,t.nom  FROM assurance_habitation c inner join  categorie t on c.type_id = t.id WHERE c.id=" + id;
+            Statement st = conn.createStatement();
+            ResultSet RS = st.executeQuery(req);
+            while (RS.next()) {
+                Habitation c = new Habitation();
+                c.setId(RS.getInt(1));
+                Categorie ca = new Categorie();
+                ca.setId(RS.getInt(6));
+                ca.setNom(RS.getString("nom"));
+                c.setType_Id(ca);
+                c.setIdclient(RS.getInt(5));
+                c.setNbpieceimmobilier(RS.getInt(2));
+                c.setCapitalimmobilier(RS.getFloat(3));
+                c.setCapitalmobilier(RS.getFloat(4));
+                c.setDevis(RS.getFloat(7));
+                list.add(c);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return list;
+    }
+
 
 
      

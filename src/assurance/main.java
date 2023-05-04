@@ -26,13 +26,17 @@ public class main extends Application {
     public void start(Stage primaryStage) {
         try {
 
-Parent root = FXMLLoader.load(getClass().getResource("/tn/assurance/gui/Home.fxml"));  
-  
-           
-        
-            Scene scene = new Scene(root);
+            Parent root
+                    = //FXMLLoader.load(getClass().getResource("/tn/assurance/gui/CategorieFront.fxml"));  
+                    //FXMLLoader.load(getClass().getResource("/tn/assurance/gui/Home.fxml"));
+                    //FXMLLoader.load(getClass().getResource("/tn/assurance/gui/ContratFront.fxml"));
+                    //FXMLLoader.load(getClass().getResource("/tn/assurance/gui/ContratBack.fxml"));
+                    //FXMLLoader.load(getClass().getResource("/tn/assurance/gui/HabitationBack.fxml"));
+                    FXMLLoader.load(getClass().getResource("/tn/assurance/gui/HabitatinFront.fxml"));
 
-            primaryStage.setTitle("DevSquad");
+            Scene scene = new Scene(root, 1200, 610);
+
+            primaryStage.setTitle("SecurAssur");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {

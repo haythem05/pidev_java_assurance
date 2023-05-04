@@ -1,33 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="581.0" prefWidth="814.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.assurance.controller.ModifierHabitationController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="610.0" prefWidth="1200.0" styleClass="right-bar" stylesheets="@../../../values/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.assurance.controller.ModifierHabitationController">
    <children>
-      <Label layoutX="275.0" layoutY="72.0" text="Id Client :" />
-      <Label layoutX="205.0" layoutY="144.0" text="Nombre Piece Immobilier :" />
-      <Label layoutX="244.0" layoutY="191.0" text="Capital Immobilier :" />
-      <Label layoutX="244.0" layoutY="254.0" text="Capital mobilier :" />
-      <TextField fx:id="idclienth" layoutX="363.0" layoutY="68.0" />
-      <TextField fx:id="nbpieceh" layoutX="363.0" layoutY="140.0" />
-      <TextField fx:id="capitalimmobilierh" layoutX="363.0" layoutY="187.0" />
-      <TextField fx:id="capitalmobilierh" layoutX="363.0" layoutY="250.0" />
-      <Button layoutX="438.0" layoutY="314.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: #606060;" text="Valider" />
-      <Label layoutX="363.0" layoutY="14.0" text="Modifier Habitation " textFill="#e10909">
+      <Label layoutX="485.0" layoutY="134.0" text="Id Client">
          <font>
-            <Font name="Arial Nova" size="16.0" />
+            <Font name="Cambria" size="17.0" />
          </font></Label>
-      <VBox prefHeight="582.0" prefWidth="171.0" style="-fx-background-color: #606060;">
-         <children>
-            <ImageView fx:id="imageV" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </VBox>
-      <Button layoutX="514.0" layoutY="314.0" mnemonicParsing="false" onAction="#retour" style="-fx-background-color: #606060;" text="Retour" />
+      <Label layoutX="485.0" layoutY="222.0" text="Nombre Piece Immobilier">
+         <font>
+            <Font name="Cambria" size="17.0" />
+         </font></Label>
+      <Label layoutX="485.0" layoutY="322.0" text="Capital Immobilier">
+         <font>
+            <Font name="Cambria" size="17.0" />
+         </font></Label>
+      <Label layoutX="485.0" layoutY="406.0" text="Capital mobilier ">
+         <font>
+            <Font name="Cambria" size="17.0" />
+         </font></Label>
+      <TextField fx:id="idclienth" layoutX="708.0" layoutY="128.0" prefHeight="32.0" prefWidth="175.0" stylesheets="@../../../values/styles.css">
+         <styleClass>
+            <String fx:value="text-fieldform" />
+            <String fx:value="date-picker" />
+         </styleClass></TextField>
+      <TextField fx:id="nbpieceh" layoutX="708.0" layoutY="216.0" prefHeight="32.0" prefWidth="175.0" stylesheets="@../../../values/styles.css">
+         <styleClass>
+            <String fx:value="date-picker" />
+            <String fx:value="text-fieldform" />
+         </styleClass></TextField>
+      <TextField fx:id="capitalimmobilierh" layoutX="708.0" layoutY="315.0" prefHeight="32.0" prefWidth="175.0" stylesheets="@../../../values/styles.css">
+         <styleClass>
+            <String fx:value="text-fieldform" />
+            <String fx:value="date-picker" />
+         </styleClass></TextField>
+      <TextField fx:id="capitalmobilierh" layoutX="708.0" layoutY="399.0" prefHeight="32.0" prefWidth="175.0" stylesheets="@../../../values/styles.css">
+         <styleClass>
+            <String fx:value="text-fieldform" />
+            <String fx:value="date-picker" />
+         </styleClass></TextField>
+      <Button layoutX="546.0" layoutY="506.0" mnemonicParsing="false" onAction="#modifier" prefHeight="38.0" prefWidth="107.0" styleClass="add-btnblanctextblack" stylesheets="@../../../values/styles.css" text="Valider" />
+      <Label layoutX="531.0" layoutY="23.0" text="Modifier Habitation " textFill="#878787">
+         <font>
+            <Font name="Cambria Bold" size="30.0" />
+         </font></Label>
+      <Button layoutX="742.0" layoutY="512.0" mnemonicParsing="false" onAction="#retour" prefHeight="38.0" prefWidth="107.0" styleClass="add-btnblanctextblack" stylesheets="@../../../values/styles.css" text="Retour" />
    </children>
 </AnchorPane>

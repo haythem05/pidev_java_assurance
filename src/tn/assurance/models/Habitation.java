@@ -38,6 +38,16 @@ public class Habitation {
         this.capitalmobilier = capitalmobilier;
 
     }
+
+    public Habitation(int id, int idclient, int nbpieceimmobilier, float capitalimmobilier, float capitalmobilier, float devis, Categorie type_Id) {
+        this.id = id;
+        this.idclient = idclient;
+        this.nbpieceimmobilier = nbpieceimmobilier;
+        this.capitalimmobilier = capitalimmobilier;
+        this.capitalmobilier = capitalmobilier;
+        this.devis = devis;
+        this.type_Id = type_Id;
+    }
     
     
     @Override

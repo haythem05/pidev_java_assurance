@@ -101,28 +101,50 @@ public class categorieS {
     
      
    
-      public Categorie  getById(int id) {
-        Categorie c  = new Categorie();
+     
+
+    /*public List<Categorie> rechCategorie(int id) {
+        List<Categorie> list = new ArrayList<>();
         try {
-            String req = "Select * from categorie  WHERE `id` = " + id;
-            Statement st = conn.createStatement();
-
-            ResultSet CA = st.executeQuery(req);
-
-            while (CA.next()) {
-                 c.setNom(CA.getString(1));
-                c.setDescription(CA.getString(2));
-                c.setCategorieimage(CA.getString(3));
+   String req = "SELECT * FROM categorie WHERE `id` = " + id;    
+   Statement st = conn.createStatement();
+            ResultSet RS = st.executeQuery(req);
+            while (RS.next()) {
+                Categorie r = new Categorie();
+                r.setId(RS.getInt("id"));
+                r.setNom(RS.getString("nom"));
+                r.setDescription(RS.getString("description"));
+                r.setCategorieimage(RS.getString("categorieimage"));
+                list.add(r);
             }
-
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            System.err.println(ex);
         }
 
-        return c;
-    }
-
+        return list;
+    }*/
     
+    public List<Categorie> rechCat(int id) {
+        List<Categorie> list = new ArrayList<>();
+        try {
+            String req = "select * from categorie WHERE id= " + id;
+            Statement st = conn.createStatement();
+            ResultSet RS = st.executeQuery(req);
+            while (RS.next()) {
+                Categorie c = new Categorie();
+                c.setId(RS.getInt(1));
+                c.setNom(RS.getString(2));
+                c.setCategorieimage(RS.getString(3));
+                c.setDescription(RS.getString(4));
+
+                list.add(c);
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+
+        return list;
+    }
     
 }
 

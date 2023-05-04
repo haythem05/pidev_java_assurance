@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="610.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="tn.assurance.controller.ContratBackController">
+   <children>
+      <VBox layoutX="396.0" layoutY="10.0" prefHeight="611.0" prefWidth="813.0" style="-fx-background-color: #f2f2f6;">
+         <children>
+            <Pane prefHeight="8.0" prefWidth="813.0" />
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="813.0">
+               <children>
+                  <Label contentDisplay="CENTER" prefHeight="17.0" prefWidth="487.0" text="Liste des contrats automobile">
+                     <font>
+                        <Font name="Cambria Bold" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <VBox prefHeight="110.0" prefWidth="278.0">
+                     <children>
+                        <Pane prefHeight="10.0" prefWidth="273.0" />
+                        <TextField fx:id="searchField" prefHeight="42.0" prefWidth="274.0" promptText="Rechercher par marque" styleClass="search-box" stylesheets="@../../../values/styles.css">
+                           <font>
+                              <Font name="Cambria" size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="110.0" prefWidth="49.0">
+                     <children>
+                        <Pane prefHeight="211.0" prefWidth="66.0" />
+                        <ImageView fitHeight="41.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../Desktop/noussajava/src/tn/esprit/gui/searchh.png" />
+                           </image>
+                        </ImageView>
+                        <Pane prefHeight="202.0" prefWidth="66.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Pane prefHeight="15.0" prefWidth="813.0" />
+            <HBox prefHeight="439.0" prefWidth="813.0">
+               <children>
+                  <TableView fx:id="table" prefHeight="406.0" prefWidth="814.0">
+                     <columns>
+                        <TableColumn fx:id="datedcol" prefWidth="97.5999755859375" text="Date de début" />
+                        <TableColumn fx:id="datefcol" prefWidth="77.60000610351562" text="Date de fin" />
+                        <TableColumn fx:id="avantagecol" prefWidth="104.0" text="Avantages" />
+                        <TableColumn fx:id="marquecol" prefWidth="82.39996337890625" text="Marque" />
+                        <TableColumn fx:id="modelecol" minWidth="4.0" prefWidth="75.20001220703125" text="Modèle" />
+                        <TableColumn fx:id="nbpcol" prefWidth="72.800048828125" text="Nb places" />
+                        <TableColumn fx:id="dateccol" minWidth="0.0" prefWidth="123.2000732421875" text="Date de circulation" />
+                        <TableColumn fx:id="vcatacol" prefWidth="107.19989013671875" text="Valeur catalogue" />
+                        <TableColumn fx:id="prixcol" prefWidth="73.60009765625" text="Prix" />
+                     </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <Pane prefHeight="12.0" prefWidth="814.0" />
+            <HBox alignment="CENTER" prefHeight="59.0" prefWidth="813.0">
+               <children>
+                  <Pane prefHeight="59.0" prefWidth="59.0" />
+                  <Button fx:id="btQR" mnemonicParsing="false" onAction="#QrCode" prefHeight="35.0" prefWidth="163.0" styleClass="add-btngrissombre" stylesheets="@../../../values/styles.css" text="Générer QR code">
+                     <font>
+                        <Font name="Cambria" size="14.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="59.0" prefWidth="64.0" />
+                  <Button mnemonicParsing="false" onAction="#generatePDF" prefHeight="35.0" prefWidth="122.0" styleClass="add-btngrissombre" stylesheets="@../../../values/styles.css" text="Générer PDF">
+                     <font>
+                        <Font name="Cambria" size="14.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="59.0" prefWidth="63.0" />
+                  <VBox alignment="CENTER" prefHeight="62.0" prefWidth="158.0">
+                     <children>
+                        <TextField fx:id="minPrixField" promptText="Min Prix" styleClass="text-fieldform" stylesheets="@../../../values/styles.css">
+                           <font>
+                              <Font name="Cambria" size="14.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="maxPrixField" promptText="Max Prix" styleClass="text-fieldform" stylesheets="@../../../values/styles.css">
+                           <font>
+                              <Font name="Cambria" size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="59.0" prefWidth="45.0" />
+                  <ImageView fx:id="imageqr" fitHeight="79.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox prefHeight="620.0" prefWidth="396.0" styleClass="right-bar" stylesheets="@../../../values/styles.css">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="125.0" prefWidth="408.0" text="SecurAssur" textFill="#878787">
+                     <font>
+                        <Font name="Cambria Bold" size="40.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="24.0" prefWidth="387.0" />
+            <VBox alignment="CENTER" prefHeight="548.0" prefWidth="359.0" style="-fx-background-color: #ECE3C9;" styleClass="chosen-fruit-card" stylesheets="@../../../values/styles.css">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="80.0" prefWidth="366.0" text="Naviguez ici" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="27.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <VBox prefHeight="437.0" prefWidth="385.0">
+                     <children>
+                        <VBox prefHeight="405.0" prefWidth="356.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="347.0">
+                                 <children>
+                                    <Pane prefHeight="37.0" prefWidth="15.0" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="20.0" right="-1.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Button mnemonicParsing="false" onAction="#habitation" prefHeight="94.0" prefWidth="356.0" style="-fx-background-color: #e5d9b6;" stylesheets="@../../../values/styles.css" text="Contrats habitation">
+                                 <font>
+                                    <Font name="Cambria Bold" size="20.0" />
+                                 </font>
+                              </Button>
+                              <Pane prefHeight="66.0" prefWidth="356.0" />
+                              <Button mnemonicParsing="false" onAction="#automobile" prefHeight="94.0" prefWidth="359.0" style="-fx-background-color: #e5d9b6;" text="Contrats Automobile ">
+                                 <font>
+                                    <Font name="Cambria Bold" size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="107.0" prefWidth="356.0" />
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -15,7 +15,7 @@
       <Button layoutX="364.0" layoutY="620.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: #606060;" text="Modifier" />
       <Button layoutX="266.0" layoutY="620.0" mnemonicParsing="false" onAction="#ajouter" style="-fx-background-color: #606060;" text="Ajouter" />
       <RadioButton layoutX="608.0" layoutY="611.0" mnemonicParsing="false" onAction="#sortAsc" text="Tri ASC" />
-      <RadioButton layoutX="608.0" layoutY="650.0" mnemonicParsing="false" onAction="#sortDesc" text="tri Desc" />
+      <RadioButton layoutX="608.0" layoutY="650.0" mnemonicParsing="false" onAction="#sortDesc" text="Tri DESC" />
       <VBox prefHeight="838.0" prefWidth="191.0" style="-fx-background-color: #606060;">
          <children>
             <ImageView fx:id="imageV" fitHeight="150.0" fitWidth="186.0" pickOnBounds="true" preserveRatio="true">

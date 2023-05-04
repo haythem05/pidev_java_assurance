@@ -1,4 +1,4 @@
-package tn.assurance.gui;
+package tn.assurance.controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -50,8 +50,6 @@ public class AjouterHabitationFrontController implements Initializable {
     private Categorie type_id;
 
     private List<Categorie> categories;
-    @FXML
-    private ImageView imageV;
 
     /**
      * Initializes the controller class.

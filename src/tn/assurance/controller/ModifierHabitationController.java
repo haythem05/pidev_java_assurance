@@ -30,8 +30,6 @@ public class ModifierHabitationController implements Initializable {
     @FXML
     private TextField capitalmobilierh;
     private TextField devish;
-    @FXML
-    private ImageView imageV;
 
     /**
      * Initializes the controller class.

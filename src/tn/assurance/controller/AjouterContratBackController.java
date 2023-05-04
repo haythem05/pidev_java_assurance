@@ -76,8 +76,6 @@ public class AjouterContratBackController implements Initializable {
     private Categorie type_id;
 
     private List<Categorie> categories;
-    @FXML
-    private ImageView imageV;
    
 
     /**
@@ -87,7 +85,6 @@ public class AjouterContratBackController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         categories = new categorieS().afficherCategorie();
         typeidc.getItems().addAll(categories);
-          imageV.setImage(new javafx.scene.image.Image("file:C:\\Users\\haythem\\Documents\\NetBeansProjects\\Assurance\\build\\classes\\images\\logo.png"));
 
     }
 
@@ -187,7 +184,7 @@ private void showAlert(String message) {
     @FXML
 private void retour(ActionEvent event) throws IOException {
     // Load the affichercategorie.fxml file
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/assurance/gui/afficherContrat.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/assurance/gui/ContratFront.fxml"));
     Parent root = loader.load();
 
     // Get the current stage and set the new scene
